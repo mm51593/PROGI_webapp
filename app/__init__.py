@@ -2,4 +2,4 @@ from flask import Flask
 
 application = Flask(__name__)
 
-import routes
+from app import routes
