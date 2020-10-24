@@ -22,3 +22,19 @@ function checkData() {
     }
   return true;
 }
+
+function checkPswd() {
+    var pswd = document.getElementById("regPswd").value;
+    var rePswd = document.getElementById("reRegPswd").value;
+
+    if(pswd != rePswd) {
+        document.getElementById("lozReg").innerHTML = "Lozinka :  <span style='color: red;'>Lozinke se ne podudaraju</span>";
+        return false;
+    }
+
+    return true;
+}
+
+function restoreReg() {
+    document.getElementById("lozReg").innerHTML = "Lozinka : ";
+}

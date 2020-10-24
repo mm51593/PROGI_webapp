@@ -276,6 +276,10 @@ button:hover {
 	min-height: 70vh;
 }
 
+.sec-main-container {
+	min-height: 56.8vh;
+}
+
 #opisPrice {
 	padding: 0%;
 	resize: none;
@@ -309,7 +313,7 @@ button:hover {
 	margin-top: 10px;
 }
 
-#subBtn {
+.subBtn {
 	width: 20%;
 	margin: 5px;
 	border-radius: 5px;
@@ -372,5 +376,8 @@ button:hover {
 .grid-ponuda-odbij {
   grid-area: odbij;
   margin-right: 45%;
-  
+}
+
+.flex-container-reg {
+	justify-content: center;
 }
