@@ -5,10 +5,10 @@ from app.database import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Korisničko ime', validators=[DataRequired(), Length(min=4, max=25)])
+    username = StringField('Korisničko ime', validators=[DataRequired(), Length(min=3, max=25)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Lozinka', validators=[DataRequired()])
-    confirmPassword = PasswordField('Potvrdi lozinku', validators=[DataRequired(), EqualTo(password)])
+    confirm_password = PasswordField('Potvrdi lozinku', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Registriraj me')
 
     def validate_username(self, username):

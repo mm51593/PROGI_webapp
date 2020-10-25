@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 from app.authentication.forms import RegistrationForm, LoginForm
 from app.database import User, db
 from flask_login import login_user
@@ -13,7 +13,9 @@ def register():
         user = User(username=reg_form.username.data, email=reg_form.email.data, password=reg_form.password.data)
         db.session.add(user)
         db.session.commit()
-    return "register.html"
+    else:
+        print(reg_form.errors)
+    return render_template("registracija.html", title="Registriraj", form=reg_form)
 
 
 @authentication.route('/login', methods=['GET', 'POST'])
