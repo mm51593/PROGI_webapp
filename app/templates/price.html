@@ -5,12 +5,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<title>Maketa Shop | Prijavi se</title>
-		<link rel="stylesheet" href="./css/style.css">
+		<title>Maketa Shop | Price</title>
+		<link rel="stylesheet" href="../static/styles/style.css">
 	</head>
   
 	<body>
-  
+	
 		<header>
 			<div class="container">
 				<div id="branding">
@@ -20,7 +20,7 @@
 				<nav>
 					<ul>
 						<li><a href="index.html">Početna</a></li>
-						<li>
+						<li class="current">
 							<div class="dropdown">
 								<button class="dropbtn"><a href="price.html">Priče</a></button>
 								<div class="dropdown-content">
@@ -38,30 +38,30 @@
 								</div>
 							</div>
 						</li>
-						<li class="current"><a href="prijava.html">Prijavi se</a><li>
+						<li><a href="prijava.html">Prijavi se</a><li>
 						
 					</ul>
 				</nav>
 			</div>
 		</header>
-	
-		<form>  
-			<div class="container sec-main-container">   
-				<label>E-mail : </label>   
-					<input type="text" placeholder="Unesi e-mail" name="username" required>  
-				<label>Lozinka : </label>   
-					<input type="password" placeholder="Unesi lozinku" name="password" required>
-				<div class="flex-container">
-				  <div><label for="checkRemember">Ostani prijavljen?</label>
-					<input type="checkbox" id="checkRemember" name="remember"></div>
-				<a href="registracija.html">Nemate racun? Registrujte se</a>
-				</div>  
-				<button type="submit">Prijavi se</button>
-			</div>   
-		</form>
+
+		<section id="main">
+			<div class="container">
+				<article id="main-col">
+					<h1 class="page-title"></h1>
+					<ul id="services">
+					 <a href="citavaPrica.html" id="priceLink" title="Otvorite citavu pricu">
+						    <li>
+							<h3>Priča 1</h3>
+							<p>bla bla bla</p>
+							</li>
+					</a>
+					</ul>
+				</article>
+			</div>
+		</section>
 	
 		<footer></footer>	
-	
+
 	</body>
-	
 </html>

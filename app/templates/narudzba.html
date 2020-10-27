@@ -5,12 +5,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<title>Maketa Shop | Dobro došli</title>
-		<link rel="stylesheet" href="./css/style.css">
+		<title>Maketa Shop | Narudzba</title>
+		<link rel="stylesheet" href="../static/styles/style.css">
 	</head>
-
+	
 	<body>
-
+	
 		<header>
 			<div class="container">
 				<div id="branding">
@@ -19,7 +19,7 @@
 				
 				<nav>
 					<ul>
-						<li class="current"><a href="index.html">Početna</a></li>
+						<li><a href="index.html">Početna</a></li>
 						<li>
 							<div class="dropdown">
 								<button class="dropbtn"><a href="price.html">Priče</a></button>
@@ -29,7 +29,7 @@
 								</div>
 							</div>
 						</li>
-						<li>
+						<li class="current">
 							<div class="dropdown">
 								<button class="dropbtn"><a href="makete.html">Makete</a></button>
 								<div class="dropdown-content">
@@ -45,15 +45,17 @@
 			</div>
 		</header>
 
-		<section id="showcase">
+		<form>
 			<div class="container">
-				<h1>Dobro došli</h1>
-				<p>Mjesto gdje vaše ideje pretvaramo u stvarnost.</p>
+				<h1>Naruči maketu</h1>
+				<label>Opis : </label>   
+					<input type="text" placeholder="Opiši maketu" name="text" required>  
+				<button class="main-button" type="submit">Naruči</button>
 			</div>
-		</section>
+		</form>
 
 		<footer></footer>
-
+	
 	</body>
 
 </html>

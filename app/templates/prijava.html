@@ -5,12 +5,12 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<title>Maketa Shop | Prihvat makete</title>
-		<link rel="stylesheet" href="./css/style.css">
+		<title>Maketa Shop | Prijavi se</title>
+		<link rel="stylesheet" href="../static/styles/style.css">
 	</head>
-	
+  
 	<body>
-	
+  
 		<header>
 			<div class="container">
 				<div id="branding">
@@ -29,7 +29,7 @@
 								</div>
 							</div>
 						</li>
-						<li class="current">
+						<li>
 							<div class="dropdown">
 								<button class="dropbtn"><a href="makete.html">Makete</a></button>
 								<div class="dropdown-content">
@@ -38,20 +38,30 @@
 								</div>
 							</div>
 						</li>
-						<li><a href="prijava.html">Prijavi se</a><li>
+						<li class="current"><a href="prijava.html">Prijavi se</a><li>
 						
 					</ul>
 				</nav>
 			</div>
 		</header>
-
-		<section id="main">
-			<div class="container">
-			</div>
-		</section>
-
-		<footer></footer>
+	
+		<form>  
+			<div class="container sec-main-container">   
+				<label>E-mail : </label>   
+					<input type="text" placeholder="Unesi e-mail" name="username" required>  
+				<label>Lozinka : </label>   
+					<input type="password" placeholder="Unesi lozinku" name="password" required>
+				<div class="flex-container">
+				  <div><label for="checkRemember">Ostani prijavljen?</label>
+					<input type="checkbox" id="checkRemember" name="remember"></div>
+				<a href="registracija.html">Nemate racun? Registrujte se</a>
+				</div>  
+				<button class="main-button" type="submit">Prijavi se</button>
+			</div>   
+		</form>
+	
+		<footer></footer>	
 	
 	</body>
-
+	
 </html>
