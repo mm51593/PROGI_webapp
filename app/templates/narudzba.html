@@ -1,61 +1,14 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html>
+{% block content %}
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Maketa Shop | Narudzba</title>
-		<link rel="stylesheet" href="../static/styles/style.css">
-	</head>
-	
-	<body>
-	
-		<header>
-			<div class="container">
-				<div id="branding">
-					<h1><span class="highlight">Maketa</span> Shop</h1>
-				</div>
-				
-				<nav>
-					<ul>
-						<li><a href="index.html">Početna</a></li>
-						<li>
-							<div class="dropdown">
-								<button class="dropbtn"><a href="price.html">Priče</a></button>
-								<div class="dropdown-content">
-									<a href="prijedlog_price.html">Predloži</a>
-									<a href="prihvat_price.html">Prihvati</a>
-								</div>
-							</div>
-						</li>
-						<li class="current">
-							<div class="dropdown">
-								<button class="dropbtn"><a href="makete.html">Makete</a></button>
-								<div class="dropdown-content">
-									<a href="narudzba.html">Naruči</a>
-									<a href="prihvat_makete.html">Prihvati</a>
-								</div>
-							</div>
-						</li>
-						<li><a href="prijava.html">Prijavi se</a><li>
-						
-					</ul>
-				</nav>
-			</div>
-		</header>
+<form>
+	<div class="container">
+		<h1>Naruči maketu</h1>
+		<label>Opis : </label>   
+			<input type="text" placeholder="Opiši maketu" name="text" required>  
+		<button class="main-button" type="submit">Naruči</button>
+	</div>
+</form>
 
-		<form>
-			<div class="container">
-				<h1>Naruči maketu</h1>
-				<label>Opis : </label>   
-					<input type="text" placeholder="Opiši maketu" name="text" required>  
-				<button class="main-button" type="submit">Naruči</button>
-			</div>
-		</form>
-
-		<footer></footer>
-	
-	</body>
-
-</html>
+{% endblock %}
