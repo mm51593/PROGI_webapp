@@ -1,98 +1,51 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html>
+{% block content %}
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Maketa Shop | Prihvat price</title>
-		<link rel="stylesheet" href="../static/styles/style.css">
-	</head>
-	
-	<body>
-	
-		<header>
-			<div class="container">
-				<div id="branding">
-					<h1><span class="highlight">Maketa</span> Shop</h1>
-				</div>
-				
-				<nav>
-					<ul>
-						<li><a href="index.html">Početna</a></li>
-						<li class="current">
-							<div class="dropdown">
-								<button class="dropbtn"><a href="price.html">Priče</a></button>
-								<div class="dropdown-content">
-									<a href="prijedlog_price.html">Predloži</a>
-									<a href="prihvat_price.html">Prihvati</a>
-								</div>
+<section id="main">
+	<div class="container main-container">
+		<article id="main-col">
+			<h1 class="page-title"></h1>
+			<ul id="services">
+				<li>
+					<div class="drzacPrijedloga">
+						<h3>Priča 1</h3>
+						<div class="grid-ponuda">
+							<div class="grid-ponuda-tekst">
+								Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
+								Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat. Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore commodo.
+								Aliostrud velit Lorem consequat exercitation nulla. Dolore ad cillum anim aute. Occaecat amet cupidatat commodo adipisicing tempor duis dolor ad pariatur nisi fugiat aliquip consectetur. Reprehenderit est aliquip sit excepteur consequat.
 							</div>
-						</li>
-						<li>
-							<div class="dropdown">
-								<button class="dropbtn"><a href="makete.html">Makete</a></button>
-								<div class="dropdown-content">
-									<a href="narudzba.html">Naruči</a>
-									<a href="prihvat_makete.html">Prihvati</a>
-								</div>
+							<video class="grid-ponuda-vid" controls>
+								<source src="../static/vid/video.mp4" type="video/mp4">
+							</video>
+							<img class="grid-ponuda-img" src="https://www.njuskalo.hr/image-w920x690/makete/maketa-kuce-hrasta-slika-2664453.jpg">
+							<div class="grid-btn grid-ponuda-prihvati" onclick="">Prihvati</div>
+							<div class="grid-btn grid-ponuda-odbij" onclick="">Odbij</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="drzacPrijedloga">
+						<h3>Priča 1</h3>
+						<div class="grid-ponuda">
+							<div class="grid-ponuda-tekst">
+								Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
+								Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat. Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore commodo.
+								Aliostrud velit Lorem consequat exercitation nulla. Dolore ad cillum anim aute. Occaecat amet cupidatat commodo adipisicing tempor duis dolor ad pariatur nisi fugiat aliquip consectetur. Reprehenderit est aliquip sit excepteur consequat.
 							</div>
-						</li>
-						<li><a href="prijava.html">Prijavi se</a><li>
-						
-					</ul>
-				</nav>
-			</div>
-		</header>
+							<video class="grid-ponuda-vid" controls>
+								<source src="../static/vid/video.mp4" type="video/mp4">
+							</video>
+							<img class="grid-ponuda-img" src="https://www.njuskalo.hr/image-w920x690/makete/maketa-kuce-hrasta-slika-2664453.jpg">
+							<div class="grid-btn grid-ponuda-prihvati" onclick="">Prihvati</div>
+							<div class="grid-btn grid-ponuda-odbij" onclick="">Odbij</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</article>
+	</div>
+</section>
 
-		<section id="main">
-			<div class="container main-container">
-				<article id="main-col">
-					<h1 class="page-title"></h1>
-					<ul id="services">
-						    <li>
-							 <div class="drzacPrijedloga">
-								<h3>Priča 1</h3>
-								<div class="grid-ponuda">
-									<div class="grid-ponuda-tekst">
-										Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
-										Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat. Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore commodo.
-										Aliostrud velit Lorem consequat exercitation nulla. Dolore ad cillum anim aute. Occaecat amet cupidatat commodo adipisicing tempor duis dolor ad pariatur nisi fugiat aliquip consectetur. Reprehenderit est aliquip sit excepteur consequat.
-									</div>
-									<video class="grid-ponuda-vid" controls>
-										<source src="../static/vid/video.mp4" type="video/mp4">
-									</video>
-									<img class="grid-ponuda-img" src="https://www.njuskalo.hr/image-w920x690/makete/maketa-kuce-hrasta-slika-2664453.jpg">
-									<div class="grid-btn grid-ponuda-prihvati" onclick="">Prihvati</div>
-									<div class="grid-btn grid-ponuda-odbij" onclick="">Odbij</div>
-								</div>
-							 </div>
-							</li>
-							<li>
-								<div class="drzacPrijedloga">
-								   <h3>Priča 1</h3>
-								   <div class="grid-ponuda">
-									   <div class="grid-ponuda-tekst">
-										   Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
-										   Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat. Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore commodo.
-										   Aliostrud velit Lorem consequat exercitation nulla. Dolore ad cillum anim aute. Occaecat amet cupidatat commodo adipisicing tempor duis dolor ad pariatur nisi fugiat aliquip consectetur. Reprehenderit est aliquip sit excepteur consequat.
-									   </div>
-									   <video class="grid-ponuda-vid" controls>
-										   <source src="../static/vid/video.mp4" type="video/mp4">
-									   </video>
-									   <img class="grid-ponuda-img" src="https://www.njuskalo.hr/image-w920x690/makete/maketa-kuce-hrasta-slika-2664453.jpg">
-									   <div class="grid-btn grid-ponuda-prihvati" onclick="">Prihvati</div>
-									   <div class="grid-btn grid-ponuda-odbij" onclick="">Odbij</div>
-								   </div>
-								</div>
-							   </li>
-					</ul>
-				</article>
-			</div>
-		</section>
-
-		<footer></footer>
-	
-	</body>
-
-</html>
+{% endblock %}
