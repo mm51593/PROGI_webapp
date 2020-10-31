@@ -20,9 +20,9 @@
 				
 				<nav>
 					<ul>
-						<!-- Umjesto current_page dodati class="current", ovisno na kojoj se stranici nalazite -->
-						<li {{ current_page_pocetna }}><a href="index.html">Početna</a></li>
-						<li {{ current_page_price }}>
+						<!-- Svaka stranica postavlja varijablue active_page koja označava trenutni izbornik -->
+						<li {% if active_page == "pocetna" %} class="current" {% endif %}><a href="index.html">Početna</a></li>
+						<li {% if active_page == "price" %} class="current" {% endif %}>
 							<div class="dropdown">
 								<button class="dropbtn"><a href="price.html">Priče</a></button>
 								<div class="dropdown-content">
@@ -31,7 +31,7 @@
 								</div>
 							</div>
 						</li>
-						<li {{ current_page_makete }}>
+						<li {% if active_page == "makete" %} class="current" {% endif %}>
 							<div class="dropdown">
 								<button class="dropbtn"><a href="makete.html">Makete</a></button>
 								<div class="dropdown-content">
@@ -39,9 +39,9 @@
 									<a href="prihvat_makete.html">Prihvati</a>
 								</div>
 							</div>
-						</li {{ current_page_prijava }}>
-						<li><a href="prijava.html">Prijavi se</a><li>
-						
+						</li>
+						<li {% if active_page == "prijava" %} class="current" {% endif %}><a href="prijava.html">Prijavi se</a><li>
+
 					</ul>
 				</nav>
 			</div>
