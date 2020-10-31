@@ -1,67 +1,21 @@
-<!DOCTYPE html>
+{% extends "layout.html" %}
 
-<html>
+{% block content %}
 
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-		<title>Maketa Shop | Price</title>
-		<link rel="stylesheet" href="../static/styles/style.css">
-	</head>
-  
-	<body>
+<section id="main">
+	<div class="container">
+		<article id="main-col">
+			<h1 class="page-title"></h1>
+			<ul id="services">
+				<a href="citavaPrica.html" id="priceLink" title="Otvorite citavu pricu">
+					<li>
+						<h3>Priča 1</h3>
+						<p>bla bla bla</p>
+					</li>
+				</a>
+			</ul>
+		</article>
+	</div>
+</section>
 	
-		<header>
-			<div class="container">
-				<div id="branding">
-					<h1><span class="highlight">Maketa</span> Shop</h1>
-				</div>
-				
-				<nav>
-					<ul>
-						<li><a href="index.html">Početna</a></li>
-						<li class="current">
-							<div class="dropdown">
-								<button class="dropbtn"><a href="price.html">Priče</a></button>
-								<div class="dropdown-content">
-									<a href="prijedlog_price.html">Predloži</a>
-									<a href="prihvat_price.html">Prihvati</a>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="dropdown">
-								<button class="dropbtn"><a href="makete.html">Makete</a></button>
-								<div class="dropdown-content">
-									<a href="narudzba.html">Naruči</a>
-									<a href="prihvat_makete.html">Prihvati</a>
-								</div>
-							</div>
-						</li>
-						<li><a href="prijava.html">Prijavi se</a><li>
-						
-					</ul>
-				</nav>
-			</div>
-		</header>
-
-		<section id="main">
-			<div class="container">
-				<article id="main-col">
-					<h1 class="page-title"></h1>
-					<ul id="services">
-					 <a href="citavaPrica.html" id="priceLink" title="Otvorite citavu pricu">
-						    <li>
-							<h3>Priča 1</h3>
-							<p>bla bla bla</p>
-							</li>
-					</a>
-					</ul>
-				</article>
-			</div>
-		</section>
-	
-		<footer></footer>	
-
-	</body>
-</html>
+{% endblock %}
