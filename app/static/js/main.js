@@ -38,3 +38,7 @@ function checkPswd() {
 function restoreReg() {
     document.getElementById("lozReg").innerHTML = "Lozinka : ";
 }
+
+function updatePrice() {
+    document.getElementById("cijena").innerHTML = Math.floor(Math.random() * Math.floor(200));
+}
