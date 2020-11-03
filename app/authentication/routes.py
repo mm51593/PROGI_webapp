@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from app.authentication.forms import RegistrationForm, LoginForm
-from app.database import User, db
+from app.database import User, db, bcrypt
 from flask_login import login_user
 
 authentication = Blueprint('auth', __name__)
@@ -10,7 +10,8 @@ authentication = Blueprint('auth', __name__)
 def register():
     reg_form = RegistrationForm()
     if reg_form.validate_on_submit():
-        user = User(username=reg_form.username.data, email=reg_form.email.data, password=reg_form.password.data)
+        hashed_pass = bcrypt.generate_password_hash(reg_form.password.data)
+        user = User(username=reg_form.username.data, email=reg_form.email.data, password=hashed_pass)
         db.session.add(user)
         db.session.commit()
     else:
