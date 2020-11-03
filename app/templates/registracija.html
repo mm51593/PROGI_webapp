@@ -3,18 +3,19 @@
 
 {% block content %}
 
-<form onsubmit="return checkPswd()">  
+<form onsubmit="return checkPswd()" method="post" action="">
+	{{ form.hidden_tag() }}
 	<div class="container sec-main-container">
-		<label>Korisnicko ime : </label>   
-			<input type="text" placeholder="Unesi korisnicko ime" name="username" required>    
-		<label>E-mail : </label>   
-			<input type="text" placeholder="Unesi e-mail" name="email" required>  
-		<label id="lozReg">Lozinka : </label>   
-			<input id="regPswd" type="password" placeholder="Unesi lozinku" name="password" required>
-		<label>Potvrdi lozinku : </label>   
-			<input id="reRegPswd" type="password" placeholder="Ponovno upisite lozinku" name="password" required>
+		{{ form.username.label() }}
+			{{ form.username() }}
+		{{ form.email.label() }}
+			{{ form.email() }}
+		{{ form.password.label() }}
+			{{ form.password() }}
+		{{ form.confirm_password.label() }}
+			{{ form.confirm_password() }}
 		<div class="flex-container flex-container-reg">
-			<input class="main-button subBtn" type="submit" value="Registriraj se">
+			{{ form.submit(class="main-button subBtn") }}
 			<input class="main-button subBtn" type="reset" onclick="restoreReg()" value="Poništi">
 		</div> 
 	</div>   
