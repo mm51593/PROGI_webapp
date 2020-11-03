@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% set active_page = "prijava" %}
+
+{% block content %}
+	
+<form>  
+	<div class="container sec-main-container">   
+		<label>E-mail : </label>   
+			<input type="text" placeholder="Unesi e-mail" name="username" required>  
+		<label>Lozinka : </label>   
+			<input type="password" placeholder="Unesi lozinku" name="password" required>
+		<div class="flex-container">
+			<div>
+				<label for="checkRemember">Ostani prijavljen?</label>
+					<input type="checkbox" id="checkRemember" name="remember">
+			</div>
+			<a href="registracija.html">Nemate racun? Registrujte se</a>
+		</div>  
+		<button class="main-button" type="submit">Prijavi se</button>
+	</div>   
+</form>
+	
+{% endblock %}
