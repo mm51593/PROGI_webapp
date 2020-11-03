@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% set active_page = "makete" %}
+
+{% block content %}
+
+<form>
+	<div class="container">
+		<h1>Naruči maketu</h1>
+		<label>Opis : </label>   
+			<input type="text" placeholder="Opiši maketu" name="text" required>  
+		<button class="main-button" type="submit">Naruči</button>
+	</div>
+</form>
+
+{% endblock %}

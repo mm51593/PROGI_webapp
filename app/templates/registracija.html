@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% set active_page = "prijava" %}
+
+{% block content %}
+
+<form onsubmit="return checkPswd()">  
+	<div class="container sec-main-container">
+		<label>Korisnicko ime : </label>   
+			<input type="text" placeholder="Unesi korisnicko ime" name="username" required>    
+		<label>E-mail : </label>   
+			<input type="text" placeholder="Unesi e-mail" name="email" required>  
+		<label id="lozReg">Lozinka : </label>   
+			<input id="regPswd" type="password" placeholder="Unesi lozinku" name="password" required>
+		<label>Potvrdi lozinku : </label>   
+			<input id="reRegPswd" type="password" placeholder="Ponovno upisite lozinku" name="password" required>
+		<div class="flex-container flex-container-reg">
+			<input class="main-button subBtn" type="submit" value="Registriraj se">
+			<input class="main-button subBtn" type="reset" onclick="restoreReg()" value="Poništi">
+		</div> 
+	</div>   
+</form>
+        
+{% endblock %}
