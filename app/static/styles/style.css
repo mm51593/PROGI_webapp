@@ -389,5 +389,37 @@ button:hover {
 
 .flex-video-img {
 	display: flex;
+}
 
+.maketa-img {
+	width: 20%;
+	border: 2px rgba(9,9,121,1) solid;
+}
+
+.specSpan {
+	padding-left: 3%;
+}
+
+.tekstHeader {
+	color: rgba(9,9,121,1);
+}
+
+.cart-func {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.add-to-cart {
+	width: 30%;
+	text-align: center;
+}
+
+.elem-chooser {
+	border: #ff5500 solid 3px;
+	width: 30%;
+}
+
+#materijaliChoose {
+	margin-left: 10px;
 }
