@@ -29,7 +29,7 @@ def login():
         user = User.query.filter_by(email=login_form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, login_form.password.data):
             login_user(user, remember=login_form.remember.data)
-            redirect('/')
+            return redirect('/')
     return render_template("prijava.html", title="Prijavi se", form=login_form)
 
 

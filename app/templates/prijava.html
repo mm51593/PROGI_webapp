@@ -15,9 +15,9 @@
 		<div class="flex-container">
 			<div>
 				{{ form.remember.label }}
-				{{ form.remember() }}
+				{{ form.remember(id="checkRemember") }}
 			</div>
-			<a href="registracija.html">Nemate racun? Registrujte se</a>
+			<a href="{{ url_for('auth.register') }}">Nemate račun? Registrirajte se</a>
 		</div>
 		{{ form.submit(class="main-button") }}
 	</div>
