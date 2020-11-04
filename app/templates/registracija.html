@@ -7,7 +7,7 @@
 	{{ form.hidden_tag() }}
 	<div class="container sec-main-container">
 		{{ form.username.label() }}
-		{{ form.username() }}
+		{{ form.username(placeholder="Unesi korisničko ime") }}
 		{% if form.username.errors %}
 			<div>
 				{% for error in form.username.errors %}
@@ -17,7 +17,7 @@
 		{% endif %}
 
 		{{ form.email.label() }}
-		{{ form.email() }}
+		{{ form.email(placeholder="Unesi e-mail adresu") }}
 		{% if form.email.errors %}
 			<div>
 				{% for error in form.email.errors %}
@@ -27,7 +27,7 @@
 		{% endif %}
 
 		{{ form.password.label() }}
-		{{ form.password() }}
+		{{ form.password(placeholder="Unesi lozinku") }}
 		{% if form.password.errors %}
 			<div>
 				{% for error in form.password.errors %}
@@ -37,7 +37,7 @@
 		{% endif %}
 
 		{{ form.confirm_password.label() }}
-		{{ form.confirm_password() }}
+		{{ form.confirm_password(placeholder="Ponovno unesi lozinku") }}
 		{% if form.confirm_password.errors %}
 		<div>
 			{% for error in form.confirm_password.errors %}

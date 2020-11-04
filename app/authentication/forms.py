@@ -25,7 +25,7 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Lozinka', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired("Ovo polje je neophodno."), Email("Pogrešan format E-mail adrese.")])
+    password = PasswordField('Lozinka', validators=[DataRequired("Ovo polje je neophodno.")])
     remember = BooleanField('Zapamti me')
     submit = SubmitField('Prijava')
