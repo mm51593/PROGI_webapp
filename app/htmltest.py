@@ -22,9 +22,9 @@ def citavaPrica():
 def price():
     return render_template("price.html", main_title="Price")
 
-@application.route("/makete.html")
+@application.route("/makete_prikaz.html")
 def makete():
-    return render_template("makete.html", main_title="Makete")
+    return render_template("makete_prikaz.html", main_title="Makete")
 
 @application.route("/narudzba.html")
 def narudzba():
@@ -53,5 +53,9 @@ def prijedlog_price():
 @application.route("/registracija.html")
 def registracija():
     return render_template("registracija.html", main_title="Registracija")
+
+@application.route("/makete.html")
+def maketa_detaljno():
+    return render_template("makete.html", main_title="Maketa")
 
 application.run(debug=True)

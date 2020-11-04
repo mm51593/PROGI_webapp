@@ -40,5 +40,13 @@ function restoreReg() {
 }
 
 function updatePrice() {
-    document.getElementById("cijena").innerHTML = Math.floor(Math.random() * Math.floor(200));
+    var selectedMaterialIndex = document.getElementById("materijaliChoose").value;
+    var searchString = "data-";
+    searchString = searchString.concat(selectedMaterialIndex);
+
+    var selectedMaterial = document.getElementById(searchString).innerHTML;
+    document.getElementById("cijena").innerHTML = selectedMaterial;
+    
+    console.log(selectedMaterialIndex);
+    console.log(searchString);
 }
