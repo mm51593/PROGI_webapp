@@ -3,21 +3,24 @@
 
 {% block content %}
 	
-<form>  
+<form method="post">
+	{{ form.hidden_tag() }}
 	<div class="container sec-main-container">   
-		<label>E-mail : </label>   
-			<input type="text" placeholder="Unesi e-mail" name="username" required>  
-		<label>Lozinka : </label>   
-			<input type="password" placeholder="Unesi lozinku" name="password" required>
+		{{ form.email.label }}
+		{{ form.email(placeholder="Unesi e-mail adresu") }}
+
+		{{ form.password.label }}
+		{{ form.password(placeholder="Unesi lozinku") }}
+
 		<div class="flex-container">
 			<div>
-				<label for="checkRemember">Ostani prijavljen?</label>
-					<input type="checkbox" id="checkRemember" name="remember">
+				{{ form.remember.label }}
+				{{ form.remember(id="checkRemember") }}
 			</div>
-			<a href="registracija.html">Nemate racun? Registrujte se</a>
-		</div>  
-		<button class="main-button" type="submit">Prijavi se</button>
-	</div>   
+			<a href="{{ url_for('auth.register') }}">Nemate račun? Registrirajte se</a>
+		</div>
+		{{ form.submit(class="main-button") }}
+	</div>
 </form>
 	
 {% endblock %}

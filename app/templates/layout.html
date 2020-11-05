@@ -41,8 +41,12 @@
 								</div>
 							</div>
 						</li>
-						<li {% if active_page == "prijava" %} class="current" {% endif %}><a href="prijava.html">Prijavi se</a><li>
-
+						{% if not current_user.is_authenticated %}
+						<li {% if active_page == "prijava" %} class="current" {% endif %}><a href="{{ url_for('auth.login') }}">Prijavi se</a><li>
+						<li {% if active_page == "registracija" %} class="current" {% endif %}><a href="{{ url_for('auth.register') }}">Registriraj se</a> </li>
+						{% else %}
+						<li><a href="{{ url_for('auth.logout') }}">Odjavi se</a> </li>
+						{% endif %}
 					</ul>
 				</nav>
 			</div>
