@@ -19,3 +19,15 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):     # output of print()
         return f"User('{self.id}', '{self.username}', '{self.email}', '{self.password}')"
+
+class Product(db.Model):
+    id_p = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(60), unique=True, nullable=False)
+    description = db.Column(db.String(500), nullable=True)          # nullable could later be omitted, description size = 500 for now
+    price = db.Column(db.Integer, nullable=False)                   # need to add restriction for price>0
+    image_file = db.Column(db.String(20), nullable=False, default='maketaimg.jpg')      # 'maketaimg.jpg' as current placeholder
+    material = db.Column(db.String(20))                             # default value could be added, material to be implemented as static type?, nullable could be implemeted
+
+    def __repr__(self):     # output of print()
+        return f"Product('{self.id_p}', '{self.name}', '{self.description}', '{self.price}', '{self.image_file}', '{self.material}')"
+    
