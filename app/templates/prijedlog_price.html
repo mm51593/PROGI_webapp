@@ -4,27 +4,18 @@
 {% block content %}
 		
 <div class="main-container">
-	<form id="submitPricu" onsubmit="return checkData()">
-		<div class="container">
-			<h1>Podnesi svoju priču</h1>
-			<label>Naslov : </label>   
-				<input type="text" placeholder="Unesi naslov priče" name="naslov" required> 
-			<div class="grid-container">
-				<div class="gridElemTekst">
-					<label for="opisPrice" id="tekstLabel">Tekst : </label>   
-						<textarea id="opisPrice" form="submitPricu" placeholder="Opisite vasu maketu.."></textarea>
-				</div>
-				<label for="upload-img" id="imgLabel">Uploadajte sliku</label>
-					<input id="upload-img" type="file" class="gridElemImg" accept="image/*">
-				<label for="upload-vid" id="vidLabel">Uploadajte video</label>
-					<input id="upload-vid" type="file" class="gridElemVid" accept="video/mp4">	
-			</div>
-			<div class="btnHolder">
-				<button class="main-button subBtn" type="submit">Podnesi</button>
-				<div class="provjeriUpload" onclick="checkUpload()">Provjeri upload</button>
-			</div>
-		</div>
-	</form>
+	<form method="post">
+        <ol id="InputList"></ol>
+        <div>
+            <input type="submit" name="submit">
+        </div>
+    </form>
+    <span>
+        <button name="addText" onclick="addTextField();">Add text</button>
+        <button name="addImage">Add image</button>
+        <button name="addVideo">Add video</button>
+    </span>
 </div>
-	
+<script src="../static/js/story.js"></script>
+
 {% endblock %}
