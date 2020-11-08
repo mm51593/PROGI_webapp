@@ -1,4 +1,5 @@
 app/__pycache__/
 app/authentication/__pycache__/
+app/stories/__pychache__/
 env
 .idea

@@ -13,9 +13,6 @@ stories = Blueprint('story', __name__)
 def add_content():
     if not current_user.is_authenticated:
         return redirect(url_for('auth.login'))
-    print(current_user)
-    print(request.form)
-    print(request.files)
 
     # TODO: sanitacija ulaza
 
