@@ -24,6 +24,8 @@ class User(db.Model, UserMixin):
 class Story(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(70), nullable=False)
+    author_id = db.Column(db.Integer, nullable=False)
+    time_created = db.Column(db.DateTime, nullable=False)
 
     def __repr__(self):
         return f"Story('{self.id}', '{self.title}')"
@@ -35,3 +37,6 @@ class StoryContent(db.Model):
     story_text = db.Column(db.String(280))
     image_name = db.Column(db.String(50))
     video_name = db.Column(db.String(50))
+
+    def __repr__(self):
+        return f"StoryContent('{self.story_id}', '{self.ordinal_number}', '{self.story_text}', '{self.image_name}', '{self.video_name}')"

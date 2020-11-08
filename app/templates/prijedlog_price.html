@@ -4,16 +4,20 @@
 {% block content %}
 		
 <div class="main-container">
-	<form method="post">
+	<form method="post" enctype="multipart/form-data">
+        <label>Naslov priče
+            <input type="text" name="story-title">
+        </label>
         <ol id="InputList"></ol>
         <div>
             <input type="submit" name="submit">
+            <input type="hidden" name="input-number" id="input-number" value=0>
         </div>
     </form>
     <span>
-        <button name="addText" onclick="addTextField();">Add text</button>
-        <button name="addImage">Add image</button>
-        <button name="addVideo">Add video</button>
+        <button name="addText" onclick="addTextField('text');">Add text</button>
+        <button name="addImage" onclick="addTextField('image');">Add image</button>
+        <button name="addVideo" onclick="addTextField('video');">Add video</button>
     </span>
 </div>
 <script src="../static/js/story.js"></script>
