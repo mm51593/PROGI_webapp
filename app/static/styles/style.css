@@ -449,6 +449,7 @@ button:hover {
 	display: flex;
 	flex-direction: column;
 	margin-top: 30vh;
+	margin-left: 0.5vw;
 }
 
 .btn-ctrl {
@@ -456,4 +457,8 @@ button:hover {
 	margin: 5px;
 	width: 10vh;
 	border: #f88f5b solid 3px;
+}
+
+#naslov-prijedlog {
+	font-size: 1.4em;
 }
