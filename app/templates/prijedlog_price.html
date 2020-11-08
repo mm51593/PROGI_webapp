@@ -3,22 +3,25 @@
 
 {% block content %}
 		
+<span class="option-controller">
+    <button class="btn-ctrl" name="addText" onclick="addTextField('text');">Add text</button>
+    <button class="btn-ctrl" name="addImage" onclick="addTextField('image');">Add image</button>
+    <button class="btn-ctrl" name="addVideo" onclick="addTextField('video');">Add video</button>
+</span>
+
 <div class="main-container">
-	<form method="post" enctype="multipart/form-data">
+    <div class="container">
+    <form method="post" enctype="multipart/form-data">
         <label>Naslov priče
             <input type="text" name="story-title">
         </label>
         <ol id="InputList"></ol>
-        <div>
-            <input type="submit" name="submit">
+        <div class="prijedlog-btn-holder">
+            <input class="ctrl-prijedlog" type="submit" name="submit">
             <input type="hidden" name="input-number" id="input-number" value=0>
         </div>
     </form>
-    <span>
-        <button name="addText" onclick="addTextField('text');">Add text</button>
-        <button name="addImage" onclick="addTextField('image');">Add image</button>
-        <button name="addVideo" onclick="addTextField('video');">Add video</button>
-    </span>
+  </div>
 </div>
 <script src="../static/js/story.js"></script>
 
