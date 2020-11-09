@@ -13,9 +13,13 @@
 			
 			\begin{packed_enum}
 				
-				\item Dionik 1
-				\item Dionik 2				
-				\item ...
+				\item Korisnik sustava
+				\begin{packed_enum}	
+					\item  Maketar 
+					\item  Kupac	
+				\end{packed_enum}
+				\item Administrator	sustava			
+				\item Razvojni tim
 				
 			\end{packed_enum}
 			
@@ -23,30 +27,49 @@
 			
 			
 			\begin{packed_enum}
-				\item  \underbar{Aktor 1 (inicijator) može:}
+				\item  \underbar{Neregistrirani/neprijavljeni korisnik (inicijator) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
-					\begin{packed_enum}
-						
+					\item registrirati se u sustav prilaganjem svoje e-mail adrese, lozinke i korisničkog imena
+					\item pregledati priče i ostavljati komentare na njima
+					\item  funkcionalnost 3
+										\begin{packed_enum}
 						\item  podfunkcionalnost 1 
 						\item  podfunkcionalnost 2
-				
+						
 					\end{packed_enum}
-					\item  funkcionalnost 3
 					
 				\end{packed_enum}
 			
-				\item  \underbar{Aktor 2 (sudionik) može:}
+				\item  \underbar{Korisnik (kupac/maketar) može:}
 				
 				\begin{packed_enum}
 					
-					\item funkcionalnost 1
-					\item funkcionalnost 2
+					\item pregledati priče i ostavljati komentare na njima
+					\item slati administratoru sustava prijedloge za nove priče
 					
 				\end{packed_enum}
+			
+			\item  \underbar{Administrator (inicijator) može:}
+			
+			\begin{packed_enum}
+				
+				\item prihvaćati ili odbijati prijedloge priča
+				\item prihvaćanjem objavljivati predložene priče
+				\item  funkcionalnost 3
+				
+			\end{packed_enum}
+		
+		\item  \underbar{Baza podataka (sudionik) može:}
+		
+		\begin{packed_enum}
+			
+			\item pohranjivati podatke o svim korisničkim računima sustava i njihovim ovlastima
+			\item pohranjivati priče i njihove dane opise
+			\item  funkcionalnost 3
+			
+		\end{packed_enum}
 			\end{packed_enum}
 			
 			\eject 
@@ -95,6 +118,192 @@
 							
 						\end{packed_item}
 					\end{packed_item}
+				
+						\noindent \underbar{\textbf{UC1 $-$ Registracija}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Napraviti korisnički račun za korisnika
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Neregistrirani korisnik odabire opciju za registraciju
+							\item Unosi potrebne podatke za registraciju
+							\item Korisnikovi podaci se upisuju u bazu te je obaviješten o uspješnoj registraciji
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[2.a] Odabir već zauzetog korsiničkog imena i/ili e-maila, unos podataka u nedozvoljenom formatu (npr. lozinka) ili pružanje neispravnog e-maila
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik je obaviješten o nastaloj grešci i mjestu na kojem se ona nalazi
+								\item Korisnik potom ispravlja grešku i ponovo šalje podatke ili odustaje od registracije
+								
+							\end{packed_enum}					
+						\end{packed_item}
+					\end{packed_item}
+				
+						\noindent \underbar{\textbf{UC2 $-$ Pregled priča}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Korisniku se pruža stranica sa kratkim prikazom svih priča u sustavu
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik sa početne stranice poveznicom dolazi do stranice sa pričama
+							\item Aplikacija korisniku prikazuje sve priče u sustavu
+						\end{packed_enum}
+					\end{packed_item}
+				
+						\noindent \underbar{\textbf{UC3 $-$ Pregled pojedine priče}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Korisniku se pruža detaljan prikaz određene priče
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik iz kratkog prikaza priča odabire priču koja ga zanima
+							\item Aplikacija korisniku pruža detaljan prikaz priče (slika, video, tekst) i mogućnost komentiranja na priču
+						\end{packed_enum}
+					\end{packed_item}
+				
+						\noindent \underbar{\textbf{UC4 $-$ Komentiranje priče}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Korisnik sustava ostavlja komentar na priču 
+						\item  \textbf{Sudionici:} Baza podataka
+						\item  \textbf{Preduvjet:} -
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							\item Korisnik otvara priču na kojoj želi ostaviti komentar
+							\item U za to namijenjeno mjesto upisuje komentar te ga objavljuje
+							\item Komentar se objavljuje te je uz njega navedeno ime korisnika koji ga je objavio
+							\item 
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[3.a] Korisnik nije prijavljen u sustav
+							\item[] \begin{packed_enum}
+								
+								\item Umjesto korisničkog imena na to mjesto se upisuje $"$Anoniman korisnik$"$
+								
+							\end{packed_enum}
+							\item[2.b] $<$opis mogućeg scenarija odstupanja u koraku 2$>$
+							\item[3.a] $<$opis mogućeg scenarija odstupanja  u koraku 3$>$
+							
+						\end{packed_item}
+					\end{packed_item}
+				
+						\noindent \underbar{\textbf{UC5 $-$ Predlaganje priče}}
+					\begin{packed_item}
+						
+						\item \textbf{Glavni sudionik: }Korisnik
+						\item  \textbf{Cilj:} Korisnik šalje prijedlog priče za objavu na stranici administratoru 
+						\item  \textbf{Sudionici:} Administrator, baza podataka
+						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+						\item  \textbf{Opis osnovnog tijeka:}
+						
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik iz izbornika odabire opciju predlaganja priče
+							\item Aplikacija mu pruža sučelje za dodavanje opisa priče (slika, video, tekst)
+							\item Korisnik popunjava podatke i šalje ih administratoru na pregled
+						\end{packed_enum}
+						
+						\item  \textbf{Opis mogućih odstupanja:}
+						
+						\item[] \begin{packed_item}
+							
+							\item[2.a] Korisnik nije predao dovoljno podataka (nema ni slike, ni teksta, ni videa i/ili nema naslova) 
+							\item[] \begin{packed_enum}
+								
+								\item Korisnik je obaviješten o grešci i mjestu na kojem je nastala
+								\item Korisnik ispravlja grešku i šalje podatke administratoru na pregled ili odustaje od slanja prijedloga priče								
+							\end{packed_enum}			
+						\end{packed_item}
+					\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC6 $-$ Prilaganje slike/teksta/videa priči}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Opisivanje priče koja se predlaže administratoru tekstom, slikom i videom
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Korisniku je pružen upravljač kojim dodaje proizvoljan broj elemenata teksta, slike i videa 
+						\item Korisnik u elemente upisuje tekst ili prilaže sliku ili video ili ih uklanja
+						\item Nakon što je popunio podatke, može ih slati administratoru
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[2.a] Korisnik prilaže sliku ili video nedozvoljenog formata
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik je obaviješten o grešci i dano mu je pojašnjenje te greške
+							\item Korisnik odustaje od prilaganja slike/videa uz priču ili prilaže sliku/video u drugom formatu
+							
+						\end{packed_enum}	
+					\end{packed_item}
+				\end{packed_item}
+			
+					\noindent \underbar{\textbf{UC7 $-$ Odobrenje/odbijanje priče}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Predložena priča se objavljuje na za to predviđenoj stranici ili se odbacuje
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen i dodana su mu prava administratora
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Aplikacija administratoru pruža listu priča danih na prijedlog i njihov opis
+						\item Administratoru je ispod svake priče ponuđena opcija odbacivanja ili prihvaćanja priče
+						\item Priča se ovisno o administratorovom izboru uklanja iz sustava ili se objavljuje
+					\end{packed_enum}
+				\end{packed_item}
+			
+					\noindent \underbar{\textbf{UC8 $-$ Objava priče}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Priča se nakon korisnikog odobravanja prikazuje svim korisnicima sustava na za to određenom mjestu
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodana su mu prava administratora
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator prihvaća priču
+						\item Priča se pohranjuje u bazu podataka te se prikazuje na određenoj stranici zajedno sa ostalim pričama
+					\end{packed_enum}
+				\end{packed_item}
 				
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
