@@ -304,7 +304,231 @@
 						\item Priča se pohranjuje u bazu podataka te se prikazuje na određenoj stranici zajedno sa ostalim pričama
 					\end{packed_enum}
 				\end{packed_item}
+			
+					\noindent \underbar{\textbf{UC16 $-$ Pregled maketa}}
+				\begin{packed_item}
 				
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Korisniku se pruža stranica s kratkim prikazom svih maketa u sustavu
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} -
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+					
+						\item Korisnik s početne stranice poveznicom dolazi do stranice s maketama
+						\item Aplikacija korisniku prikazuje sve makete u sustavu
+					\end{packed_enum}
+				\end{packed_item}
+			
+			
+					\noindent \underbar{\textbf{UC17 $-$ Pregled pojedine makete}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Korisniku se pruža detaljan prikaz pojedine makete
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} -
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Korisnik sa stranice s pregledom svih maketa odabire maketu koja ga zanima
+						\item Aplikacija korisniku prikazuje detaljan opis tražene makete koji uključuje tekst, slike, izbornike te mogućnost kupovine makete
+					\end{packed_enum}
+				\end{packed_item}
+			
+				\noindent \underbar{\textbf{UC18 $-$ Odabir materijala za maketu}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Korisniku se pruža mogućnost odabira materijala od kojeg želi da se izradi maketa
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik mora biti na stranici pojedinačne makete
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Korisnik na stranici makete otvara padajući izbornik s opcijama za materijale te odabire željeni materijal
+						\item Aplikacija na osnovu odabranog materijala izračunava cijenu makete te prikazuje novu cijenu na stranici
+					\end{packed_enum}
+				\end{packed_item}
+				
+				
+				\noindent \underbar{\textbf{UC19 $-$ Spremanje podataka formulara za plaćanje}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Formular koji je ispunio registrirani korisnik pri plaćanju se sprema za ponovno korištenje
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik mora biti registriran te ispravno popuniti formular
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Korisnik na stranici za plaćanje ispunjava formular
+						\item Aplikacija provjerava ispravnost unesenih podataka
+						\item Nakon provjere podatci se spremaju u bazu podataka za ponovnu upotrebu pri sljedećoj kupovini
+					\end{packed_enum}
+				
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+						
+						\item[2.a] Korisnik neispravno popuni jedno ili više polja ili ostavi prazno polje
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik je obaviješten o grešci i dano mu je pojašnjenje te greške
+							\item Korisnik prepravlja ili nadopunjava podatke te se oni ponovno šalju na validaciju ili odustaje od ispunjavanja formulara
+							
+						\end{packed_enum}	
+					\end{packed_item}
+				\end{packed_item}
+			
+				\noindent \underbar{\textbf{UC20 $-$ Popunjavanje formulara za maketu po narudžbi}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Korisnik predaje formular sa specifikacijama željene makete 
+					\item  \textbf{Sudionici:} Baza podataka, administrator
+					\item  \textbf{Preduvjet:} Korisnik mora biti registriran te ispravno popuniti formular
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Korisnik na stranici za ispunjavanje formulara popunjava formular sa željenim dimenzijama, materijalom i opisom
+						\item Aplikacija provjerava ispravnost unesenih podataka
+						\item Nakon provjere podatci se spremaju u bazu podataka
+						\item Administratoru se šalje obavijest o novom formularu
+					\end{packed_enum}
+					
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+ 
+						\item[2.a] Korisnik neispravno popuni jedno ili više polja ili ostavi prazno polje
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik je obaviješten o grešci i dano mu je pojašnjenje te greške
+							\item Korisnik prepravlja ili nadopunjava podatke te se oni ponovno šalju na validaciju ili odustaje od ispunjavanja formulara
+							
+						\end{packed_enum}	
+					\end{packed_item}
+				\end{packed_item}
+
+
+				\noindent \underbar{\textbf{UC21 $-$ Ponuda makete na zahtjev}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Administrator pregledava zahtjev te šalje ponudu na osnovu traženih specifikacija
+					\item  \textbf{Sudionici:} Baza podataka, korisnik
+					\item  \textbf{Preduvjet:} Administrator mora imati predan zahtjev od strane korisnika
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator dobija obavijest o podnesenom zahtjevu te otvara zahtjev
+						\item Administrator na osnovu zahtjeva određuje cijenu te šalje ponudu korisniku
+						\item Korisnik dobija obavijest o ponudi
+					\end{packed_enum}
+				\end{packed_item}
+
+				\noindent \underbar{\textbf{UC22 $-$ Prihvat ili odbijanje ponude makete}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Korisnik prihvaća ili odbija ponuđenu cijenu makete
+					\item  \textbf{Sudionici:} Baza podataka, administrator
+					\item  \textbf{Preduvjet:} Korisnik mora biti registriran
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Korisnik dobija obavijest o ponudi cijene za maketu
+						\item Korisnik odbija ili prihvaća ponudu
+						\item Šalje se povratna informacija administratoru
+					\end{packed_enum}
+				\end{packed_item}
+
+				\noindent \underbar{\textbf{UC23 $-$ Postavljanje postavki vidljivosti korisničkog računa}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Korisnik postavlja željenu vidljivost svojih podataka
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik mora biti registriran
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Korisnik odabire stranicu s postavkama korisničkog računa
+						\item Korisnik odabire opciju postavljanja vidljivosti
+						\item Korisnik odabire stavke koje želi da budu privatne ili javne (korisničko ime mora biti javno)
+						\item Korisnik potvrđuje odabir te se on šalje sustavu
+						\item Stranica osvježava podatke
+					\end{packed_enum}
+
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+ 
+						\item[4.a] Korisnik ne potvrdi svoj odabir prije napuštanja stranice
+						\item[] \begin{packed_enum}
+							
+							\item Korisnik je obaviješten o grešci te se nudi opcija povratka na potvrdu odabira
+							\item Korisnik potvrđuje ili odustaje od izmjena
+							
+						\end{packed_enum}	
+					\end{packed_item}
+				\end{packed_item}
+
+				\noindent \underbar{\textbf{UC24 $-$ Zabrana pristupa korisniku}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Administrator zabranjuje pristup određenom registriranom korisniku
+					\item  \textbf{Sudionici:} Baza podataka, korisnik
+					\item  \textbf{Preduvjet:} Korisnik mora biti registriran
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator odabire korisnika kojem želi zabraniti pristup
+						\item Potvrđuje odabir te se sprema u bazu podataka
+					\end{packed_enum}
+				\end{packed_item}
+
+
+				\noindent \underbar{\textbf{UC25 $-$ Kreiranje standardne ponude maketa}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Administrator ispunjava i objavljuje standardnu ponudu na stranici
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} -
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Administrator ispunjava podatke za novu ponudu makete
+						\item Administrator potvrđuje formular te se šalje u bazu podataka
+						\item Nova maketa se sprema te se počinje prikazivati na stranici
+					\end{packed_enum}
+
+					\item  \textbf{Opis mogućih odstupanja:}
+					
+					\item[] \begin{packed_item}
+ 
+						\item[2.a] Administrator krivo ispuni ili ostavi prazno polje u formularu
+						\item[] \begin{packed_enum}
+							
+							\item Administrator je obaviješten o grešci te se nudi opcija povratka na ispunjavanje formulara
+							\item Korisnik izmjenjuje ili nadopunjava podatke te ponovno potvrđuje odabir
+							
+						\end{packed_enum}	
+					\end{packed_item}
+				\end{packed_item}
 					
 				\subsubsection{Dijagrami obrazaca uporabe}
 					
