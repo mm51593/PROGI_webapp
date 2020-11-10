@@ -33,6 +33,7 @@
 					
 					\item registrirati se u sustav prilaganjem svoje e-mail adrese, lozinke i korisničkog imena
 					\item pregledati priče i ostavljati komentare na njima
+					\item unjeti podatke za kupovinu i kupiti proizvod
 					\item  funkcionalnost 3
 										\begin{packed_enum}
 						\item  podfunkcionalnost 1 
@@ -48,6 +49,9 @@
 					
 					\item pregledati priče i ostavljati komentare na njima
 					\item slati administratoru sustava prijedloge za nove priče
+					\item vidjeti podatke o svom korisničkom računu
+					\item kupiti proizvod
+					\item odjaviti se
 					
 				\end{packed_enum}
 			
@@ -57,6 +61,7 @@
 				
 				\item prihvaćati ili odbijati prijedloge priča
 				\item prihvaćanjem objavljivati predložene priče
+				\item vidjeti podatke o izvršenim transakcijama
 				\item  funkcionalnost 3
 				
 			\end{packed_enum}
@@ -67,6 +72,7 @@
 			
 			\item pohranjivati podatke o svim korisničkim računima sustava i njihovim ovlastima
 			\item pohranjivati priče i njihove dane opise
+			\item pohranjivati podatke o izvršenim transakcijama
 			\item  funkcionalnost 3
 			
 		\end{packed_enum}
@@ -302,6 +308,149 @@
 						
 						\item Administrator prihvaća priču
 						\item Priča se pohranjuje u bazu podataka te se prikazuje na određenoj stranici zajedno sa ostalim pričama
+					\end{packed_enum}
+				\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC9 $-$ Prijava}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Prijaviti korisnika u sustav
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je registriran u bazi podataka
+					\item  \textbf{Opis osnovnog tijeka:}
+						
+					\item[] \begin{packed_enum}
+							
+						\item Neprijavljen korisnik odabire opciju za prijavu
+						\item Unosi potrebne podatke za prijavu
+						\item Podaci se provjeravaju u bazi podataka te se obavještava o uspješnoj prijavi
+					\end{packed_enum}
+						
+					\item  \textbf{Opis mogućih odstupanja:}
+						
+					\item[] \begin{packed_item}
+							
+						\item[2.a] Unos nepostojećeg korisničkog imena ili e-maila, unos pogrešne lozinke
+						\item[] \begin{packed_enum}
+								
+							\item Korisnik je obaviješten o nastaloj grešci i mjestu na kojem se ona nalazi
+							\item Korisnik potom ispravlja grešku i ponovo šalje podatke ili odustaje od prijave
+								
+						\end{packed_enum}					
+					\end{packed_item}
+				\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC10 $-$ Odjava}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Odjaviti se iz sustava
+					\item  \textbf{Sudionici:} -
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Prijavljen korisnik odabire opciju za odjavu 
+						\item Obavještava se korisnika o uspješnoj odjavi
+					\end{packed_enum}
+				\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC11 $-$ Prikaz korisničkog računa}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Prikazati podatke o korisničkom računu
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
+					\item  \textbf{Opis osnovnog tijeka:}
+					
+					\item[] \begin{packed_enum}
+						
+						\item Prijavljen korisnik odabire opciju za prikaz svog korisničkog računa 
+						\item Prikazuju se podaci o korisničkom računu
+					\end{packed_enum}
+				\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC12 $-$ Unos podataka za kupovinu za prijavljenog korisnika}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Popuniti formular za kupovinu makete
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen u bazi podataka
+					\item  \textbf{Opis osnovnog tijeka:}
+						
+					\item[] \begin{packed_enum}
+							
+						\item Prijavljen korisnik odabire opciju za kupnju makete
+						\item Formular s podacima za kupovinu se automatski ispuni osobnim podacima
+						\item Odabire se opcija za izvršavanje transakcije/kupnje
+						\item Obavještava se korisnika o uspješnoj transakciji/kupnji
+					\end{packed_enum}
+				\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC13 $-$ Unos podataka za kupovinu za neregistriranog korisnika}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Korisnik
+					\item  \textbf{Cilj:} Popuniti formular za kupovinu makete
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} -
+					\item  \textbf{Opis osnovnog tijeka:}
+						
+					\item[] \begin{packed_enum}
+							
+						\item Neregistrirani korisnik odabire opciju za kupnju makete
+						\item Ispunjava formular za kupovinu s osobnim podacima
+						\item Odabire se opcija za izvršavanje transakcije/kupnje
+						\item Obavještava se korisnika o uspješnoj transakciji/kupnji
+					\end{packed_enum}
+						
+					\item  \textbf{Opis mogućih odstupanja:}
+						
+					\item[] \begin{packed_item}
+							
+						\item[2.a] Unos pogrešnih osobnih podataka ili podataka potrebnih za transakciju
+						\item[] \begin{packed_enum}
+								
+							\item Korisnik je obaviješten o nastaloj grešci i mjestu na kojem se ona nalazi
+							\item Korisnik potom ispravlja grešku i ponovo šalje podatke ili odustaje od kupnje
+								
+						\end{packed_enum}					
+					\end{packed_item}
+				\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC14 $-$ Spremanje izvršenih transakcija}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Baza podataka
+					\item  \textbf{Cilj:} Spremiti izvršene transakcije u bazu podataka
+					\item  \textbf{Sudionici:} -
+					\item  \textbf{Preduvjet:} Transakcija je uspješno obavljena
+					\item  \textbf{Opis osnovnog tijeka:}
+						
+					\item[] \begin{packed_enum}
+							
+						\item Sustav javlja korisniku da je transakcija uspješna
+						\item Baza podataka sprema podatke o transakciji
+					\end{packed_enum}
+				\end{packed_item}
+				
+					\noindent \underbar{\textbf{UC15 $-$ Pregled izvršenih transakcija}}
+				\begin{packed_item}
+					
+					\item \textbf{Glavni sudionik: }Administrator
+					\item  \textbf{Cilj:} Pregled podataka o izvršenim transakcijama
+					\item  \textbf{Sudionici:} Baza podataka
+					\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav i dodana su mu prava administratora
+					\item  \textbf{Opis osnovnog tijeka:}
+						
+					\item[] \begin{packed_enum}
+							
+						\item Administrator odabire opciju za pregled prošlih transakcija
+						\item Prikazuju se podaci iz baze podataka o transakcijama
 					\end{packed_enum}
 				\end{packed_item}
 			
