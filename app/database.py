@@ -30,4 +30,13 @@ class Product(db.Model):
 
     def __repr__(self):     # output of print()
         return f"Product('{self.id_p}', '{self.name}', '{self.description}', '{self.price}', '{self.image_file}', '{self.material}')"
+
+products = {
+        'name': 'Maketa 1',
+        'description': 'blablabla bla',
+        'price': '100',
+        'image_file': '',
+        'material': ''
+    }
+
     

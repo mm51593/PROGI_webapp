@@ -13,3 +13,4 @@ from app import routes
 from app.authentication.routes import authentication
 
 application.register_blueprint(authentication)
+#application.store_blueprint(store)
