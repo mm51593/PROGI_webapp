@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.database import User
@@ -29,3 +30,15 @@ class LoginForm(FlaskForm):
     password = PasswordField('Lozinka', validators=[DataRequired("Ovo polje je neophodno.")])
     remember = BooleanField('Zapamti me')
     submit = SubmitField('Prijava')
+
+class UpdateForm(FlaskForm):
+    username = StringField('Novo korisničko ime', validators=[DataRequired("Ovo polje je neophodno."), Length(min=3, max=25, message="Korisničko ime mora biti između %(min)d i %(max)d znakova dugo.")])
+    submit = SubmitField('Promijeni ime')
+
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            fromdb = User.query.filter_by(username=username.data).first()
+            if fromdb:
+                raise ValidationError('Ovo korisničko ime je zauzeto.')
+            return
+    

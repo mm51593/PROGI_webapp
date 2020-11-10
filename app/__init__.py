@@ -6,6 +6,8 @@ application = Flask(__name__)
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dummy.db'
 application.config['SECRET_KEY'] = 'secret-key'
 login_manager = LoginManager(application)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'
 
 
 from app import database

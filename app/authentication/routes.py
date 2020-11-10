@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for
-from app.authentication.forms import RegistrationForm, LoginForm
+from flask import Blueprint, render_template, redirect, url_for , request
+from app.authentication.forms import RegistrationForm, LoginForm, UpdateForm
 from app.database import User, db, bcrypt
-from flask_login import login_user, current_user, logout_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 authentication = Blueprint('auth', __name__)
 
@@ -37,3 +37,14 @@ def login():
 def logout():
     logout_user()
     return redirect('/')
+
+@authentication.route('User')
+@login_required
+def User():
+    form = UpdateForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        db.session.commit()
+        flash ('Promijenili ste ime korisničkog računa', 'success')
+        return redirect(url_for('User'))
+    return render_template ('User.html', title = 'User', form = form)
