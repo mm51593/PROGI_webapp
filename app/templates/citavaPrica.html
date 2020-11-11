@@ -18,7 +18,7 @@
 			{% elif element.video_name %}
 				<div class="flex-container-column flex-video-img">
 					<video class="flex-element" controls>
-						<source src="../static/vid/video.mp4" type="video/mp4">
+						<source src="{{ url_for('story.pull_file', file=element.video_name) }}"  type="video/mp4">
 					</video>
 				</div>
 			{% endif %}
