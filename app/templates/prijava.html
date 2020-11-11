@@ -5,12 +5,33 @@
 	
 <form method="post">
 	{{ form.hidden_tag() }}
-	<div class="container sec-main-container">   
+
+	<div class="container sec-main-container">
+		{% if error %}
+		<div>
+			{{ error }}
+		</div>
+
+		{% endif %}
 		{{ form.email.label }}
 		{{ form.email(placeholder="Unesi e-mail adresu") }}
+		{% if form.email.errors %}
+			<div>
+				{% for error in form.email.errors %}
+					<span>{{ error }}</span>
+				{% endfor %}
+			</div>
+		{% endif %}
 
 		{{ form.password.label }}
 		{{ form.password(placeholder="Unesi lozinku") }}
+		{% if form.password.errors %}
+			<div>
+				{% for error in form.password.errors %}
+					<span>{{ error }}</span>
+				{% endfor %}
+			</div>
+		{% endif %}
 
 		<div class="flex-container">
 			<div>

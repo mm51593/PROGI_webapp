@@ -25,12 +25,16 @@ def login():
     if current_user.is_authenticated:
         return redirect('/')
     login_form = LoginForm()
+    login_error = None
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, login_form.password.data):
             login_user(user, remember=login_form.remember.data)
             return redirect('/')
-    return render_template("prijava.html", title="Prijavi se", form=login_form)
+        else:
+            login_error = "Neispravna E-mail adresa ili lozinka."
+            print(login_error)
+    return render_template("prijava.html", title="Prijavi se", form=login_form, error=login_error)
 
 
 @authentication.route('/logout')
