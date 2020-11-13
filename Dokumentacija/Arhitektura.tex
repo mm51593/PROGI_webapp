@@ -2,18 +2,32 @@
 		
 		\textbf{\textit{dio 1. revizije}}\\
 
-		\textit{ Potrebno je opisati stil arhitekture te identificirati: podsustave, preslikavanje na radnu platformu, spremišta podataka, mrežne protokole, globalni upravljački tok i sklopovsko-programske zahtjeve. Po točkama razraditi i popratiti odgovarajućim skicama:}
-	\begin{itemize}
-		\item 	\textit{izbor arhitekture temeljem principa oblikovanja pokazanih na predavanjima (objasniti zašto ste baš odabrali takvu arhitekturu)}
-		\item 	\textit{organizaciju sustava s najviše razine apstrakcije (npr. klijent-poslužitelj, baza podataka, datotečni sustav, grafičko sučelje)}
-		\item 	\textit{organizaciju aplikacije (npr. slojevi frontend i backend, MVC arhitektura) }		
-	\end{itemize}
-
+		\noindent Arhitektura se moze podijeliti na tri podsustava: 
+		\begin{itemize}
+			\item Web poslužitelj
+			\item Web aplikacija
+			\item Baza podataka
+		\end{itemize}
 	
-		
+		\begin{figure}[H]
+			\includegraphics[width=.9\linewidth]{slike/arhitektura_sustava.png}
+			\centering
+			\caption{Arhitektura sustava}
+			\label{fig:arh1}
+		\end{figure}
 
+		\indent \underline{\textit{Web preglednik}} (internetski preglednik) program je koji omogućuje korisnicima pristup web stranicama i multimedijalnim sadržajima vezanih uz njih. Svaki internetski preglednik je prevoditelj što znači da je stranica pisana u kodu koji se potom interpretira kao nešto svakome razumljivo. Putem web preglednika korisnik šalje zahtjeve web poslužitelju. \\
+		\indent \underline{\textit{Web poslužitelj}} je računalni program koji služi kao medij između korisnika i drugih programa ili uređaja. Poslužitelj je osnova rada web aplikacije budući da on pokreće web aplikaciju te joj preusmjerava zahtjeve klijenata. Njegova primarna funkcija je pohranjivanje, obrada i isporuka web stranica klijentima. Komunikacija izmedu klijenta i poslužitelja odvija se pomoću protokola HTTP (engl. \textit{Hyper Text Transfer Protocol}).\\
+		\indent \underline{\textit{Web aplikacija}} je računalni program kojemu klijent pristupa iz web preglednika za obradu željenih zahtjeva. Ovisno o tipu zahtjeva, aplikacija pristupa bazi podataka zatim preko poslužitelja vraća korisniku odgovor vidljiv u web pregledniku kao HTML dokument.\\
 		
-
+		Programski jezik koji smo koristili za izradu web aplikacije "Maketa Shop" je Python s Flask radnim okvirom.\\
+		
+		MVC (Model-View-Controller) je obrazac koji se obično koristi za razvoj korisničkih sučelja zato jer dijeli programsku	logiku na tri medusobno povezana elementa što pojednostavnjuje razvoj web	aplikacija. Flask nije strukuriran kao čisti MVC okvir, ali po funkcionalnosti je vrlo sličan. Stoga možemo definirati sva tri elementa: 
+		\begin{itemize}
+			\item Model --- Središnja komponenta sustava.To je dinamička struktura podataka aplikacije neovisna o korisničkom sučelju. Izravno upravlja podacima, logikom i pravilima aplikacije i prima podatke od Controllera.
+			\item View --- Svako predstavljanje informacija poput grafova, dijagrama ili tablica. Moguće je višestruko prikazivanje istih podataka, poput trake grafikona za upravljanje i tabličnog prikaza.
+			\item Controller --- Prihvaća unos i pretvara ga u naredbe za Model ili View. Upravlja	korisničkim zahtjevima te izvodi daljnju interakciju.
+		\end{itemize}
 				
 		\section{Baza podataka}
 			
