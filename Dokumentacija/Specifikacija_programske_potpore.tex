@@ -190,7 +190,7 @@
 						
 						\item \textbf{Glavni sudionik: }Korisnik
 						\item  \textbf{Cilj:} Korisnik šalje prijedlog priče za objavu na stranici administratoru 
-						\item  \textbf{Sudionici:} Administrator, baza podataka
+						\item  \textbf{Sudionici:} Baza podataka
 						\item  \textbf{Preduvjet:} Korisnik je prijavljen u sustav
 						\item  \textbf{Opis osnovnog tijeka:}
 						
@@ -505,7 +505,7 @@
 					
 					\item \textbf{Glavni sudionik: }Korisnik
 					\item  \textbf{Cilj:} Korisnik predaje formular sa specifikacijama željene makete 
-					\item  \textbf{Sudionici:} Baza podataka, administrator
+					\item  \textbf{Sudionici:} Baza podataka
 					\item  \textbf{Preduvjet:} Korisnik mora biti registriran te ispravno popuniti formular
 					\item  \textbf{Opis osnovnog tijeka:}
 					
@@ -514,7 +514,6 @@
 						\item Korisnik na stranici za ispunjavanje formulara popunjava formular sa željenim dimenzijama, materijalom i opisom
 						\item Aplikacija provjerava ispravnost unesenih podataka
 						\item Nakon provjere podatci se spremaju u bazu podataka
-						\item Administratoru se šalje obavijest o novom formularu
 					\end{packed_enum}
 					
 					\item  \textbf{Opis mogućih odstupanja:}
@@ -679,16 +678,51 @@
 				
 			\subsection{Sekvencijski dijagrami}
 				
-				\textbf{\textit{dio 1. revizije}}\\
-				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
+				\subsubsection{Obrazac upotrebe UC5 - Predlaganje priče i UC6 - Prilaganje slike/teksta/videa priči}
+					\noindent Korisnik u formular unosi željeni naslov priče, a zatim i prozvoljan broj komada sadržaja tipa tekst, slika i video. Priča se na poslužitelj prenosi u jednom komadu pa se do slanja sprema u lokalnoj memoriji web-preglednika. Po prijenosu, aplikacija nad pristiglim podacima provodi \textit{sanity check}, to jest provjerava ispravnost podataka. Ako su podaci ispravni, šalju se bazi podataka. Baza stvara novu n-torku u relaciji Story i pohranjuje opće podatke o novonastaloj priči te ju označava neodobrenom. Potom stvara po jednu n-torku u relaciji StoryContent za svaki komad sadržaja priče. Ako je korisnik poslao neispravne podatke, ili praznu priču, aplikacija mu šalje poruku o grešci i daje mu da ponovno unese potrebne podatke.
+					\begin{figure}[H]
+						\includegraphics[width=.9\linewidth]{dijagrami/SD_UC5&UC6.png}
+						\centering
+						\caption{Sekvencijski dijagram, UC5 - Predlaganje priče i UC6 - Prilaganje slike / teksta / videa priči}	
+						\label{fig:sekvdija1}
+					\end{figure}
 				\eject
+				
+				\subsubsection{Obrazac upotrebe UC7 - Odobrenje/odbijenje priče}
+					\noindent Administrator od aplikacije traži sve neodobrene zahtjeve. Aplikacija od baze dohvaća sve neodobrene priče i šalje ih nazad administratoru. Za svaku neodobrenu priču administrator ima opciju odobriti ju ili odbiti. Odobrene priče aplikacija u bazi označava odobrenima. Odbijene priče aplikacija briše iz baze podataka.
+					\begin{figure}[H]
+						\includegraphics[width=.9\linewidth]{dijagrami/SD_UC7.png}
+						\centering
+						\caption{Sekvencijski dijagram, UC7 - Odobrenje/odbijenje priče}
+						\label{fig:sekvdija2}
+					\end{figure}
+				
+				\subsubsection{Obrazac upotrebe UC20 - Popunjavanje formulara za maketu po narudžbi}
+					\noindent Korisnik ispunjava formular u kojem opisuje vlastitu maketu te ju šalje aplikaciji. Aplikaciji provodi \textit{sanity check} pristiglih podataka. Ako su podaci ispravni, šalju se bazi podataka. Baza stvara novu n-torku u relaciji Models, pohranjuje korisnikove opise u nju i označava ju neodobrenom. Aplikacija potom korisniku šalje potvrdu o zaprimitku zahtjeva. Ako su podaci nepotupuni ili neispravni na neki drugi način, aplikacija korisniku šalje poruku u grešci i daje mu da ponovno unese svoj opis.
+					\begin{figure}[H]
+						\includegraphics[width=.9\linewidth]{dijagrami/SD_UC20.png}
+						\centering
+						\caption{Sekvencijski dijagram, UC20 - Popunjavanje formulara za maketu po narudžbi}
+						\label{fig:sekvdija3}
+					\end{figure}
+				
+			\eject
 	
 		\section{Ostali zahtjevi}
 		
 			\textbf{\textit{dio 1. revizije}}\\
-		 
-			 \textit{Nefunkcionalni zahtjevi i zahtjevi domene primjene dopunjuju funkcionalne zahtjeve. Oni opisuju \textbf{kako se sustav treba ponašati} i koja \textbf{ograničenja} treba poštivati (performanse, korisničko iskustvo, pouzdanost, standardi kvalitete, sigurnost...). Primjeri takvih zahtjeva u Vašem projektu mogu biti: podržani jezici korisničkog sučelja, vrijeme odziva, najveći mogući podržani broj korisnika, podržane web/mobilne platforme, razina zaštite (protokoli komunikacije, kriptiranje...)... Svaki takav zahtjev potrebno je navesti u jednoj ili dvije rečenice.}
+			\begin{itemize}
+				\item Sustav treba biti implementiran u jeziku objektno-orijentirane paradigme
+				\item Sustav treba omogućiti nesmetan rad više korisnika u isto vrijeme
+				\item Sustav mora podržavati hrvatsku abecedu
+				\item Izvršavanje dijela programa u kojem se pristupa bazi podataka ne smije trajati duže od nekoliko sekundi
+				\item Korisničko sučelje treba biti jednostavno i intuitivno za korištenje
+				\item Neispravno korištenje korisničkog sučelja ne smije narušiti funkcionalnost i rad sustava
+				\item Veza s bazom podataka mora biti sigurna, brza i otporna na vanjske greške
+				\item Sustav kao valutu koristi HRK
+				\item Veza sa sustavom mora biti zaštićena HTTPS-om
+			\end{itemize}
+			
 			 
 			 
 			 
