@@ -5,3 +5,10 @@
 /dokumentacija/*.out
 /dokumentacija/*.synctex.gz
 /dokumentacija/*.toc
+/Dokumentacija/*.aux
+/Dokumentacija/*.lof
+/Dokumentacija/*.log
+/Dokumentacija/*.lot
+/Dokumentacija/*.out
+/Dokumentacija/*.synctex.gz
+/Dokumentacija/*.toc
