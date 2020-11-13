@@ -679,10 +679,35 @@
 				
 			\subsection{Sekvencijski dijagrami}
 				
-				\textbf{\textit{dio 1. revizije}}\\
-				
-				\textit{Nacrtati sekvencijske dijagrame koji modeliraju najvažnije dijelove sustava (max. 4 dijagrama). Ukoliko postoji nedoumica oko odabira, razjasniti s asistentom. Uz svaki dijagram napisati detaljni opis dijagrama.}
+				\subsubsection{Obrazac upotrebe UC5 - Predlaganje priče i UC6 - Prilaganje slike/teksta/videa priči}
+					\noindent Korisnik u formular unosi željeni naslov priče, a zatim i prozvoljan broj komada sadržaja tipa tekst, slika i video. Priča se na poslužitelj prenosi u jednom komadu pa se do slanja sprema u lokalnoj memoriji web-preglednika. Po prijenosu, aplikacija nad pristiglim podacima provodi \textit{sanity check}, to jest provjerava ispravnost podataka. Ako su podaci ispravni, šalju se bazi podataka. Baza stvara novu n-torku u relaciji Story i pohranjuje opće podatke o novonastaloj priči te ju označava neodobrenom. Potom stvara po jednu n-torku u relaciji StoryContent za svaki komad sadržaja priče. Ako je korisnik poslao neispravne podatke, ili praznu priču, aplikacija mu šalje poruku o grešci i daje mu da ponovno unese potrebne podatke.
+					\begin{figure}[H]
+						\includegraphics[width=.9\linewidth]{dijagrami/SD_UC5&UC6.png}
+						\centering
+						\caption{Sekvencijski dijagram, UC5 - Predlaganje priče i UC6 - Prilaganje slike / teksta / videa priči}	
+						\label{fig:sekvdija1}
+					\end{figure}
 				\eject
+				
+				\subsubsection{Obrazac upotrebe UC7 - Odobrenje/odbijenje priče}
+					\noindent Administrator od aplikacije traži sve neodobrene zahtjeve. Aplikacija od baze dohvaća sve neodobrene priče i šalje ih nazad administratoru. Za svaku neodobrenu priču administrator ima opciju odobriti ju ili odbiti. Odobrene priče aplikacija u bazi označava odobrenima. Odbijene priče aplikacija briše iz baze podataka.
+					\begin{figure}[H]
+						\includegraphics[width=.9\linewidth]{dijagrami/SD_UC7.png}
+						\centering
+						\caption{Sekvencijski dijagram, UC7 - Odobrenje/odbijenje priče}
+						\label{fig:sekvdija2}
+					\end{figure}
+				
+				\subsubsection{Obrazac upotrebe UC20 - Popunjavanje formulara za maketu po narudžbi}
+					\noindent Korisnik ispunjava formular u kojem opisuje vlastitu maketu te ju šalje aplikaciji. Aplikaciji provodi \textit{sanity check} pristiglih podataka. Ako su podaci ispravni, šalju se bazi podataka. Baza stvara novu n-torku u relaciji Models, pohranjuje korisnikove opise u nju i označava ju neodobrenom. Aplikacija potom korisniku šalje potvrdu o zaprimitku zahtjeva. Ako su podaci nepotupuni ili neispravni na neki drugi način, aplikacija korisniku šalje poruku u grešci i daje mu da ponovno unese svoj opis.
+					\begin{figure}[H]
+						\includegraphics[width=.9\linewidth]{dijagrami/SD_UC20.png}
+						\centering
+						\caption{Sekvencijski dijagram, UC20 - Popunjavanje formulara za maketu po narudžbi}
+						\label{fig:sekvdija3}
+					\end{figure}
+				
+			\eject
 	
 		\section{Ostali zahtjevi}
 		
