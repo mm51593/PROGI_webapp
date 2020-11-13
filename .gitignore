@@ -3,3 +3,17 @@ app/authentication/__pycache__/
 app/stories/__pycache__/
 env
 .idea
+/dokumentacija/*.aux
+/dokumentacija/*.lof
+/dokumentacija/*.log
+/dokumentacija/*.lot
+/dokumentacija/*.out
+/dokumentacija/*.synctex.gz
+/dokumentacija/*.toc
+/Dokumentacija/*.aux
+/Dokumentacija/*.lof
+/Dokumentacija/*.log
+/Dokumentacija/*.lot
+/Dokumentacija/*.out
+/Dokumentacija/*.synctex.gz
+/Dokumentacija/*.toc
