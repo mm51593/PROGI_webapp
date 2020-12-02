@@ -423,3 +423,75 @@ button:hover {
 #materijaliChoose {
 	margin-left: 10px;
 }
+
+.elem-liste {
+	background-color: #f8f8f8;
+	border: #ff5500 2px solid;
+	color: #ff5500;
+	padding: 5px;
+	margin: 5px;
+}
+
+.listDiv {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.div-content {
+	width: 50%;
+	color: #000000;
+}
+
+.rmv-prijedlog-elem, .ctrl-prijedlog, .btn-ctrl {
+	height: 5vh;
+	width: 10vw;
+	border-radius: 5px;
+	background-color: #ff5500;
+	border: #ff5500 1px solid;
+	color: black;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.elem-submit-text {
+	display: block;
+}
+
+.elem-submit-image, .elem-submit-video {
+	margin: 5px;
+}
+
+.text-field-class {
+	height: 15vh;
+	width: 30vw;
+	resize: none;
+}
+
+.prijedlog-btn-holder {
+	display: flex;
+	justify-content: center;
+}
+
+.ctrl-prijedlog {
+	margin: 0px 10px;
+}
+
+.option-controller {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	margin-top: 30vh;
+	margin-left: 0.5vw;
+}
+
+.btn-ctrl {
+	border-radius: 20px;
+	margin: 5px;
+	width: 10vh;
+	border: #f88f5b solid 3px;
+}
+
+#naslov-prijedlog {
+	font-size: 1.4em;
+}
