@@ -3,6 +3,11 @@ function removeElement(self)
     self.parentElement.parentElement.remove()
     document.getElementById("input-number").value--;
 }
+
+function resetCounter()
+{
+    document.getElementById("input-number").value = 0;
+}
  
 function reevaluateNames()
 {
@@ -52,6 +57,8 @@ function addTextField(type)
         field.accept = "video/*";
     }
 
+    field.required = false;      // TESTING
+
     var listDiv = document.createElement("div");
     listDiv.className = "listDiv";
 
@@ -84,3 +91,5 @@ function addTextField(type)
 
     reevaluateNames();
 }
+
+resetCounter()

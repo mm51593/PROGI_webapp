@@ -3,7 +3,7 @@ from app.database import Story, StoryContent, db
 from datetime import datetime
 from app import application
 from flask_login import current_user
-from os import path
+from os import path, listdir
 from uuid import uuid4
 
 
@@ -14,35 +14,52 @@ def add_content():
     if not current_user.is_authenticated:
         return redirect(url_for('auth.login'))
 
-    # TODO: sanitacija ulaza
+    ret_error = None
 
     if request.method == "POST":
-        if int(request.form['input-number']) > 0:
-            newstory = Story(title=request.form["story-title"], author_id=current_user.id, time_created=datetime.now())
-            db.session.add(newstory)
-            db.session.commit()
+        passing = True
+        for form in request.form:
+            if form.startswith('text') and request.form[form] == '':
+                passing = False
+                break
+        for file in request.files:
+            if request.files[file].filename == '':
+                passing = False
+                break
+        if passing:
+            if int(request.form['input-number']) > 0:
+                newstory = Story(title=request.form["story-title"], author_id=current_user.id, time_created=datetime.now())
+                db.session.add(newstory)
+                db.session.commit()
 
-            for form in request.form:
-                if form.startswith("text"):
-                    newcontentpiece = StoryContent(story_id=newstory.id, ordinal_number=int(form.split('-')[-1]), story_text=request.form[form])
+                for form in request.form:
+                    if form.startswith("text"):
+                        newcontentpiece = StoryContent(story_id=newstory.id, ordinal_number=int(form.split('-')[-1]), story_text=request.form[form])
+                        db.session.add(newcontentpiece)
+
+                for file in request.files:
+                    filename = request.files[file].filename.split('.')
+                    extension = filename[-1]
+                    while True:
+                        filename = uuid4().hex + '.' + extension
+                        if filename not in listdir(path.join(application.root_path, application.config['STORY_LOCATION'])):
+                            break
+
+                    request.files[file].save(path.join(application.root_path, application.config['STORY_LOCATION'], filename))
+
+                    newcontentpiece = StoryContent(story_id=newstory.id, ordinal_number=int(file.split('-')[-1]))
+                    if file.startswith("image"):
+                        newcontentpiece.image_name = filename
+                    else:
+                        newcontentpiece.video_name = filename
+
                     db.session.add(newcontentpiece)
 
-            for file in request.files:
-                filename = request.files[file].filename.split('.')
-                filename = uuid4().hex + '.' + filename[-1]             # TODO: osigurati da će generirano ime uvijek biti jedinstveno
-                request.files[file].save(path.join(application.root_path, application.config['STORY_LOCATION'], filename))
-
-                newcontentpiece = StoryContent(story_id=newstory.id, ordinal_number=int(file.split('-')[-1]))
-                if file.startswith("image"):
-                    newcontentpiece.image_name = filename
-                else:
-                    newcontentpiece.video_name = filename
-
-                db.session.add(newcontentpiece)
-
-            db.session.commit()
-            return redirect(url_for('story.display_story', story_id=newstory.id))
-    return render_template("prijedlog_price.html", title="Zahtjev priče")
+                db.session.commit()
+                return redirect(url_for('story.display_story', story_id=newstory.id))
+        else:
+            ret_error = "Greška pri prijenosu"
+    return render_template("prijedlog_price.html", title="Zahtjev priče", error=ret_error)
 
 
 @stories.route('/story/<story_id>')
