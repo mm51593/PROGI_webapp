@@ -3,6 +3,12 @@
 
 {% block content %}
 
+<script src="../static/js/cycler.js"></script>
+
+<span hidden id="elem-count">2</span>
+<span hidden class="img-cycle" id="elem-cycle-0">./static/img/pocetna.png</span>
+<span hidden class="vid-cycle" id="elem-cycle-1">./static/vid/video.mp4</span>
+
 <section id="main">
     <div class="container main-container">
         <article id="main-col">
@@ -13,7 +19,7 @@
                     <div class="flex-container">
                         <div class="flex-container-column">
                             <div class="flex-element flex-element-tekst">
-                                <b class="tekstHeader">Opis makete</b><br/>
+                                <b class="tekstHeader">Opis makete</b><br />
                                 Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute
                                 commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure
                                 dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
@@ -23,34 +29,41 @@
                                 commodo.
                             </div>
                             <div class="flex-element flex-element-tekst flex-element-specifikacije">
-                                <b class="tekstHeader">Specifikacije</b><br/>
-                                    <span class="specSpan">Cijena:  </span><span id="cijena">Odaberite materijal</span><br/>
-                                    <span class="specSpan">Boje:  </span>crvena, zelena<br/>
-                                    <span class="specSpan">Dimenzije:  </span>100cm x 40cm x 100cm<br/>
-                                    <span class="specSpan">Ostalo:</span><br/>
+                                <b class="tekstHeader">Specifikacije</b><br />
+                                <span class="specSpan">Cijena: </span><span id="cijena">Odaberite materijal</span><br />
+                                <span class="specSpan">Boje: </span>crvena, zelena<br />
+                                <span class="specSpan">Dimenzije: </span>100cm x 40cm x 100cm<br />
+                                <span class="specSpan">Ostalo:</span><br />
                             </div>
                             <div class="cart-func">
-                            <div class="elem-chooser flex-element-tekst">
-                                <label for="materijalChoose"><b class="tekstHeader">Odaberite materijal</b></label><br/>
-                                <select id="materijaliChoose" size="1" onchange="updatePrice()">
-                                    <option disabled selected value>--odaberite--</option>
-                                    <option value="1">Aluminij</option>
-                                    <option value="2">Zeljezo</option>
-                                    <option value="3">Drvo</option>
-                                    <option id="data-1" hidden>200 HRK</option>
-                                    <option id="data-2" hidden>200 EUR</option>
-                                    <option id="data-3" hidden>200 BAM</option>
-                                </select>
+                                <div class="elem-chooser flex-element-tekst">
+                                    <label for="materijalChoose"><b class="tekstHeader">Odaberite
+                                            materijal</b></label><br />
+                                    <select id="materijaliChoose" size="1" onchange="updatePrice()">
+                                        <option disabled selected value>--odaberite--</option>
+                                        <option value="1">Aluminij</option>
+                                        <option value="2">Zeljezo</option>
+                                        <option value="3">Drvo</option>
+                                        <option id="data-1" hidden>200 HRK</option>
+                                        <option id="data-2" hidden>200 EUR</option>
+                                        <option id="data-3" hidden>200 BAM</option>
+                                    </select>
+                                </div>
+                                <input type="button" class="main-button subBtn add-to-cart"
+                                    value="Dodaj u kosaricu"><br />
                             </div>
-                            <input type="button" class="main-button subBtn add-to-cart" value="Dodaj u kosaricu"><br/>
-                            </div>	
                         </div>
                         <div class="flex-container-column flex-video-img">
-                            <video class="flex-element" controls>
-                                <source src="../static/vid/video.mp4" type="video/mp4">
-                            </video>
-                            <img class="flex-element" id="maketaSlika"
-                                src="./static/img/maketaimg.jpg">
+                            <div class="flex-contain-story">
+                                <div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
+                                <div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
+                                    <div class="img-prop-holder" id="elem-holdncycle">
+                                    </div>
+                                </div>
+                                <div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
+                            </div>
+                            <!-- <img class="flex-element" id="maketaSlika"
+                                    src="./static/img/maketaimg.jpg"> -->
                         </div>
                     </div>
                 </li>

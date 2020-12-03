@@ -1,10 +1,8 @@
 var stringField = ["elem-arrow-l", "elem-arrow-r"];
 var elemMax, videoNode, sourceNode, imgNode;
-let currentElem = 0;
 
 function events() {
     elemMax = document.getElementById("elem-count").innerHTML;
-    cycleCaller(1);
 
     //dinamicki elementi
     videoNode = document.createElement("video");
@@ -26,9 +24,12 @@ function events() {
             document.getElementById("elem-arrow-r").style.opacity = "0.2";
         });
     })
+    cycleCaller(1);
 }
 
 window.onload = events;
+
+let currentElem = 0;
 
 function cycleCaller(direction) {
     var divCycle = document.getElementById("elem-holdncycle");
