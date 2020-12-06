@@ -2,52 +2,49 @@
 {% set active_page = "price" %}
 
 {% block content %}
+
+<script src="../static/js/cycler.js"></script>
         
-<div class="main-container">
-	<p id="naslovPrice"> {{ story_title}} </p>
-	<div class="flex-container">
-		{% for element in story_elements %}
-			{% if element.story_text %}
-				<div class="flex-element flex-element-tekst">
-					{{ element.story_text }}
-				</div>
-			{% elif element.image_name %}
-				<div class="flex-container-column flex-video-img">
-					<img class="flex-element" id="element.image_name" src="{{ url_for('story.pull_file', file=element.image_name) }}">
-				</div>
-			{% elif element.video_name %}
-				<div class="flex-container-column flex-video-img">
-					<video class="flex-element" controls>
-						<source src="{{ url_for('story.pull_file', file=element.video_name) }}"  type="video/mp4">
-					</video>
-				</div>
-			{% endif %}
-		{% endfor %}
-	</div>
-</div>
+<span hidden id="elem-count">4</span>
+    <span hidden class="img-cycle" id="elem-cycle-0">./static/img/maketaimg.jpg</span>
+    <span hidden class="text-cycle" id="elem-cycle-1">Et anim labore incididunt veniam fugiat proident id incididunt duis cillum sint sint
+        eu quis. Culpa excepteur minim ex nulla dolore velit est. Sint nisi sit non cupidatat magna consequat
+        reprehenderit voluptate laboris. Ut aliqua dolore ea esse adipisicing minim in. Pariatur aliqua sunt id aliquip
+        velit ad labore. Nulla ea in nulla exercitation excepteur nisi tempor enim voluptate nisi. Mollit sit qui mollit
+        irure officia esse velit elit ad aliqua laboris aliqua eu excepteur.</span>
+    <span hidden class="text-cycle" id="elem-cycle-2">Ipsum labore pariatur ullamco et anim voluptate amet consequat minim aliquip
+        incididunt fugiat commodo. Quis esse voluptate voluptate pariatur. Exercitation cupidatat sunt cillum sit esse
+        occaecat aliqua et culpa sint nostrud. Aliqua nostrud dolor consequat quis ut ullamco aliquip ut. Lorem commodo
+        irure ea sit anim aute reprehenderit nisi ipsum. Esse nostrud labore enim esse qui esse fugiat consequat
+        occaecat Lorem veniam quis commodo. Officia esse irure enim non.</span>
+    <span hidden class="vid-cycle" id="elem-cycle-3">./static/vid/video.mp4</span>
 
-<div id="divider"></div>
+    <section id="main">
+        <div class="sec-main-container full-story-cont">
+            <h1 class="page-title"></h1>
+            <p class="naslov-move" id="naslovPrice"> Naslov price </p>
+            <div class="flex-contain-story">
+                <div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
+                <div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
+                    <div class="img-prop-holder" id="elem-holdncycle">
+                    </div>
+                </div>
+                <div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
+            </div>
+        </div>
+    </section>
 
-<div class="flex-container-column">
-	<form class="ostaviKomentar" id="idKomentar" target="_self">
-		<fieldset class="ostaviKomentar ostaviKomentar-fieldset">
-			<textarea form="idKomentar" name="objavitiKomentar" placeholder="Upisite komentar" id="komentarText"></textarea>
-			<input type="submit" id="submitKom" value="Objavi komentar">
-			<input type="reset" id="resetKom" value="Odustani">
-		</fieldset>
-	</form>
-	<div class="comment">
-		<p>Ime korisnika</p>
-		<p>Njegov komentar....</p>
-	</div>
-	<div class="comment">
-		<p>Ime korisnika</p>
-		<p>Njegov komentar....</p>
-	</div>
-	<div class="comment">
-		<p>Ime korisnika</p>
-		<p>Njegov komentar....</p>
-	</div>
-</div>
+    <div id="divider"></div>
+
+    <div class="flex-container-column">
+        <form class="ostaviKomentar" id="idKomentar" target="_self">
+            <fieldset class="ostaviKomentar ostaviKomentar-fieldset">
+                <textarea form="idKomentar" name="objavitiKomentar" placeholder="Upisite komentar"
+                    id="komentarText"></textarea>
+                <input type="submit" id="submitKom" value="Objavi komentar">
+                <input type="reset" id="resetKom" value="Odustani">
+            </fieldset>
+        </form>
+    </div>
 
 {% endblock %}

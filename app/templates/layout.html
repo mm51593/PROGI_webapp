@@ -7,7 +7,7 @@
 		<meta name="viewport" content="width=device-width">
 		<!-- Dodati glavni naslov svakoj stranici -->
 		<link rel="stylesheet" href="../static/styles/style.css">
-		{% if title %}
+    {% if title %}
         <title>MaketaShop-{{ title }}</title>
     {% else %}
         <title>MaketaShop</title>
@@ -39,7 +39,7 @@
 						</li>
 						<li {% if active_page == "makete" %} class="current" {% endif %}>
 							<div class="dropdown">
-								<button class="dropbtn"><a href="makete.html">Makete</a></button>
+								<button class="dropbtn"><a href="makete_prikaz.html">Makete</a></button>
 								<div class="dropdown-content">
 									<a href="narudzba.html">Naruči</a>
 									<a href="prihvat_makete.html">Prihvati</a>

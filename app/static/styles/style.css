@@ -391,6 +391,39 @@ button:hover {
 	display: flex;
 }
 
+.maketa-img {
+	width: 20%;
+	border: 2px rgba(9,9,121,1) solid;
+}
+
+.specSpan {
+	padding-left: 3%;
+}
+
+.tekstHeader {
+	color: rgba(9,9,121,1);
+}
+
+.cart-func {
+	margin-top: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.add-to-cart {
+	width: 30%;
+	text-align: center;
+}
+
+.elem-chooser {
+	border: #ff5500 solid 3px;
+	width: 30%;
+}
+
+#materijaliChoose {
+	margin-left: 10px;
+}
+
 .elem-liste {
 	background-color: #f8f8f8;
 	border: #ff5500 2px solid;
@@ -451,6 +484,7 @@ button:hover {
 	margin-top: 30vh;
 	margin-left: 0.5vw;
 }
+<<<<<<< HEAD
 
 .btn-ctrl {
 	border-radius: 20px;
@@ -461,4 +495,84 @@ button:hover {
 
 #naslov-prijedlog {
 	font-size: 1.4em;
+=======
+
+.btn-ctrl {
+	border-radius: 20px;
+	margin: 5px;
+	width: 10vh;
+	border: #f88f5b solid 3px;
+}
+
+#naslov-prijedlog {
+	font-size: 1.4em;
+}
+
+.full-story-cont {
+	margin: 10px auto;
+	width: 90%;
+	padding: 20px;
+	border: #cccccc solid 1px;
+	background: #e6e6e6;
+}
+
+.flex-contain-story {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.left-arrow, .right-arrow {
+  border: 4px #fc702a solid;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  border-radius: 50px;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  opacity: 0.2;
+  transition: opacity .25s ease-in-out;
+  background-color: #ff5500;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.left-arrow {
+	background-image: url("..\\..\\static\\img\\arrow-left.jpg")
+}
+
+.right-arrow {
+	background-image: url("..\\..\\static\\img\\arrow-right.jpg");
+}
+
+#story-control-tekst {
+	align-self: center;
+	max-height: 40%;
+	min-width: 50%;
+	margin: 5px;
+}
+
+.auto-params-vid-img {
+	max-width: 100%;
+	max-height: 100%;
+	flex-shrink: 0;
+}
+
+.img-prop-holder {
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.sec-main-container {
+	min-height: 50vh;
+}
+
+.naslov-move {
+	text-align: center;
+	color: rgb(5, 5, 71);
+>>>>>>> feature/front-end
 }
