@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, url_for, send_from_directory
+from flask import Blueprint, render_template, redirect, request, url_for, send_from_directory, abort
 from app.database import Story, StoryContent, db
 from datetime import datetime
 from app import application
@@ -64,9 +64,13 @@ def add_content():
 
 @stories.route('/story/<story_id>')
 def display_story(story_id):
-    story_title = Story.query.filter_by(id=story_id).first().title
+    try:
+        story_title = Story.query.filter_by(id=story_id).first().title
+    except AttributeError:
+        return abort(404)
     story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
-    return render_template("citavaPrica.html", title="Prica", story_title=story_title, story_elements=story_elements)
+    print(story_elements)
+    return render_template("citavaPrica.html", title="Prica", story_title=story_title, story_elements=story_elements, elem_len=len(story_elements))
 
 
 @stories.route('/story_element/<file>')
