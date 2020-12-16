@@ -555,11 +555,16 @@ button:hover {
     overflow: hidden
 }
 
-.sec-main-container {
+.third-main-container {
 	min-height: 50vh;
 }
 
 .naslov-move {
 	text-align: center;
 	color: rgb(5, 5, 71);
+}
+
+.regErrMsg {
+	opacity: 0;
+	transition: ease-in 0.25s;
 }
