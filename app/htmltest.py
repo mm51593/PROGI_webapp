@@ -58,4 +58,12 @@ def registracija():
 def maketa_detaljno():
     return render_template("makete.html", main_title="Maketa")
 
+@application.route("/korracun_izmjena.html")
+def korracun_izmjena():
+    return render_template("korracun_izmjena.html", main_title="Korisnicki racun - izmjena")
+
+@application.route("/korracun_prikaz.html")
+def korracun_prikaz():
+    return render_template("korracun_prikaz.html", main_title="Korisnicki racun - prikaz")
+
 application.run(debug=True)

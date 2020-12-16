@@ -41,6 +41,14 @@
 								</div>
 							</div>
 						</li>
+						<li {% if active_page == "korracun_prikaz" %} class="current" {% endif %}>
+							<div class="dropdown">
+								<button class="dropbtn"><a href="./korracun_prikaz.html">Korisnicki racun</a></button>
+								<div class="dropdown-content">
+									<a href="./korracun_izmjena.html">Izmjena</a>
+								</div>
+							</div>
+						</li>
 						<li {% if active_page == "prijava" %} class="current" {% endif %}><a href="prijava.html">Prijavi se</a><li>
 
 					</ul>
