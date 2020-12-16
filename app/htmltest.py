@@ -8,7 +8,7 @@ application = Flask(__name__)
 @application.route("/")
 def index_main():
     # Prvi parametar je html koji se prikazuje, main_title je naslov kartice
-    return render_template("index.html", main_title="Index")
+    return render_template("makete_prikaz.html", main_title="Index")
 
 @application.route("/index.html")
 def index():

@@ -11,6 +11,7 @@ login_manager = LoginManager(application)
 from app import database
 from app import routes
 from app.authentication.routes import authentication
+from app.store.routes import store
 
 application.register_blueprint(authentication)
-#application.store_blueprint(store)
+application.register_blueprint(store)
