@@ -340,7 +340,7 @@ button:hover {
 .grid-ponuda {
 	display: grid;
 	grid-template-areas: 'text text'
-						 'vid img'
+						 'img img'
 						 'prihvati odbij';
 	grid-gap: 20px;
 	align-items: center;
@@ -659,4 +659,18 @@ button:hover {
 	border: 2px solid #ff5500;
 	padding: 5px;
 	background-color: #fcfcfc;
+}
+
+.cijena-nas {
+	color: #1a1197;
+	font-size: 2em;
+	font-weight: bold;
+}
+
+.cijena-flt {
+	float: right;
+}
+
+.mrg-top {
+	margin-top: 15px;
 }
