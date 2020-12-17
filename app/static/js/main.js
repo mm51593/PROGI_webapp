@@ -15,6 +15,10 @@ function checkUpload() {
     }
 }
 
+function rejectOffer(offerNum) {
+    let offer = document.getElementById("ponuda/cijena-" + offerNum).remove();
+}
+
 function checkData() {
     if(document.getElementById("upload-vid").value == "" && document.getElementById("upload-img").value == "" && document.getElementById("opisPrice").value == "") {
         document.getElementById("tekstLabel").innerHTML = "Tekst :   <span style='color: red;'>Trebate dati barem jedno od teksta, slike ili videa</span>";
@@ -37,4 +41,16 @@ function checkPswd() {
 
 function restoreReg() {
     document.getElementById("lozReg").innerHTML = "Lozinka : ";
+}
+
+function updatePrice() {
+    var selectedMaterialIndex = document.getElementById("materijaliChoose").value;
+    var searchString = "data-";
+    searchString = searchString.concat(selectedMaterialIndex);
+
+    var selectedMaterial = document.getElementById(searchString).innerHTML;
+    document.getElementById("cijena").innerHTML = selectedMaterial;
+    
+    console.log(selectedMaterialIndex);
+    console.log(searchString);
 }
