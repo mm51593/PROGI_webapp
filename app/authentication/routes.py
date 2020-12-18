@@ -16,7 +16,7 @@ def register():
         user = User(username=reg_form.username.data, email=reg_form.email.data, password=hashed_pass)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('/auth.login'))
     return render_template("registracija.html", title="Registriraj se", form=reg_form)
 
 
@@ -38,7 +38,7 @@ def logout():
     logout_user()
     return redirect('/')
 
-@authentication.route('User')
+@authentication.route('/User')
 @login_required
 def User():
     form = UpdateForm()
@@ -46,5 +46,5 @@ def User():
         current_user.username = form.username.data
         db.session.commit()
         flash ('Promijenili ste ime korisničkog računa', 'success')
-        return redirect(url_for('User'))
-    return render_template ('User.html', title = 'User', form = form)
+        return redirect(url_for('/User'))
+    return render_template ('korracun_prikaz.html', title = 'User', form = form)
