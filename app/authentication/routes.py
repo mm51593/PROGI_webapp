@@ -39,12 +39,15 @@ def logout():
     return redirect('/')
 
 @authentication.route('/User')
-@login_required
 def User():
+    return render_template ('korracun_prikaz.html', title = 'User')
+
+@authentication.route('/UserChange', methods=['GET','POST'])
+def Change():
     form = UpdateForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
         db.session.commit()
         flash ('Promijenili ste ime korisničkog računa', 'success')
         return redirect(url_for('/User'))
-    return render_template ('korracun_prikaz.html', title = 'User', form = form)
+    return render_template('korracun_izmjena.html',title = "Izmjeni korisničke podatke", form = form)

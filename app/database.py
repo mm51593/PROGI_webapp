@@ -19,3 +19,10 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):     # output of print()
         return f"User('{self.id}', '{self.username}', '{self.email}', '{self.password}')"
+
+class UserPodaci(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	Ime = db.Column(db.String(25), nullable = False)
+	Prezime = db.Column(db.String, nullable = False)
+	Datum_rodenja = db.Column(db.String(12), nullable = False)
+	Zivotopis = db.Column(db.String(300), nullable = True)

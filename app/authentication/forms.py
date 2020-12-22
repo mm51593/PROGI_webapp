@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DateField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.database import User
 
@@ -32,13 +32,14 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Prijava')
 
 class UpdateForm(FlaskForm):
-    username = StringField('Novo korisničko ime', validators=[DataRequired("Ovo polje je neophodno."), Length(min=3, max=25, message="Korisničko ime mora biti između %(min)d i %(max)d znakova dugo.")])
-    submit = SubmitField('Promijeni ime')
+    Ime = StringField('Ime', validators=[DataRequired("Ovo polje je neophodno."), Length(min=3, max=25, message="Ime mora biti između %(min)d i %(max)d znakova dugo.")])
+    Private_Ime = BooleanField('Privatno')
+    Prezime = StringField('Prezime', validators=[DataRequired("Ovo polje je neophodno."), Length(min=3, max=25, message="Prezime mora biti između %(min)d i %(max)d znakova dugo.")])
+    Private_Prezime = BooleanField('Privatno')
+    Datum_rodenja = DateField("Datum rodenja", validators=[DataRequired("Datum rodenja mora biti oznacen")], format='%d/%m/%Y')
+    Private_Datum = BooleanField('Privatno')
+    Zivotopis = StringField('Zivotopis', validators=[DataRequired("Ovo polje je neophodno."), Length(min=1, max=400, message="Zivotopis mora biti između %(min)d i %(max)d znakova dugo.")])
+    Private_Zivotopis = BooleanField('Privatno')
+    submit = SubmitField('Spremi promjene')
 
-    def validate_username(self, username):
-        if username.data != current_user.username:
-            fromdb = User.query.filter_by(username=username.data).first()
-            if fromdb:
-                raise ValidationError('Ovo korisničko ime je zauzeto.')
-            return
     
