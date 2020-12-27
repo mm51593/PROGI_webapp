@@ -22,14 +22,14 @@ class User(db.Model, UserMixin):
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    Ime = db.Column(db.String(25), nullable = False)
+    Ime = db.Column(db.String(25), nullable = True)
     Private_ime = db.Column(db.Boolean, default = False)
-    Prezime = db.Column(db.String, nullable = False)
+    Prezime = db.Column(db.String, nullable = True)
     Private_prezime = db.Column(db.Boolean, default = False)
-    Datum_rodenja = db.Column(db.String(12), nullable = False)
+    Datum_rodenja = db.Column(db.String(12), nullable = True)
     Private_Datum = db.Column(db.Boolean, default = False)
     Zivotopis = db.Column(db.String(300), nullable = True)
     Private_Zivotopis = db.Column(db.Boolean, default = False)
 
     def __repr__(self):
-        return f"UserPodaci('{self.Ime}', '{self.Prezime}', '{self.Datum_rodenja}', '{self.Zivotopis}')"
+        return f"Profile('{self.Ime}', '{self.Prezime}', '{self.Datum_rodenja}', '{self.Zivotopis}')"
