@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for , request
-from app.authentication.forms import RegistrationForm, LoginForm, UpdateForm
-from app.database import User, db, bcrypt, UserPodaci
-from flask_login import login_user, current_user, logout_user, login_required
+from flask import Blueprint, render_template, redirect, url_for
+from app.authentication.forms import RegistrationForm, LoginForm
+from app.database import User, db, bcrypt
+from flask_login import login_user, current_user, logout_user
 
 authentication = Blueprint('auth', __name__)
 
@@ -25,46 +25,19 @@ def login():
     if current_user.is_authenticated:
         return redirect('/')
     login_form = LoginForm()
+    login_error = None
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, login_form.password.data):
             login_user(user, remember=login_form.remember.data)
             return redirect('/')
-    return render_template("prijava.html", title="Prijavi se", form=login_form)
+        else:
+            login_error = "Neispravna E-mail adresa ili lozinka."
+            print(login_error)
+    return render_template("prijava.html", title="Prijavi se", form=login_form, error=login_error)
 
 
 @authentication.route('/logout')
 def logout():
     logout_user()
     return redirect('/')
-
-@authentication.route('/User')
-@login_required
-def User():
-    return render_template ('korracun_prikaz.html', title = 'korisnički podaci')
-
-@authentication.route('/UserChange', methods=['GET','POST'])
-def Change():
-    form = UpdateForm()
-    if form.validate_on_submit():
-        current_user.Ime = form.Ime.data
-        current_user.Private_Ime = form.Private_Ime.data
-        current_user.Prezime = form.Prezime.data
-        current_user.Private_Prezime = form.Private_Prezime.data
-        current_user.DatumRodenja = form.DatumRodenja.data
-        current_user.Private_Datum = form.Private_Datum.data
-        current_user.Zivotopis = form.Zivotopis.data
-        current_user.Private_Zivotopis = form.Private_Zivotopis.data
-        db.session.commit()
-        flash ('Promijenili ste podatke korisničkog računa', 'success')
-        return redirect(url_for('/User'))
-    elif request.method == 'GET':
-        form.Ime.data = current_user.Ime
-        form.Private_Ime.data = False
-        form.Prezime.data = current_user.Prezime
-        form.Private_Prezime.data = False
-        form.DatumRodenja.data = current_user.DatumRodenja
-        form.Private_Datum.data = False
-        form.Zivotopis.data = current_user.Zivotopis
-        form.Private_Zivotopis.data = False
-    return render_template('korracun_izmjena.html',title = "Izmjeni korisničke podatke", form = form)

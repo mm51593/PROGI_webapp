@@ -27,19 +27,7 @@ class RegistrationForm(FlaskForm):
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired("Ovo polje je neophodno."), Email("Pogrešan format E-mail adrese.")])
-    password = PasswordField('Lozinka', validators=[DataRequired("Ovo polje je neophodno.")])
+    password = PasswordField('Lozinka', validators=[DataRequired("Ovo polje je neophodno."), Length(min=8, message="Lozinka mora biti barem %(min)d znakova duga.")])
     remember = BooleanField('Zapamti me')
     submit = SubmitField('Prijava')
-
-class UpdateForm(FlaskForm):
-    Ime = StringField('Ime', validators=[DataRequired("Ovo polje je neophodno."), Length(min=3, max=25, message="Ime mora biti između %(min)d i %(max)d znakova dugo.")])
-    Private_Ime = BooleanField('Privatno')
-    Prezime = StringField('Prezime', validators=[DataRequired("Ovo polje je neophodno."), Length(min=3, max=25, message="Prezime mora biti između %(min)d i %(max)d znakova dugo.")])
-    Private_Prezime = BooleanField('Privatno')
-    Datum_rodenja = DateField("Datum rodenja", validators=[DataRequired("Datum rodenja mora biti oznacen")], format='%d/%m/%Y')
-    Private_Datum = BooleanField('Privatno')
-    Zivotopis = StringField('Zivotopis', validators=[DataRequired("Ovo polje je neophodno."), Length(min=1, max=400, message="Zivotopis mora biti između %(min)d i %(max)d znakova dugo.")])
-    Private_Zivotopis = BooleanField('Privatno')
-    submit = SubmitField('Spremi promjene')
-
     

@@ -7,8 +7,11 @@
 		<meta name="viewport" content="width=device-width">
 		<!-- Dodati glavni naslov svakoj stranici -->
 		<link rel="stylesheet" href="../static/styles/style.css">
-
-		<script src="../static/js/main.js"></script>
+    {% if title %}
+        <title>MaketaShop-{{ title }}</title>
+    {% else %}
+        <title>MaketaShop</title>
+    {% endif %}
 	</head>
 	
 	
@@ -29,7 +32,7 @@
 							<div class="dropdown">
 								<button class="dropbtn"><a href="price.html">Priče</a></button>
 								<div class="dropdown-content">
-									<a href="prijedlog_price.html">Predloži</a>
+									<a href="">Predloži</a>
 									<a href="prihvat_price.html">Prihvati</a>
 								</div>
 							</div>
@@ -43,15 +46,12 @@
 								</div>
 							</div>
 						</li>
-						<li {% if active_page == "korracun_prikaz" %} class="current" {% endif %}>
-							<div class="dropdown">
-								<button class="dropbtn"><a href="./korracun_prikaz.html">Korisnicki racun</a></button>
-								<div class="dropdown-content">
-									<a href="./korracun_izmjena.html">Izmjena</a>
-								</div>
-							</div>
-						</li>
-						<li {% if active_page == "prijava" %} class="current" {% endif %}><a href="prijava.html">Prijavi se</a><li>
+						{% if not current_user.is_authenticated %}
+						<li {% if active_page == "prijava" %} class="current" {% endif %}><a href="{{ url_for('auth.login') }}">Prijavi se</a><li>
+						<li {% if active_page == "registracija" %} class="current" {% endif %}><a href="{{ url_for('auth.register') }}">Registriraj se</a> </li>
+						{% else %}
+						<li><a href="{{ url_for('auth.logout') }}">Odjavi se</a> </li>
+						{% endif %}
 					</ul>
 				</nav>
 			</div>
