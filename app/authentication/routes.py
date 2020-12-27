@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for , request
 from app.authentication.forms import RegistrationForm, LoginForm, UpdateForm
-from app.database import User, db, bcrypt
+from app.database import User, db, bcrypt, UserPodaci
 from flask_login import login_user, current_user, logout_user, login_required
 
 authentication = Blueprint('auth', __name__)
@@ -39,15 +39,32 @@ def logout():
     return redirect('/')
 
 @authentication.route('/User')
+@login_required
 def User():
-    return render_template ('korracun_prikaz.html', title = 'User')
+    return render_template ('korracun_prikaz.html', title = 'korisnički podaci')
 
 @authentication.route('/UserChange', methods=['GET','POST'])
 def Change():
     form = UpdateForm()
     if form.validate_on_submit():
-        current_user.username = form.username.data
+        current_user.Ime = form.Ime.data
+        current_user.Private_Ime = form.Private_Ime.data
+        current_user.Prezime = form.Prezime.data
+        current_user.Private_Prezime = form.Private_Prezime.data
+        current_user.DatumRodenja = form.DatumRodenja.data
+        current_user.Private_Datum = form.Private_Datum.data
+        current_user.Zivotopis = form.Zivotopis.data
+        current_user.Private_Zivotopis = form.Private_Zivotopis.data
         db.session.commit()
-        flash ('Promijenili ste ime korisničkog računa', 'success')
+        flash ('Promijenili ste podatke korisničkog računa', 'success')
         return redirect(url_for('/User'))
+    elif request.method == 'GET':
+        form.Ime.data = current_user.Ime
+        form.Private_Ime.data = False
+        form.Prezime.data = current_user.Prezime
+        form.Private_Prezime.data = False
+        form.DatumRodenja.data = current_user.DatumRodenja
+        form.Private_Datum.data = False
+        form.Zivotopis.data = current_user.Zivotopis
+        form.Private_Zivotopis.data = False
     return render_template('korracun_izmjena.html',title = "Izmjeni korisničke podatke", form = form)

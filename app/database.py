@@ -21,8 +21,15 @@ class User(db.Model, UserMixin):
         return f"User('{self.id}', '{self.username}', '{self.email}', '{self.password}')"
 
 class UserPodaci(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	Ime = db.Column(db.String(25), nullable = False)
-	Prezime = db.Column(db.String, nullable = False)
-	Datum_rodenja = db.Column(db.String(12), nullable = False)
-	Zivotopis = db.Column(db.String(300), nullable = True)
+    id = db.Column(db.Integer, primary_key=True)
+    Ime = db.Column(db.String(25), nullable = False)
+    Private_ime = db.Column(db.Boolean, default = False)
+    Prezime = db.Column(db.String, nullable = False)
+    Private_prezime = db.Column(db.Boolean, default = False)
+    Datum_rodenja = db.Column(db.String(12), nullable = False)
+    Private_Datum = db.Column(db.Boolean, default = False)
+    Zivotopis = db.Column(db.String(300), nullable = True)
+    Private_Zivotopis = db.Column(db.Boolean, default = False)
+
+    def __repr__(self):
+        return f"UserPodaci('{self.Ime}', '{self.Prezime}', '{self.Datum_rodenja}', '{self.Zivotopis}')"
