@@ -66,4 +66,8 @@ def korracun_izmjena():
 def korracun_prikaz():
     return render_template("korracun_prikaz.html", main_title="Korisnicki racun - prikaz")
 
+@application.route("/cart.html")
+def cart():
+    return render_template("cart.html", main_title="Košarica")
+
 application.run(debug=True)
