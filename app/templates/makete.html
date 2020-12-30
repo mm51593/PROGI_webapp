@@ -9,18 +9,12 @@
             <h1 class="page-title"></h1>
             <ul id="services">
                 <li>
-                    <p id="naslovPrice"> Standardna maketa </p>
+                    <p id="naslovPrice"> {{ model.name }} </p>
                     <div class="flex-container">
                         <div class="flex-container-column">
                             <div class="flex-element flex-element-tekst">
                                 <b class="tekstHeader">Opis makete</b><br/>
-                                Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute
-                                commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure
-                                dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
-                                Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim
-                                tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat.
-                                Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore
-                                commodo.
+                                {{ model.description }}
                             </div>
                             <div class="flex-element flex-element-tekst flex-element-specifikacije">
                                 <b class="tekstHeader">Specifikacije</b><br/>
@@ -47,10 +41,10 @@
                         </div>
                         <div class="flex-container-column flex-video-img">
                             <video class="flex-element" controls>
-                                <source src="../static/vid/video.mp4" type="video/mp4">
+                                <source src="{{ url_for('static', filename='vid/' + model_video) }}" type="video/mp4">
                             </video>
                             <img class="flex-element" id="maketaSlika"
-                                src="./static/img/maketaimg.jpg">
+                                src="{{ url_for('static', filename='img/' + model_photo) }}">
                         </div>
                     </div>
                 </li>

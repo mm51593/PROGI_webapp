@@ -32,10 +32,11 @@ class Model(db.Model):
 
 class ModelPhoto(db.Model):
     image_name = db.Column(db.String(50), primary_key=True, nullable=False)  # 'maketaimg.jpg'
+    video_name = db.Column(db.String(50), unique=True, nullable=False)         # 'video.mp4'
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
 
     def __repr__(self):     # output of print()
-            return f"ModelPhoto('{self.image_name}', '{self.model_id}')"
+            return f"ModelPhoto('{self.image_name}', '{self.video_name}', '{self.model_id}')"
 
 class ModelPrice(db.Model): 
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), primary_key=True) 

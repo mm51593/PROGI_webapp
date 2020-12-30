@@ -9,6 +9,6 @@ from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice, Order
 
 
 @application.route('/')
-@application.route('/index')
+@application.route('/makete_prikaz')
 def index():
-    return render_template('index.html', title='Početna')
+    return render_template('makete_prikaz.html', title='Početna')

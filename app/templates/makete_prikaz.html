@@ -7,20 +7,22 @@
     <div class="container">
         <article id="main-col">
             <h1 class="page-title"></h1>
-            <ul id="services">
-                <a href="makete.html" id="priceLink" title="Otvorite citavu pricu">
-                    <li>
-                        <h3>Standardna maketa 1</h3>
-                        <p>Laboris laboris irure sit aliquip eiusmod Lorem eiusmod aliquip cupidatat eiusmod ipsum sit cillum. Irure quis reprehenderit eu in consectetur mollit. Laborum dolor consectetur ea id ea eiusmod consectetur pariatur pariatur reprehenderit labore anim.</p>
-                    </li>
-                </a>
-                <a href="makete.html" id="priceLink" title="Otvorite citavu pricu">
-                    <li>
-                        <h3>Standardna maketa 2</h3>
-                        <p>Laboris laboris irure sit aliquip eiusmod Lorem eiusmod aliquip cupidatat eiusmod ipsum sit cillum. Irure quis reprehenderit eu in consectetur mollit. Laborum dolor consectetur ea id ea eiusmod consectetur pariatur pariatur reprehenderit labore anim.</p>
-                    </li>
-                </a>
-            </ul>
+                
+                    <ul id="services">
+                        {% for model in models %}
+                            <a href="{{ url_for('model_Instance', model_id=model.id) }}" id="priceLink" title="Otvorite citavu pricu">
+                                
+                                <li>
+                                    
+                                        <h3>{{ model.name }} Standardna maketa 1</h3>
+                                        <p>{{ model.description }} Laboris laboris irure sit aliquip eiusmod Lorem eiusmod aliquip cupidatat eiusmod ipsum sit cillum. Irure quis reprehenderit eu in consectetur mollit. Laborum dolor consectetur ea id ea eiusmod consectetur pariatur pariatur reprehenderit labore anim.</p>
+                                   
+                                </li>
+                               
+                            </a>
+                        {% endfor %}
+                    </ul>
+                
         </article>
     </div>
 </section>
