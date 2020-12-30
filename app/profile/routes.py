@@ -5,12 +5,22 @@ from app.database import db, Profile
 
 profile = Blueprint('profile', __name__)
 
-@profile.route('/User')
-@login_required
-def User():
+@profile.route('/Profil')
+def Profil():
     user_profile = Profile.query.filter_by(id=current_user.id).first()
+    user_profile.Private_Ime = False
+    user_profile.Private_Prezime = False
+    user_profile.Private_Datum = False
+    user_profile.Private_Zivotopis = False
     print(user_profile)
     return render_template ('korracun_prikaz.html', title = 'Korisnički podaci', profile=user_profile)
+
+@profile.route('/Profil/<id>')
+def User_Profil(id):
+    user_profile = Profile.query.filter_by(Profile.id == id).first()
+    print(user_profile)
+    return render_template ('tudi_korracun_prikaz.html', title = 'Korisnički podaci', profile=user_profile)
+
 
 @profile.route('/UserChange', methods=['GET','POST'])
 def Change():
@@ -27,7 +37,7 @@ def Change():
         user_profile.Private_Zivotopis = form.Private_Zivotopis.data
         db.session.commit()
         flash ('Promijenili ste podatke korisničkog računa', 'success')
-        return redirect(url_for('profile.User'))
+        return redirect(url_for('profile.Profil'))
     elif request.method == 'GET':
         form.Ime.data = user_profile.Ime
         form.Private_Ime.data = False

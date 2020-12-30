@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% set active_page = "tudi_korracun_prikaz" %}
+
+{% block content %}
+
+<section id="main">
+    <div class="main-container container">
+        <div class="cont-style" method="POST">
+            <h1 class="kor-page-title">Korisnicki racun</h1>
+
+            <div class="kor-pregled">
+                {% if profile.PrivateIme %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>Private</div>
+                {% else %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>{{ profile.Ime }}</div>
+                {% endif %}
+                {% if profile.PrivatePrezime %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>Private</div>
+                {% else %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>{{ profile.Prezime }}</div>
+                {% endif %}
+                {% if profile.PrivateDatum %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>Private</div>
+                {% else %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>{{ profile.Datum_rodenja.strftime('%d.%m.%Y.') }}</div>
+                {% endif %}
+                <div class="flex-pre pre-elem">
+                    <div class="kor-pre-desc">
+                        Životopis:
+                    </div>
+                    {% if profile.PrivateZivotopis %}
+                        <div class="kor-pre-info">Private</div>
+                    {% else %}
+                        <div class="kor-pre-info">{{ profile.Zivotopis }}</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

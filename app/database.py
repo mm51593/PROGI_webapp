@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from app import application, login_manager
 from flask_login import UserMixin
+import datetime
 db = SQLAlchemy(application)
 bcrypt = Bcrypt(application)
 
@@ -26,7 +27,7 @@ class Profile(db.Model):
     Private_ime = db.Column(db.Boolean, default = False)
     Prezime = db.Column(db.String, nullable = True)
     Private_prezime = db.Column(db.Boolean, default = False)
-    Datum_rodenja = db.Column(db.DateTime, nullable = True)
+    Datum_rodenja = db.Column(db.DateTime, nullable = True, default = datetime.datetime.utcnow)
     Private_Datum = db.Column(db.Boolean, default = False)
     Zivotopis = db.Column(db.String(300), nullable = True)
     Private_Zivotopis = db.Column(db.Boolean, default = False)
