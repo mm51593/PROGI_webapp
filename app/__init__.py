@@ -13,6 +13,8 @@ from app import database
 from app import routes
 from app.authentication.routes import authentication
 from app.stories.routes import stories
+from app.index.routes import index
 
 application.register_blueprint(authentication)
 application.register_blueprint(stories)
+application.register_blueprint(index)

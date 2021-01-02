@@ -27,7 +27,7 @@
 				<nav>
 					<ul>
 						<!-- Svaka stranica postavlja varijablue active_page koja označava trenutni izbornik -->
-						<li {% if active_page == "pocetna" %} class="current" {% endif %}><a href="{{ url_for('index')}}">Početna</a></li>
+						<li {% if active_page == "pocetna" %} class="current" {% endif %}><a href="{{ url_for('index.homepage')}}">Početna</a></li>
 						<li {% if active_page == "price" %} class="current" {% endif %}>
 							<div class="dropdown">
 								<button class="dropbtn"><a href="price.html">Priče</a></button>

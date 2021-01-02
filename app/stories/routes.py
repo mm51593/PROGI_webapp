@@ -78,3 +78,17 @@ def pull_file(file):
     route = path.join(application.root_path, application.config['STORY_LOCATION'])
     return send_from_directory(route, file)
 
+@stories.route('/story/validation/<story_id>', methods=['GET', 'POST'])
+def validation(story_id):
+    #TODO: osiguraj da samo admin moze na ovaj URL
+    validationstory = Story.query.filter_by(id=story_id).first()
+
+    if request.method == 'POST':
+        if request.form.get("Prihvati"):
+            validationstory.validated = "True"
+            db.session.add(validationstory)
+            db.session.commit()
+        elif request.form.get("Odbij"):
+            db.session.delete(validationstory)
+            db.session.commit()
+    return render_template("prihvat_price.html", title="Prihvat price")
