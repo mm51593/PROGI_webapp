@@ -739,3 +739,8 @@ span.price {
 	float: right;
 	color: grey;
 }
+
+.margin-align {
+	margin-bottom: 6px;
+	align-self: flex-end;
+}
