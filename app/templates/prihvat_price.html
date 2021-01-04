@@ -24,8 +24,7 @@
 <section id="main">
 	<div class="container main-container">
 		<article id="main-col">
-			<ul id="services" class="mrg-top">
-				<li id="ponuda/cijena-1">
+			<form class="cont-style" method="POST" target="./prihvat_price_list.html">
 					<p class="naslov-move" id="naslovPrice"> Naslov price </p>
 					<div class="flex-contain-story">
 						<div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
@@ -35,12 +34,11 @@
 						</div>
 						<div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
 					</div>
-					<div class="grid-ponuda">
-						<div class="grid-btn grid-ponuda-prihvati" onclick="">Prihvati</div>
-						<div class="grid-btn grid-ponuda-odbij" onclick="return rejectOffer(1)">Odbij</div>
+					<div class="flex-acc-rej">
+						<input type="submit" value="Prihvati" name="prihvPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return acceptOfferRed()" />
+						<input type="submit" value="Odbaci" name="odbPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return rejectOfferRed()" />
 					</div>
-				</li>
-			</ul>
+			</form>
 		</article>
 	</div>
 </section>

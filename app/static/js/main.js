@@ -15,6 +15,14 @@ function checkUpload() {
     }
 }
 
+function acceptOfferRed() {
+     location.replace('./prihvat_price_list.html');
+}
+
+function rejectOfferRed() {
+    location.replace('./prihvat_price_list.html');
+}
+
 function rejectOffer(offerNum) {
     let offer = document.getElementById("ponuda/cijena-" + offerNum).remove();
 }
