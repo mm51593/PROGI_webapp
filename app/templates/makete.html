@@ -18,7 +18,13 @@
                             </div>
                             <div class="flex-element flex-element-tekst flex-element-specifikacije">
                                 <b class="tekstHeader">Specifikacije</b><br/>
-                                    <span class="specSpan">Cijena:  </span><span id="cijena">{{ price }}</span><br/>
+                                    <span class="specSpan">Cijena:  </span>
+                                    <span id="prices">
+                                    {% for material in materials %}
+                                        <span value="{{ material.material }}" hidden>{{ material.price }}</span>
+                                    {% endfor %}
+                                    </span>
+                                    <br/>
                                     <span class="specSpan">Boje:  </span>crvena, zelena<br/>
                                     <span class="specSpan">Dimenzije:  </span>100cm x 40cm x 100cm<br/>
                                     <span class="specSpan">Ostalo:</span><br/>
@@ -26,10 +32,12 @@
                             <div class="cart-func">
                             <div class="elem-chooser flex-element-tekst">
                                 <label for="materijalChoose"><b class="tekstHeader">Odaberite materijal</b></label><br/>
-                                <form method="POST">
-                                    {{ form.material_input }}
-                                    {{ form.m_submit(class="main-button") }}
-                                </form>
+                                <select id="materijaliChoose" size="1" onchange="updatePrice()">
+                                    <option disabled selected value>--odaberite--</option>
+                                    {% for material in materials %}
+                                        <option value="{{ material.material }}">{{ material.material }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
                             <input type="button" class="main-button subBtn add-to-cart" value="Dodaj u kosaricu"><br/>
                             </div>	

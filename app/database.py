@@ -42,7 +42,7 @@ class ModelPhoto(db.Model):
 
 class ModelPrice(db.Model): 
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), primary_key=True) 
-    material = db.Column(db.String(20), nullable=False)    # composite key?, static type for material?
+    material = db.Column(db.String(20), nullable=False, primary_key=True)    # composite key?, static type for material?
     price = db.Column(db.Integer, nullable=False)    # need to add restriction for price>0    
 
     def __repr__(self):     # output of print()
