@@ -3,21 +3,23 @@
 
 {% block content %}
 
-<form onsubmit="return checkPswd()">  
-	<div class="container sec-main-container" id="regFormHolder">
-		<label>Korisnicko ime : </label>  
-			<input type="text" placeholder="Unesi korisnicko ime" name="username">    
-		<label>E-mail : </label>   
-			<input type="text" placeholder="Unesi e-mail" name="email">  
-		<label id="lozReg">Lozinka : </label>  
-			<input id="regPswd" type="password" placeholder="Unesi lozinku" name="password">
-		<label>Potvrdi lozinku : </label>   
-			<input id="reRegPswd" type="password" placeholder="Ponovno upisite lozinku" name="password">
-		<div class="flex-container flex-container-reg">
-			<input class="main-button subBtn" type="submit" value="Registriraj se">
-			<input class="main-button subBtn" type="reset" onclick="restoreReg()" value="Poništi">
-		</div> 
-	</div>   
-</form>
+<div class="regErrMsg"></div>
+
+	<form id="regForm" onsubmit="return checkPswd()">  
+		<div class="container sec-main-container" id="regFormHolder">
+			<label>Korisnicko ime : </label>   
+				<input type="text" id="user" placeholder="Unesi korisnicko ime" name="username">    
+			<label>E-mail : </label>  
+				<input type="text" id="mail" placeholder="Unesi e-mail" name="email">  
+			<label id="lozReg">Lozinka : </label>   
+				<input id="regPswd" type="password" placeholder="Unesi lozinku" name="password">
+			<label>Potvrdi lozinku : </label>   
+				<input id="reRegPswd" type="password" placeholder="Ponovno upisite lozinku" name="password">
+			<div class="flex-container flex-container-reg">
+				<input class="main-button subBtn" type="submit" value="Registriraj se">
+				<input class="main-button subBtn" type="reset" onclick="restoreReg()" value="Poništi">
+			</div> 
+		</div>   
+	</form>
         
 {% endblock %}
