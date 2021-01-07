@@ -9,6 +9,8 @@ from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice, Order
 
 
 @application.route('/')
-@application.route('/makete_prikaz')
-def index():
-    return render_template('makete_prikaz.html', title='Početna')
+@application.route('/makete_prikaz', methods=['GET', 'POST'])
+#@login_required
+def makete_prikaz_Instance():
+    models = Model.query.all()
+    return render_template('makete_prikaz.html', title='Makete', models=models)

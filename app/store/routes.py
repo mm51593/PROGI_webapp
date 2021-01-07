@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, redirect, request, flash
 from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice
-from app.store.forms import ModelForm
+from app.store.forms import ModelForm, MaterialForm
 from flask_login import login_user, current_user, logout_user
 
 store = Blueprint('store', __name__)
@@ -43,7 +43,7 @@ def new_model():
 @store.route('/makete_prikaz', methods=['GET', 'POST'])
 #@login_required
 def makete_prikaz_Instance():
-    models = Model.query.all() #staticki za svrhu testiranja trenutno
+    models = Model.query.all()
     return render_template('makete_prikaz.html', title='Makete', models=models)
 
 @store.route('/makete/<int:model_id>', methods=['GET', 'POST'])
@@ -51,9 +51,28 @@ def model_Instance(model_id):
     model = Model.query.get_or_404(model_id)
     model_photo = ModelPhoto.query.filter_by(model_id=model.id).first().image_name
     model_video = ModelPhoto.query.filter_by(model_id=model.id).first().video_name
-    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video)
-    #def updatePrice():
-    #   pass
+    m_form = MaterialForm()
+    if m_form.validate_on_submit():
+        material = m_form.material_input
+        model_price = ModelPrice.query.filter_by(model_id=model.id, material=material).first().price
+        if model_price == None:
+            model_price = 'Nije trenutno dostupno'
+            #print(mode_price)
+            return redirect(url_for('/makete/<int:model_id>/updated', model_id=model.id, price=model_price, form=m_form))   #price??
+        #ModelPrice(model_id=model.id, material=m_form.material.data, price=price)
+        #model = Model(name=form.name.data, description=form.description.data, creator_id=current_user) #dodati image_name      uvezati model s material atributom + dodati dimenzije i boje u Model()
+        #db.session.add(model_price)
+        #db.session.commit()
+        return redirect(url_for('/makete/<int:model_id>/updated', model_id=model.id, price=model_price, form=m_form))   #price??
+    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video, form=m_form)
+    
+@store.route('/makete/<int:model_id>/updated', methods=['GET', 'POST'])    
+def updatePrice(model_id, price):
+    model = Model.query.get_or_404(model_id)
+    model_photo = ModelPhoto.query.filter_by(model_id=model.id).first().image_name
+    model_video = ModelPhoto.query.filter_by(model_id=model.id).first().video_name
+    
+    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video, price=price, form=m_form) #model_material=m_form.material)
     #post request za updatePrice()
 
 

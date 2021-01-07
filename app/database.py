@@ -24,7 +24,9 @@ class User(db.Model, UserMixin):
 class Model(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True, nullable=False)
-    description = db.Column(db.String(500), nullable=True)          # nullable could later be omitted, description size = 500 for now
+    description = db.Column(db.String(500), nullable=True)
+    #dimension = db.Column()
+    #color = db.Column()
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id') , nullable=False)
 
     def __repr__(self):     # output of print()
