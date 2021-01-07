@@ -70,4 +70,8 @@ def korracun_prikaz():
 def cart():
     return render_template("cart.html", main_title="Košarica")
 
+@application.route("/prihvat_price_list.html")
+def prihvat_price_list():
+    return render_template("/prihvat_price_list.html", main_title="Lista predlozenih prica")
+
 application.run(debug=True)

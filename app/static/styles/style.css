@@ -761,3 +761,15 @@ span.price {
 	display: unset;
 	margin-top: unset;
 }
+
+.flex-acc-rej {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.grid-ponuda-sing {
+	width: 15vw;
+	height: 4vh;
+	margin: 10px 10px;
+}
