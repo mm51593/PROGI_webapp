@@ -82,13 +82,14 @@ def pull_file(file):
 def validation(story_id):
     #TODO: osiguraj da samo admin moze na ovaj URL
     validationstory = Story.query.filter_by(id=story_id).first()
-
+    story_title = validationstory.title
+    story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
     if request.method == 'POST':
-        if request.form.get("Prihvati"):
+        if request.form['prihvPonudaPric'] == 'Prihvati':
             validationstory.validated = "True"
             db.session.add(validationstory)
             db.session.commit()
-        elif request.form.get("Odbij"):
+        elif request.form.get['odbPonudaPric'] == 'Odbaci':
             db.session.delete(validationstory)
             db.session.commit()
-    return render_template("prihvat_price.html", title="Prihvat price")
+    return render_template("prihvat_price.html", title="Prihvat price", story_title=story_title, story_elements=story_elements, elem_len=len(story_elements))

@@ -17,3 +17,4 @@ env
 /Dokumentacija/*.out
 /Dokumentacija/*.synctex.gz
 /Dokumentacija/*.toc
+/venv/
