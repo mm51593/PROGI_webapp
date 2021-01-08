@@ -41,7 +41,7 @@ class ModelPhoto(db.Model):
             return f"ModelPhoto('{self.image_name}', '{self.video_name}', '{self.model_id}')"
 
 class ModelPrice(db.Model): 
-    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), primary_key=True) 
+    model_id = db.Column(db.Integer, db.ForeignKey('model.id'))
     material = db.Column(db.String(20), nullable=False, primary_key=True)    # composite key?, static type for material?
     price = db.Column(db.Integer, nullable=False)    # need to add restriction for price>0    
 
@@ -60,7 +60,7 @@ class Order(db.Model):
 #    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
 #    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
 #    material = db.Column(db.String(20), nullable=False)
-#    price = db.Column(db.Integer, nullable=False)  # numeric type instead of integer?
+#    price = db.Column(db.Integer, nullable=False)
 #
 #    def __repr__(self):     # output of print()
 #        return f"OrderModel('{self.order_id}', '{self.model_id}', '{self.material}', '{self.price}')"
