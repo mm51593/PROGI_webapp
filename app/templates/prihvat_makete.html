@@ -3,6 +3,8 @@
 
 {% block content %}
 
+<div class="regErrMsg"></div>
+
 <section id="main">
 	<div class="container main-container">
 		<article id="main-col">
@@ -19,9 +21,9 @@
 								<div class="grid-ponuda-tekst">Potreban materijal</div>
 							<form>
 								<label>Cijena: </label>
-									<input type="text" placeholder="Cijena izrade" name="text" required>
+									<input id="1" type="text" placeholder="Cijena izrade" name="text" required>
 							</form>
-							<button class="main-button" type="submit">Pošalji</button>
+							<button onclick="return checkCijena(1)" class="main-button" type="submit">Pošalji</button>
 					</div>
 				</li>
 				<li>
@@ -35,9 +37,9 @@
 								<div class="grid-ponuda-tekst">Potreban materijal</div>
 							<form>
 								<label>Cijena: </label>
-									<input type="text" placeholder="Cijena izrade" name="text" required>
+									<input id="2" type="text" placeholder="Cijena izrade" name="text" required>
 							</form>
-							<button class="main-button" type="submit">Pošalji</button>
+							<button onclick="return checkCijena(2)" class="main-button" type="submit">Pošalji</button>
 					</div>
 				</li>
 			</ul>

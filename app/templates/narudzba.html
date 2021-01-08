@@ -3,15 +3,17 @@
 
 {% block content %}
 
-<form>
-	<div class="container">
+<div class="regErrMsg"></div>
+
+<form onsubmit="return checkNarudzba()">
+	<div class="container sec-main-container">
 		<h1>Naruči maketu</h1>
 		<label>Opis : </label>   
-			<input type="text" placeholder="Opiši maketu" name="text" required>
+			<input id="opisMaketa" type="text" placeholder="Opiši maketu" name="text">
 		<label>Dimenzije : </label>   
-			<input type="text" placeholder="Unesi dimenzije" name="text" required>
+			<input id="dimenzijeMaketa" type="text" placeholder="Unesi dimenzije" name="text">
 		<label>Materijal : </label>   
-			<input type="text" placeholder="Potrebni materijal" name="text" required>
+			<input id="materijaliMaketa" type="text" placeholder="Potrebni materijal" name="text">
 		<button class="main-button" type="submit">Naruči</button>
 	</div>
 </form>

@@ -15,6 +15,92 @@ function checkUpload() {
     }
 }
 
+function checkCijena(element) {
+    var error = false;
+    var errMsg = document.getElementsByClassName("regErrMsg")[0];
+
+    restoreReg();
+
+    if(document.getElementById(element).value == "") {
+        error = true;
+        var errReq = document.createElement("span");
+        errReq.innerHTML = "Cijena mora biti unesena";
+
+        errMsg.appendChild(errReq);
+    }
+
+    var regCijena = new RegExp('^\\d+$');
+    console.log(!regCijena.test(document.getElementById(element).value) + " za " + document.getElementById(element).value);
+
+    if(!document.getElementById(element).value == "") {
+        if(!regCijena.test(document.getElementById(element).value)) {
+            error = true;
+            var errReq = document.createElement("span");
+            errReq.innerHTML = "Samo brojevi smiju biti uneseni";
+    
+            errMsg.appendChild(errReq);
+        }
+    }
+    
+    if (error) {
+        errMsg.style.marginTop = "20px";
+        errMsg.style.padding = "10px";
+        errMsg.style.opacity = "1";
+        return false;
+    }
+
+    return true
+}
+
+function checkNarudzba() {
+    var error = false;
+    var errMsg = document.getElementsByClassName("regErrMsg")[0];
+
+    restoreReg();
+
+    if(document.getElementById("materijaliMaketa").value == "" || document.getElementById("opisMaketa").value == ""
+       || document.getElementById("dimenzijeMaketa").value == "") {
+        error = true;
+        var errReq = document.createElement("span");
+        errReq.innerHTML = "Sva polja moraju biti popunjena";
+
+        errMsg.appendChild(errReq);
+    }
+
+    if (error) {
+        errMsg.style.marginTop = "20px";
+        errMsg.style.padding = "10px";
+        errMsg.style.opacity = "1";
+        return false;
+    }
+
+    return true; 
+}
+
+function checkMaketa() {
+    var error = false;
+    var errMsg = document.getElementsByClassName("regErrMsg")[0];
+
+    restoreReg();
+
+    if(document.getElementById("materijaliChoose").value == "noneSelected") {
+        error = true;
+        var errReq = document.createElement("span");
+        errReq.innerHTML = "Materijal mora biti odabran";
+
+        errMsg.appendChild(errReq);
+    }
+
+    if (error) {
+        errMsg.style.marginTop = "20px";
+        errMsg.style.padding = "10px";
+        errMsg.style.opacity = "1";
+        return false;
+    }
+
+    return true; 
+}
+
 function acceptOfferRed() {
      location.replace('./prihvat_price_list.html');
 }
