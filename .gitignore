@@ -1,6 +1,7 @@
 app/__pycache__/
 app/authentication/__pycache__/
 app/stories/__pycache__/
+app/store/__pycache__/
 env
 .idea
 /dokumentacija/*.aux
