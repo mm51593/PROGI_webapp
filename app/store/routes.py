@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, redirect, request, flash
+from flask_login import current_user
 from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice
 from app.store.forms import ModelForm, MaterialForm, ModelPriceForm
 from flask_login import login_user, current_user, logout_user
@@ -65,10 +66,12 @@ def model_Instance(model_id):
     #db.session.add(model_price)
     #db.session.commit()
     #print(materials)
+    if request.method == "POST":
+        if current_user.is_authenticated:
+            if current_user.cart == None:
+                current_user.cart = []
+            #current_user.cart.append("")
+            print(model_id, request.form.get("materijaliChoose"))
+        else:
+            return redirect(url_for("auth.login"))
     return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video, materials=materials, dimensions=model_dimensions, colors=model_colors)
-
-
-
-
-
-
