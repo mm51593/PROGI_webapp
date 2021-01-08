@@ -15,55 +15,51 @@
             <h1 class="page-title"></h1>
             <ul id="services">
                 <li>
-                    <p id="naslovPrice"> Standardna maketa </p>
+                    <p id="naslovPrice"> {{ model.name }} </p>
                     <div class="flex-container">
                         <div class="flex-container-column">
                             <div class="flex-element flex-element-tekst">
-                                <b class="tekstHeader">Opis makete</b><br />
-                                Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute
-                                commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure
-                                dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
-                                Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim
-                                tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat.
-                                Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore
-                                commodo.
+                                <b class="tekstHeader">Opis makete</b><br/>
+                                {{ model.description }}
                             </div>
                             <div class="flex-element flex-element-tekst flex-element-specifikacije">
-                                <b class="tekstHeader">Specifikacije</b><br />
-                                <span class="specSpan">Cijena: </span><span id="cijena">Odaberite materijal</span><br />
-                                <span class="specSpan">Boje: </span>crvena, zelena<br />
-                                <span class="specSpan">Dimenzije: </span>100cm x 40cm x 100cm<br />
-                                <span class="specSpan">Ostalo:</span><br />
+                                <b class="tekstHeader">Specifikacije</b><br/>
+                                    <span class="specSpan">Cijena:  </span>
+                                    <span id="prices">
+                                    {% for material in materials %}
+                                        <span value="{{ material.material }}" hidden>{{ material.price }}</span>
+                                    {% endfor %}
+                                    </span>
+                                    <br/>
+                                    <span class="specSpan">Boje: {% for color in colors %}
+                                    {{ color }} 
+                                    {% endfor %}</span>
+                                    <br/>
+                                    <span class="specSpan">Dimenzije: {% for dimension in dimensions %} 
+                                    {{ dimension }}cm 
+                                    {% endfor %}</span>
+                                    <br/>
+                                    <span class="specSpan">Ostalo:</span><br/>
                             </div>
-                            <div class="cart-func">
+                            <form id="addToCart" method="POST" class="cart-func">
                                 <div class="elem-chooser flex-element-tekst">
-                                    <label for="materijalChoose"><b class="tekstHeader">Odaberite
-                                            materijal</b></label><br />
-                                    <select id="materijaliChoose" size="1" onchange="updatePrice()">
+                                    <label for="materijalChoose"><b class="tekstHeader">Odaberite materijal</b></label><br/>
+                                    <select id="materijaliChoose" name="materijaliChoose" size="1" onchange="updatePrice()" required>
                                         <option disabled selected value>--odaberite--</option>
-                                        <option value="1">Aluminij</option>
-                                        <option value="2">Zeljezo</option>
-                                        <option value="3">Drvo</option>
-                                        <option id="data-1" hidden>200 HRK</option>
-                                        <option id="data-2" hidden>200 EUR</option>
-                                        <option id="data-3" hidden>200 BAM</option>
+                                            {% for material in materials %}
+                                                <option value="{{ material.material }}">{{ material.material }}</option>
+                                            {% endfor %}
                                     </select>
                                 </div>
-                                <input type="button" class="main-button subBtn add-to-cart"
-                                    value="Dodaj u kosaricu"><br />
-                            </div>
+                                <input type="submit" class="main-button subBtn add-to-cart" value="Dodaj u kosaricu"><br/>
+                            </form>
                         </div>
                         <div class="flex-container-column flex-video-img">
-                            <div class="flex-contain-story">
-                                <div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
-                                <div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
-                                    <div class="img-prop-holder" id="elem-holdncycle">
-                                    </div>
-                                </div>
-                                <div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
-                            </div>
-                            <!-- <img class="flex-element" id="maketaSlika"
-                                    src="./static/img/maketaimg.jpg"> -->
+                            <video class="flex-element" controls>
+                                <source src="{{ url_for('static', filename='vid/' + model_video) }}" type="video/mp4">
+                            </video>
+                            <img class="flex-element" id="maketaSlika"
+                                src="{{ url_for('static', filename='img/' + model_photo) }}">
                         </div>
                     </div>
                 </li>
@@ -71,5 +67,8 @@
         </article>
     </div>
 </section>
+<script>
+    updatePrice()
+</script>
 
 {% endblock %}

@@ -40,13 +40,19 @@ function restoreReg() {
 }
 
 function updatePrice() {
-    var selectedMaterialIndex = document.getElementById("materijaliChoose").value;
-    var searchString = "data-";
-    searchString = searchString.concat(selectedMaterialIndex);
+    var materialDropdown = document.getElementById("materijaliChoose");
+    var selectValue = materialDropdown.value;
+    var priceList = document.getElementById("prices");
 
-    var selectedMaterial = document.getElementById(searchString).innerHTML;
-    document.getElementById("cijena").innerHTML = selectedMaterial;
-    
-    console.log(selectedMaterialIndex);
-    console.log(searchString);
+    for (var node of priceList.children)
+    {
+        if (node.getAttribute("value") == selectValue)
+        {
+            node.hidden = false;
+        }
+        else
+        {
+            node.hidden = true;
+        }
+    }
 }

@@ -13,8 +13,8 @@
         <title>MaketaShop</title>
     {% endif %}
 	</head>
-	
-	
+
+
 
 	<body>
 
@@ -23,7 +23,7 @@
 				<div id="branding">
 					<h1><span class="highlight">Maketa</span> Shop</h1>
 				</div>
-				
+
 				<nav>
 					<ul>
 						<!-- Svaka stranica postavlja varijablue active_page koja označava trenutni izbornik -->
@@ -39,7 +39,7 @@
 						</li>
 						<li {% if active_page == "makete" %} class="current" {% endif %}>
 							<div class="dropdown">
-								<button class="dropbtn"><a href="makete_prikaz.html">Makete</a></button>
+								<button class="dropbtn"><a href="{{ url_for('store.makete_prikaz_Instance') }}">Makete</a></button>
 								<div class="dropdown-content">
 									<a href="narudzba.html">Naruči</a>
 									<a href="prihvat_makete.html">Prihvati</a>
