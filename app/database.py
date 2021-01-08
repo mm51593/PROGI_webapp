@@ -27,7 +27,7 @@ class Story(db.Model):
     title = db.Column(db.String(70), nullable=False)
     author_id = db.Column(db.Integer, nullable=False)
     time_created = db.Column(db.DateTime, nullable=False)
-    validated = db.Column(db.Boolean, nullable=False)
+    validated = db.Column(db.Boolean, nullable=False, default=False)
     def __repr__(self):
         return f"Story('{self.id}', '{self.title}')"
 

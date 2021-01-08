@@ -8,24 +8,14 @@
 		<article id="main-col">
 			<h1 class="page-title"></h1>
 			<ul id="services">
-				<a href="prihvat_price.html" id="priceLink" title="Otvorite citavu pricu">
+				{% for story in stories %}
+				<a href="{{url_for('validation(story.id)')}}" id="priceLink" title="Otvorite citavu pricu">
 					<li>
-						<h3>Priča 1</h3>
-						<p>Kratki opis prve price</p>
-					</li>
-                </a>
-                <a href="prihvat_price.html" id="priceLink" title="Otvorite citavu pricu">
-					<li>
-						<h3>Priča 2</h3>
-						<p>Kratki opis druge price</p>
-					</li>
-                </a>
-                <a href="prihvat_price.html" id="priceLink" title="Otvorite citavu pricu">
-					<li>
-						<h3>Priča 3</h3>
-						<p>Kratki opis trece price</p>
+						<h3>{{ story.title }}</h3>
+						<p>bla bla bla</p>
 					</li>
 				</a>
+				{% endfor %}
 			</ul>
 		</article>
 	</div>

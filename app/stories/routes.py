@@ -86,10 +86,18 @@ def validation(story_id):
     story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
     if request.method == 'POST':
         if request.form['prihvPonudaPric'] == 'Prihvati':
-            validationstory.validated = "True"
+            validationstory.validated = True
             db.session.add(validationstory)
             db.session.commit()
         elif request.form.get['odbPonudaPric'] == 'Odbaci':
             db.session.delete(validationstory)
             db.session.commit()
     return render_template("prihvat_price.html", title="Prihvat price", story_title=story_title, story_elements=story_elements, elem_len=len(story_elements))
+
+@stories.route('/stories')
+def display_story_list():
+    return render_template('price.html', stories=Story.query.filter_by(validated=True).all())
+
+@stories.route('/storiesforvalidation')
+def display_story_list_validation():
+    return render_template('prihvat_price_list.html', stories=Story.query.filter_by(validated=False).all())
