@@ -25,12 +25,12 @@ class Model(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(60), unique=True, nullable=False)
     description = db.Column(db.String(500), nullable=True)
-    #dimension = db.Column()
-    #color = db.Column()
+    dimension = db.Column(db.String(100), nullable=False)
+    colors = db.Column(db.String(100), nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id') , nullable=False)
 
     def __repr__(self):     # output of print()
-          return f"Model('{self.id}', '{self.name}', '{self.description}', '{self.creator_id}')"
+          return f"Model('{self.id}', '{self.name}', '{self.description}', '{self.dimension}', '{self.colors}', '{self.creator_id}')"
 
 class ModelPhoto(db.Model):
     image_name = db.Column(db.String(50), primary_key=True, nullable=False)  # 'maketaimg.jpg'
@@ -42,7 +42,7 @@ class ModelPhoto(db.Model):
 
 class ModelPrice(db.Model): 
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), primary_key=True) 
-    material = db.Column(db.String(20), nullable=False)    # composite key?, static type for material?
+    material = db.Column(db.String(20), nullable=False, primary_key=True)    # composite key?, static type for material?
     price = db.Column(db.Integer, nullable=False)    # need to add restriction for price>0    
 
     def __repr__(self):     # output of print()

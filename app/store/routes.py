@@ -30,10 +30,16 @@ store = Blueprint('store', __name__)
 def new_model():
     form = ModelForm()
     if form.validate_on_submit():
-        model = Model(name=form.name.data, description=form.description.data, creator_id=current_user) #dodati image_name
+        dimension = f"{form.dimension_1.data},{form.dimension_2.data},{form.dimension_3.data}"   #unesene dimenzije su spojene ',' npr. '100,120,150'
+        colors = form.colors.data                                                                #unesene boje odvojene zarezom npr. 'plava,crvena,zelena'
+        model = Model(name=form.name.data, description=form.description.data, creator_id=current_user, dimension=dimension, colors=colors) #dodati image_name
         db.session.add(model)
         db.session.commit()
-        # file upload image/video
+        #dodati za photo i video obradu podataka    # file upload image/video
+        model_temp = Model.query.filter_by(name=model.name).first()
+        model_photo = ModelPhoto(image_name=image_name, video_name=video_name, model_id=model_temp.id)
+        db.session.add(model_photo)
+        db.session.commit()
         #flash('Nova maketa dodana!', 'succes')
         return redirect(url_for('index'))
     return render_template('create_model.html', title='Nova maketa', form=form)
@@ -51,20 +57,22 @@ def model_Instance(model_id):
     model = Model.query.get_or_404(model_id)
     model_photo = ModelPhoto.query.filter_by(model_id=model.id).first().image_name
     model_video = ModelPhoto.query.filter_by(model_id=model.id).first().video_name
+    model_dimensions = model.dimension.split(',')
+    model_colors = model.colors.split(',')
     m_form = MaterialForm()
     if m_form.validate_on_submit():
-        material = m_form.material_input
+        material = m_form.material_input.data
         model_price = ModelPrice.query.filter_by(model_id=model.id, material=material).first().price
         if model_price == None:
             model_price = 'Nije trenutno dostupno'
-            #print(mode_price)
+            #print(model_price)
             return redirect(url_for('/makete/<int:model_id>/updated', model_id=model.id, price=model_price, form=m_form))   #price??
         #ModelPrice(model_id=model.id, material=m_form.material.data, price=price)
-        #model = Model(name=form.name.data, description=form.description.data, creator_id=current_user) #dodati image_name      uvezati model s material atributom + dodati dimenzije i boje u Model()
+        #model = Model(name=form.name.data, description=form.description.data, creator_id=current_user) #dodati image_name
         #db.session.add(model_price)
         #db.session.commit()
         return redirect(url_for('/makete/<int:model_id>/updated', model_id=model.id, price=model_price, form=m_form))   #price??
-    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video, form=m_form)
+    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video, form=m_form, dimensions=model_dimensions, colors=model_colors)
     
 @store.route('/makete/<int:model_id>/updated', methods=['GET', 'POST'])    
 def updatePrice(model_id, price):
@@ -72,7 +80,7 @@ def updatePrice(model_id, price):
     model_photo = ModelPhoto.query.filter_by(model_id=model.id).first().image_name
     model_video = ModelPhoto.query.filter_by(model_id=model.id).first().video_name
     
-    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video, price=price, form=m_form) #model_material=m_form.material)
+    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video, price=price, form=m_form, dimensions=model_dimensions, colors=model_colors) #model_material=m_form.material)
     #post request za updatePrice()
 
 
