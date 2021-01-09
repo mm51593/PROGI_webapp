@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, request
 from app.authentication.forms import RegistrationForm, LoginForm
 from app.database import User, db, bcrypt, Profile
 from flask_login import login_user, current_user, logout_user
@@ -36,7 +36,7 @@ def login():
         user = User.query.filter_by(email=login_form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, login_form.password.data):
             login_user(user, remember=login_form.remember.data)
-            return redirect('/')
+            return redirect(request.referrer)
         else:
             login_error = "Neispravna E-mail adresa ili lozinka."
             print(login_error)
