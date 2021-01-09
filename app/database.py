@@ -77,7 +77,7 @@ class Order(db.Model):
     def __repr__(self):     # output of print()
           return f"Order('{self.id}', '{self.time_created}', '{self.user_id}')" 
 
-#class OrderModel(db.Model):  #primary key nedostaje
+# class OrderModel(db.Model):  #primary key nedostaje
 #    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
 #    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
 #    material = db.Column(db.String(20), nullable=False)
