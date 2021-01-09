@@ -6,6 +6,7 @@ application = Flask(__name__)
 application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dummy.db'
 application.config['SECRET_KEY'] = 'secret-key'
 application.config['STORY_LOCATION'] = 'static/story_files'
+application.config['MODEL_LOCATION'] = 'static/model_files'
 login_manager = LoginManager(application)
 
 

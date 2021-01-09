@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% set active_page = "korracun_prikaz" %}
+
+{% block content %}
+
+<section id="main">
+    <div class="main-container container">
+        <form class="cont-style" method="POST">
+            <h1 class="kor-page-title">Korisnicki racun</h1>
+
+            <div class="kor-pregled">
+                <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>ime</div>
+                <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>prezime</div>
+                <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>10.10.2010.</div>
+                <div class="flex-pre pre-elem">
+                    <div class="kor-pre-desc">
+                        Životopis:
+                    </div>
+                    <div class="kor-pre-info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
+                        velit facere
+                        eaque cupiditate aspernatur, accusantium rem officia quos molestiae, repellendus nihil
+                        debitis
+                        suscipit iste enim ullam illo saepe laboriosam sapiente? Lorem, ipsum dolor sit amet
+                        consectetur adipisicing elit. Quasi ipsum maiores adipisci sit eos, voluptatem, excepturi,
+                        ut quaerat voluptate facilis doloremque! Eveniet eum cum ipsum, consequatur excepturi
+                        exercitationem ipsa adipisci.</div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

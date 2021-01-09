@@ -3,12 +3,34 @@
 
 {% block content %}
 
-<form>
-	<div class="container">
+<div class="regErrMsg"></div>
+
+<form onsubmit="return checkNarudzba()" method="POST" enctype="multipart/form-data">
+	{{ form.hidden_tag() }}
+	<div class="container sec-main-container">
 		<h1>Naruči maketu</h1>
-		<label>Opis : </label>   
-			<input type="text" placeholder="Opiši maketu" name="text" required>  
-		<button class="main-button" type="submit">Naruči</button>
+        {{ form.name.label }}
+			{{ form.name(id="imeMaketa", placeholder="Unesi ime") }}
+
+		{{ form.description.label }}
+			{{ form.description(id="opisMaketa", placeholder="Opiši maketu") }}
+
+		<label>Dimenzije</label>
+			{{ form.dimension_1(id="dimenzijeMaketa", placeholder="Unesi duljinu") }}
+			{{ form.dimension_2(id="dimenzijeMaketa", placeholder="Unesi visinu") }}
+			{{ form.dimension_3(id="dimenzijeMaketa", placeholder="Unesi širinu") }}
+
+		{{ form.colors.label }}
+			{{ form.colors(id="bojeMaketa", placeholder="Unesi boju/boje") }}
+
+		<!--<label for="slika">Slika ili nacrt</label>
+        <input type="file" id="slika" accept="image/*" name="slika" required>-->
+
+		{{ form.image.label }}
+		{{ form.image() }}
+
+		{{ form.submit(class="ddmain-button") }}
+
 	</div>
 </form>
 

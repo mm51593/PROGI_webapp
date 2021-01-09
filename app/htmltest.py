@@ -58,4 +58,20 @@ def registracija():
 def maketa_detaljno():
     return render_template("makete.html", main_title="Maketa")
 
+@application.route("/korracun_izmjena.html")
+def korracun_izmjena():
+    return render_template("korracun_izmjena.html", main_title="Korisnicki racun - izmjena")
+
+@application.route("/korracun_prikaz.html")
+def korracun_prikaz():
+    return render_template("korracun_prikaz.html", main_title="Korisnicki racun - prikaz")
+
+@application.route("/cart.html")
+def cart():
+    return render_template("cart.html", main_title="Košarica")
+
+@application.route("/prihvat_price_list.html")
+def prihvat_price_list():
+    return render_template("/prihvat_price_list.html", main_title="Lista predlozenih prica")
+
 application.run(debug=True)
