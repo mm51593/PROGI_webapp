@@ -57,11 +57,6 @@ function addTextField(type)
         field.accept = "video/*";
     }
 
-<<<<<<< HEAD
-    field.required = false;      // TESTING
-
-=======
->>>>>>> feature/front-end
     var listDiv = document.createElement("div");
     listDiv.className = "listDiv";
 
@@ -93,10 +88,7 @@ function addTextField(type)
     document.getElementById("InputList").append(newlistitem);
 
     reevaluateNames();
-<<<<<<< HEAD
-}
 
-resetCounter()
-=======
 }
->>>>>>> feature/front-end
+resetCounter();
+

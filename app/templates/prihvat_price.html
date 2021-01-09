@@ -3,44 +3,41 @@
 
 {% block content %}
 
-<script src="static/js/cycler.js"></script>
+<script src="../static/js/cycler.js"></script>
 
-<span hidden id="elem-count">4</span>
-<span hidden class="img-cycle" id="elem-cycle-0">./static/img/maketaimg.jpg</span>
-<span hidden class="text-cycle" id="elem-cycle-1">Et anim labore incididunt veniam fugiat proident id incididunt duis
-	cillum sint sint
-	eu quis. Culpa excepteur minim ex nulla dolore velit est. Sint nisi sit non cupidatat magna consequat
-	reprehenderit voluptate laboris. Ut aliqua dolore ea esse adipisicing minim in. Pariatur aliqua sunt id aliquip
-	velit ad labore. Nulla ea in nulla exercitation excepteur nisi tempor enim voluptate nisi. Mollit sit qui mollit
-	irure officia esse velit elit ad aliqua laboris aliqua eu excepteur.</span>
-<span hidden class="text-cycle" id="elem-cycle-2">Ipsum labore pariatur ullamco et anim voluptate amet consequat minim
-	aliquip
-	incididunt fugiat commodo. Quis esse voluptate voluptate pariatur. Exercitation cupidatat sunt cillum sit esse
-	occaecat aliqua et culpa sint nostrud. Aliqua nostrud dolor consequat quis ut ullamco aliquip ut. Lorem commodo
-	irure ea sit anim aute reprehenderit nisi ipsum. Esse nostrud labore enim esse qui esse fugiat consequat
-	occaecat Lorem veniam quis commodo. Officia esse irure enim non.</span>
-<span hidden class="vid-cycle" id="elem-cycle-3">./static/vid/video.mp4</span>
+<span hidden id="elem-count">{{ elem_len }}</span>
 
-<section id="main">
-	<div class="container main-container">
-		<article id="main-col">
-			<form class="cont-style" method="POST" target="./prihvat_price_list.html">
-					<p class="naslov-move" id="naslovPrice"> Naslov price </p>
-					<div class="flex-contain-story">
-						<div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
-						<div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
-							<div class="img-prop-holder" id="elem-holdncycle">
+    {% for elem in story_elements %}
+        {% if elem.story_text %}
+            <span hidden class="text-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ elem.story_text }}</span>
+        {% elif elem.image_name %}
+            <span hidden class="img-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ url_for('story.pull_file', file=elem.image_name) }}</span>
+        {% elif elem.video_name %}
+            <span hidden class="vid-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ url_for('story.pull_file', file=elem.video_name) }}</span>
+        {% endif %}
+    {% endfor %}
+
+
+	<section id="main">
+		<div class="container main-container">
+			<article id="main-col">
+				<form class="cont-style" method="POST" target="./prihvat_price_list.html">
+						<p class="naslov-move" id="naslovPrice"> Naslov price </p>
+						<div class="flex-contain-story">
+							<div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
+							<div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
+								<div class="img-prop-holder" id="elem-holdncycle">
+								</div>
 							</div>
+							<div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
 						</div>
-						<div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
-					</div>
-					<div class="flex-acc-rej">
-						<input type="submit" value="Prihvati" name="prihvPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return acceptOfferRed()" />
-						<input type="submit" value="Odbaci" name="odbPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return rejectOfferRed()" />
-					</div>
-			</form>
-		</article>
-	</div>
-</section>
+						<div class="flex-acc-rej">
+							<input type="submit" value="Prihvati" name="prihvPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return acceptOfferRed()" />
+							<input type="submit" value="Odbaci" name="odbPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return rejectOfferRed()" />
+						</div>
+				</form>
+			</article>
+		</div>
+	</section>
 
 {% endblock %}
