@@ -484,18 +484,6 @@ button:hover {
 	margin-top: 30vh;
 	margin-left: 0.5vw;
 }
-<<<<<<< HEAD
-
-.btn-ctrl {
-	border-radius: 20px;
-	margin: 5px;
-	width: 10vh;
-	border: #f88f5b solid 3px;
-}
-
-#naslov-prijedlog {
-	font-size: 1.4em;
-=======
 
 .btn-ctrl {
 	border-radius: 20px;
@@ -574,5 +562,23 @@ button:hover {
 .naslov-move {
 	text-align: center;
 	color: rgb(5, 5, 71);
->>>>>>> feature/front-end
+}
+
+.admin-link {
+	text-align: center;
+	cursor: pointer;
+}
+
+.center {
+	padding: 100px 0px;
+}
+
+.fourth-main-container {
+	min-height: 43.5vh;
+}
+
+.table-spacer {
+	margin: auto;
+	margin-top: 5vh;
+	width: 90%;
 }
