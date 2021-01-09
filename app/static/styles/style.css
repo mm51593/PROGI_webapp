@@ -773,3 +773,22 @@ span.price {
 	height: 4vh;
 	margin: 10px 10px;
 }
+
+.admin-link {
+	text-align: center;
+	cursor: pointer;
+}
+
+.center {
+	padding: 100px 0px;
+}
+
+.fourth-main-container {
+	min-height: 43.5vh;
+}
+
+.table-spacer {
+	margin: auto;
+	margin-top: 5vh;
+	width: 90%;
+}
