@@ -44,18 +44,19 @@ class StoryContent(db.Model):
 
 class Model(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(60), unique=True, nullable=False)
+    name = db.Column(db.String(60), nullable=False)
     description = db.Column(db.String(500), nullable=True)
     dimension = db.Column(db.String(100), nullable=False)
     colors = db.Column(db.String(100), nullable=False)
     creator_id = db.Column(db.Integer, db.ForeignKey('user.id') , nullable=False)
+    approved = db.Column(db.Boolean, nullable=False, default=False)
 
     def __repr__(self):     # output of print()
-          return f"Model('{self.id}', '{self.name}', '{self.description}', '{self.dimension}', '{self.colors}', '{self.creator_id}')"
+          return f"Model('{self.id}', '{self.name}', '{self.description}', '{self.dimension}', '{self.colors}', '{self.creator_id}', '{self.approved}')"
 
 class ModelPhoto(db.Model):
     image_name = db.Column(db.String(50), primary_key=True, nullable=False)  # 'maketaimg.jpg'
-    video_name = db.Column(db.String(50), unique=True, nullable=False)         # 'video.mp4'
+    #video_name = db.Column(db.String(50), unique=True, nullable=False)         # 'video.mp4'
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
 
     def __repr__(self):     # output of print()

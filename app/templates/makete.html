@@ -9,6 +9,8 @@
 <span hidden class="img-cycle" id="elem-cycle-0">./static/img/pocetna.png</span>
 <span hidden class="vid-cycle" id="elem-cycle-1">./static/vid/video.mp4</span>
 
+<div class="regErrMsg"></div>
+
 <section id="main">
     <div class="container main-container">
         <article id="main-col">
@@ -55,11 +57,11 @@
                             </form>
                         </div>
                         <div class="flex-container-column flex-video-img">
-                            <video class="flex-element" controls>
-                                <source src="{{ url_for('static', filename='vid/' + model_video) }}" type="video/mp4">
-                            </video>
+                            <!--<video class="flex-element" controls>
+                                <source src="{ url_for('static', filename='vid/' + model_video) }" type="video/mp4">
+                            </video>-->
                             <img class="flex-element" id="maketaSlika"
-                                src="{{ url_for('static', filename='img/' + model_photo) }}">
+                                src="{{ url_for('static', filename='model_files/' + model_photo) }}">
                         </div>
                     </div>
                 </li>

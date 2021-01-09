@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% set active_page = "korracun_izmjena" %}
+
+{% block content %}
+
+
+<section id="main">
+    <div class="main-container container">
+        <form class="cont-style" method="POST">
+            <h1 class="kor-page-title">Korisnicki racun</h1>
+
+            <div class="kor-grid">
+
+                <div class="kor-flex-item">
+                        <label class="label-ponistavanje" for="korisnikIme">Ime</label>
+                        <input id="korisnikIme" placeholder="Upisite vaše ime..." class="kor-input" type="text"
+                            name="ime">
+                </div>
+                <div class="flex-container kor-flex-subitem">
+                        <div class="flex-container-str-clm">
+                            <label class="label-ponistavanje" for="privIme">Privatno</label>
+                            <input checked type="radio" name="privPubIme" id="privIme" value="privIme" />
+                        </div>
+                        <div class="flex-container-str-clm">
+                            <label class="label-ponistavanje" for="privIme">Javno</label>
+                            <input type="radio" name="privPubIme" id="privIme" value="pubIme" />
+                        </div>
+                </div>
+
+                <div class="kor-flex-item">
+                    <label class="label-ponistavanje" for="korisnikPrezime">Prezime</label>
+                    <input id="korisnikPrezime" placeholder="Upisite vaše prezime..." class="kor-input"
+                        type="text" name="prezime">
+                </div>
+                <div class="flex-container kor-flex-subitem">
+                    <div class="flex-container-str-clm">
+                        <label class="label-ponistavanje" for="privPrezime">Privatno</label>
+                        <input checked type="radio" name="privPubPrezime" id="privPrezime" value="privPrezime" />
+                    </div>
+                    <div class="flex-container-str-clm">
+                        <label class="label-ponistavanje" for="pubPrezime">Javno</label>
+                        <input type="radio" name="privPubPrezime" id="pubPrezime" value="pubPrezime" />
+                    </div>
+                </div>
+
+                <div class="kor-flex-item">
+                    <label class="label-ponistavanje" for="korisnikDatum">Datum rođenja</label>
+                    <input id="korisnikDatum" class="kor-date" type="date" name="datRod">
+                </div>
+                <div class="flex-container kor-flex-subitem">
+                    <div class="flex-container-str-clm">
+                        <label class="label-ponistavanje" for="privDatum">Privatno</label>
+                        <input checked type="radio" name="privPubDatum" id="privDatum" value="privDatum" />
+                    </div>
+                    <div class="flex-container-str-clm">
+                        <label class="label-ponistavanje" for="pubDatum">Javno</label>
+                        <input type="radio" name="privPubDatum" id="pubDatum" value="pubDatum" />
+                    </div>
+                </div>
+
+                <div class="kor-flex-item">
+                    <label class="label-ponistavanje" for="korisnikBio">Životopis</label>
+                    <textarea id="korisnikBio" placeholder="Upisite vaš zivotopis..."
+                        class="kor-text-area"></textarea>
+                </div>
+                <div class="flex-container kor-flex-subitem">
+                    <div class="flex-container-str-clm">
+                        <label class="label-ponistavanje" for="privZiv">Privatno</label>
+                        <input checked type="radio" name="privPubZiv" id="privZiv" value="privZiv" />
+                    </div>
+                    <div class="flex-container-str-clm">
+                        <label class="label-ponistavanje" for="pubZiv">Javno</label>
+                        <input type="radio" name="privPubZiv" id="pubZiv" value="pubZiv" />
+                    </div>
+                </div>
+
+            </div>
+             <input class="ctrl-prijedlog mrg-left-42" type="submit" value="Spremi promjene">
+            <div>
+
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

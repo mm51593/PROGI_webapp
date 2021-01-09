@@ -1,8 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for, redirect, request, flash
-from flask_login import current_user
 from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice
 from app.store.forms import ModelForm, MaterialForm, ModelPriceForm
+from app import application
 from flask_login import login_user, current_user, logout_user
+from uuid import uuid4
+from os import path, listdir
 
 store = Blueprint('store', __name__)
 
@@ -31,19 +33,31 @@ store = Blueprint('store', __name__)
 def new_model():
     form = ModelForm()
     if form.validate_on_submit():
+        print("success")
         dimension = f"{form.dimension_1.data},{form.dimension_2.data},{form.dimension_3.data}"   #unesene dimenzije su spojene ',' npr. '100,120,150'
         colors = form.colors.data                                                                #unesene boje odvojene zarezom npr. 'plava,crvena,zelena'
-        model = Model(name=form.name.data, description=form.description.data, creator_id=current_user, dimension=dimension, colors=colors) #dodati image_name
+        model = Model(name=form.name.data, description=form.description.data, creator_id=current_user.id, dimension=dimension, colors=colors) #dodati image_name
         db.session.add(model)
         db.session.commit()
         #dodati za photo i video obradu podataka    # file upload image/video
-        model_temp = Model.query.filter_by(name=model.name).first()
-        model_photo = ModelPhoto(image_name=image_name, video_name=video_name, model_id=model_temp.id)
+        filename = form.image.data.filename.split('.')
+        extension = filename[-1]
+        while True:
+            filename = uuid4().hex + '.' + extension
+            if filename not in listdir(path.join(application.root_path, application.config['MODEL_LOCATION'])):
+                break
+
+        form.image.data.save(path.join(application.root_path, application.config['MODEL_LOCATION'], filename))
+        model_photo = ModelPhoto(image_name=filename, model_id=model.id)
         db.session.add(model_photo)
         db.session.commit()
         #flash('Nova maketa dodana!', 'succes')
-        return redirect(url_for('index'))
-    return render_template('create_model.html', title='Nova maketa', form=form)
+        return redirect(url_for('index.homepage'))
+    else:
+        print(form.errors)
+        for error in form.errors:
+            print(error)
+    return render_template('narudzba.html', title='Nova maketa', form=form)
 
 
 
@@ -56,8 +70,8 @@ def makete_prikaz_Instance():
 @store.route('/makete/<int:model_id>', methods=['GET', 'POST'])
 def model_Instance(model_id):
     model = Model.query.get_or_404(model_id)
+    print(model_id)
     model_photo = ModelPhoto.query.filter_by(model_id=model.id).first().image_name
-    model_video = ModelPhoto.query.filter_by(model_id=model.id).first().video_name
     model_dimensions = model.dimension.split(',')
     model_colors = model.colors.split(',')
     materials = ModelPrice.query.filter_by(model_id=model.id).all()
@@ -74,4 +88,4 @@ def model_Instance(model_id):
             print(model_id, request.form.get("materijaliChoose"))
         else:
             return redirect(url_for("auth.login"))
-    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, model_video=model_video, materials=materials, dimensions=model_dimensions, colors=model_colors)
+    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, materials=materials, dimensions=model_dimensions, colors=model_colors)
