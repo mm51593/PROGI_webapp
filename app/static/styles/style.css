@@ -858,6 +858,15 @@ span.price {
 	text-align: center;
 }
 
+#decolour-nav {
+	color: black;
+	font-weight: unset;
+}
+
+#decolour-nav:hover {
+	color: white;
+	font-weight: bold;
+}
 
 .w3-table,.w3-table-all{border-collapse:collapse;border-spacing:0;width:100%;display:table}.w3-table-all{border:1px solid #ccc}
 .w3-bordered tr,.w3-table-all tr{border-bottom:1px solid #ddd}.w3-striped tbody tr:nth-child(even){background-color:#f1f1f1}

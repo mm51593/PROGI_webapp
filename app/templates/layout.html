@@ -35,7 +35,7 @@
 							<div class="dropdown">
 								<button class="dropbtn"><a href="{{ url_for('story.display_story_list') }}">Priče</a></button>
 								<div class="dropdown-content">
-									<a href="{{ url_for('story.add_content') }}">Predloži</a>
+									<a id="decolour-nav" href="{{ url_for('story.add_content') }}">Predloži</a>
 								</div>
 							</div>
 						</li>
@@ -46,9 +46,9 @@
 									<img src="../static/img/exclamation-16.ico">
 								{% endif %}</a></button>
 								<div class="dropdown-content">
-									<a href="{{ url_for('store.new_model') }}">Naruči</a>
-									<a href="{{ url_for('store.model_approval') }}">Prihvati</a>
-                                    <a href="{{ url_for('store.my_notifications') }}">Obavijesti</a>
+									<a id="decolour-nav" href="{{ url_for('store.new_model') }}">Naruči</a>
+									<a id="decolour-nav" href="{{ url_for('store.model_approval') }}">Prihvati</a>
+                                    <a id="decolour-nav" href="{{ url_for('store.my_notifications') }}">Obavijesti</a>
 								</div>
 							</div>
 						</li>
