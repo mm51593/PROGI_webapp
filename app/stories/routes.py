@@ -100,19 +100,25 @@ def pull_file(file):
 
 @stories.route('/story/validation/<story_id>', methods=['GET', 'POST'])
 def validation(story_id):
-    #TODO: osiguraj da samo admin moze na ovaj URL
+
     validationstory = Story.query.filter_by(id=story_id).first()
     story_title = validationstory.title
     story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
     if request.method == 'POST':
-        if request.form['prihvPonudaPric'] == 'Prihvati':
-            validationstory.validated = True
-            db.session.add(validationstory)
-            db.session.commit()
-        elif request.form.get['odbPonudaPric'] == 'Odbaci':
-            db.session.delete(validationstory)
-            db.session.commit()
+        if current_user.id == 1:
+            if request.form.get('prihvPonudaPric', False) == 'Prihvati':
+                validationstory.validated = True
+                db.session.add(validationstory)
+                db.session.commit()
+                return redirect(url_for('story.display_story_list_validation'))
+            elif request.form.get('odbPonudaPric', False) == 'Odbaci':
+                db.session.delete(validationstory)
+                db.session.commit()
+                return redirect(url_for('story.display_story_list_validation'))
+        else:
+            abort(404)
     return render_template("prihvat_price.html", title="Prihvat price", story_title=story_title, story_elements=story_elements, elem_len=len(story_elements))
+
 
 @stories.route('/stories')
 def display_story_list():

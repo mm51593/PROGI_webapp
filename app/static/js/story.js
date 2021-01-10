@@ -100,4 +100,5 @@ function addTextField(type)
     reevaluateNames();
 }
 
-resetCounter()
+resetCounter();
+

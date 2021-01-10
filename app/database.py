@@ -21,6 +21,12 @@ class User(db.Model, UserMixin):
     def __repr__(self):     # output of print()
         return f"User('{self.id}', '{self.username}', '{self.email}', '{self.password}')"
 
+class Banned(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50), nullable=False)
+
+    def __repr__(self):     # output of print()
+        return f"Banned('{self.id}', '{self.email}')"
 
 class Story(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -88,7 +94,7 @@ class Comment(db.Model):
     def __repr__(self):     # output of print()
           return f"Comment('{self.id}', '{self.text}', '{self.author}', '{self.timestamp}', '{self.id_story}' )"
 
-#class OrderModel(db.Model):  #primary key nedostaje
+# class OrderModel(db.Model):  #primary key nedostaje
 #    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
 #    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
 #    material = db.Column(db.String(20), nullable=False)
