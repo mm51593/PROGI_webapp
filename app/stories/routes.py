@@ -102,3 +102,11 @@ def validation(story_id):
             db.session.delete(validationstory)
             db.session.commit()
     return render_template("prihvat_price.html", title="Prihvat price")
+
+@stories.route('/stories')
+def display_story_list():
+    return render_template('price.html', stories=Story.query.filter_by(validated=True).all())
+
+@stories.route('/storiesforvalidation')
+def display_story_list_validation():
+    return render_template('prihvat_price_list.html', stories=Story.query.filter_by(validated=False).all())
