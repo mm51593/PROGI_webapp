@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, request
 from app.authentication.forms import RegistrationForm, LoginForm
-from app.database import User, db, bcrypt, Profile
+from app.database import User, db, bcrypt, Profile, PodaciPlacanje
 from flask_login import login_user, current_user, logout_user
 
 authentication = Blueprint('auth', __name__)
@@ -19,6 +19,9 @@ def register():
         db.session.commit()
         profile = Profile(id=user.id)
         db.session.add(profile)
+        db.session.commit()
+        Podaci = PodaciPlacanje(id = user.id)
+        db.session.add(Podaci)
         db.session.commit()
         return redirect(url_for('auth.login'))
     else:

@@ -15,6 +15,8 @@ from app import database
 from app import routes
 from app.authentication.routes import authentication
 from app.profile.routes import profile
+from app.checkout.routes import checkout
 
 application.register_blueprint(authentication)
 application.register_blueprint(profile)
+application.register_blueprint(checkout)

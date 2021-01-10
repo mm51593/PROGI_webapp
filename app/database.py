@@ -34,3 +34,20 @@ class Profile(db.Model):
 
     def __repr__(self):
         return f"Profile('{self.Ime}', '{self.Prezime}', '{self.Datum_rodenja}', '{self.Zivotopis}')"
+
+class PodaciPlacanje(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    Ime_Prezime = db.Column(db.String(40), nullable = False)
+    email = db.Column(db.String(50), nullable=False)
+    Adresa = db.Column(db.String(30), nullable=False)
+    Grad = db.Column(db.String(20), nullable=False)
+    Ime_Kartica = db.Column(db.String(40), default = "Pero Perić" , nullable = False)
+    Broj_Kartica = db.Column(db.String(20), default = "1111-2222-3333-4444" , nullable = False)
+    Datum_Isteka = db.Column(db.String(10), default = "studeni" , nullable = False)
+    Drzava = db.Column(db.String(20), default = "Hrvatska" , nullable = False)
+    Postanski_Broj = db.Column(db.String(8), default = "10000" , nullable = False)
+    Godina_Isteka = db.Column(db.String(5), default = "2022" , nullable = False)
+    CVV = db.Column(db.String(3), default = "352" , nullable = False)
+
+    def __repr__(self):
+        return f"PodaciPlacanje('{self.Ime_Prezime}', '{self.email}', '{self.Ime_Kartica}', '{self.Broj_Kartica}')"
