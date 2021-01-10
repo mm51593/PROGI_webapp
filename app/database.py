@@ -21,6 +21,12 @@ class User(db.Model, UserMixin):
     def __repr__(self):     # output of print()
         return f"User('{self.id}', '{self.username}', '{self.email}', '{self.password}')"
 
+class Banned(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50), nullable=False)
+
+    def __repr__(self):     # output of print()
+        return f"Banned('{self.id}', '{self.email}')"
 
 class Story(db.Model):
     id = db.Column(db.Integer, primary_key=True)

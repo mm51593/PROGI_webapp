@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, request, url_for, send_from_directory, abort
-from app.database import  User, db
+from app.database import  User, db, Banned
 from flask_login import current_user
 
 admin = Blueprint('admin', __name__)
@@ -29,3 +29,13 @@ def admin_userlist():
         return render_template('lista_korisnika.html', title='Lista korisnika', users=users) #TODO: PROMIJENI HYPERLINK U HTMLU DA EKSLI IDE NA USER PAGE
     else:
         abort(404)
+
+@admin.route('/admin/ban/<user_id>')
+def admin_ban(user_id):
+    banuser = User.query.filter_by(id=user_id).first()
+    banneduser = Banned(email=banuser.email)
+    db.session.delete(banuser)
+    db.session.commit()
+    db.session.add(banneduser)
+    db.session.commit()
+    return redirect(url_for('admin.admin_userlist'))
