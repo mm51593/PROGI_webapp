@@ -35,7 +35,7 @@
     <div id="divider"></div>
 
     <div class="flex-container-column">
-        <form class="ostaviKomentar" id="idKomentar" target="_self">
+        <form method="POST" class="ostaviKomentar" id="idKomentar" target="_self">
             <fieldset class="ostaviKomentar ostaviKomentar-fieldset">
                 <textarea form="idKomentar" name="objavitiKomentar" placeholder="Upisite komentar"
                     id="komentarText"></textarea>
@@ -44,5 +44,13 @@
             </fieldset>
         </form>
     </div>
+
+    {% for comment in comments %}
+    <div>
+        <p> {{ comment.author }} </p>
+        <p> {{ comment.timestamp }} </p>
+        <p> {{ comment.text }} </p>
+    </div>
+    {% endfor %}
 
 {% endblock %}
