@@ -39,17 +39,17 @@
             <fieldset class="ostaviKomentar ostaviKomentar-fieldset">
                 <textarea form="idKomentar" name="objavitiKomentar" placeholder="Upisite komentar"
                     id="komentarText"></textarea>
-                <input type="submit" id="submitKom" value="Objavi komentar">
-                <input type="reset" id="resetKom" value="Odustani">
+                <input class="grid-btn grid-ponuda-sing komentar-btn-padding" type="submit" id="submitKom" value="Objavi komentar">
+                <input class="grid-btn grid-ponuda-sing komentar-btn-padding" type="reset" id="resetKom" value="Odustani">
             </fieldset>
         </form>
     </div>
 
     {% for comment in comments %}
-    <div>
-        <p> {{ comment.author_name }} </p>
-        <p> {{ comment.timestamp.strftime('%d.%m.%Y %H:%M') }} </p>
-        <p> {{ comment.text }} </p>
+    <div class="objavljen-komentar">
+        <p class="komentar-userName"> {{ comment.author_name }} </p>
+        <p class="komentar-date"> {{ comment.timestamp.strftime('%d.%m.%Y %H:%M') }} </p>
+        <p class="komentar-data"> {{ comment.text }} </p>
     </div>
     {% endfor %}
 

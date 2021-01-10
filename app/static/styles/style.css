@@ -809,6 +809,35 @@ span.price {
 	padding-bottom: unset;
 }
 
+.objavljen-komentar {
+	display: grid;
+	grid-template-areas: "user user user user date"
+						 "kom kom kom kom kom";
+	border: 1px solid black;
+	background-color: #ffffff;
+	margin: 5px 8px;
+	padding: 8px;
+}
+
+.komentar-userName {
+	font-weight: bold;
+	grid-area: user;
+}
+
+.komentar-date {
+	grid-area: date;
+	font-style: italic;
+	justify-self: end;
+}
+
+.komentar-data {
+	grid-area: kom;
+}
+
+.komentar-btn-padding {
+	padding-top: 0.7vh;
+}
+
 .w3-table,.w3-table-all{border-collapse:collapse;border-spacing:0;width:100%;display:table}.w3-table-all{border:1px solid #ccc}
 .w3-bordered tr,.w3-table-all tr{border-bottom:1px solid #ddd}.w3-striped tbody tr:nth-child(even){background-color:#f1f1f1}
 .w3-table-all tr:nth-child(odd){background-color:#fff}.w3-table-all tr:nth-child(even){background-color:#f1f1f1}
