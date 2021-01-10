@@ -100,7 +100,7 @@ def validation(story_id):
 
 @stories.route('/stories')
 def display_story_list():
-    return render_template('price.html', stories=Story.query.filter_by(validated=False).all())
+    return render_template('price.html', stories=Story.query.filter_by(validated=True).all())
 
 @stories.route('/storiesforvalidation')
 def display_story_list_validation():

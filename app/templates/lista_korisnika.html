@@ -8,27 +8,19 @@
         <table class="w3-table-all w3-centered">
             <thead>
                 <tr class="w3-orange">
-                    <th>Naziv 1</th>
-                    <th>Naziv 2</th>
-                    <th>Naziv 3</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>LINK</th>
                 </tr>
             </thead>
             <tbody>
+            {% for user in users %}
                 <tr>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td><a href="{{url_for('story.validation', story_id=1)}}" id="userLink" title="Otvorite stranicu usera">Link na usera</a></td>
                 </tr>
-                <tr>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                </tr>
-                <tr>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
