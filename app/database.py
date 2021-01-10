@@ -80,8 +80,8 @@ class Order(db.Model):
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    text = db.Column(db.String(140))
-    author = db.Column(db.String(32))
+    text = db.Column(db.String(140), nullable=False)
+    author_id = db.Column(db.Integer, nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False)
     id_story = db.Column(db.Integer, db.ForeignKey('story.id'), nullable=False)
     

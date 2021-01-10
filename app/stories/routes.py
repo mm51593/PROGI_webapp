@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, request, url_for, send_from_directory, abort
-from app.database import Story, StoryContent, db
+from app.database import Story, StoryContent, Comment, User, db
 from datetime import datetime
 from app import application
 from flask_login import current_user
@@ -67,16 +67,25 @@ def add_content():
 def display_story(story_id):
     try:
         story_title = Story.query.filter_by(id=story_id).first().title
-        comments = Comment.query.filter_by(id_story=story_id).order_by(Comment.timestamp.desc()).all()     #
+        comments = Comment.query.filter_by(id_story=story_id).order_by(Comment.timestamp.desc()).all()
+        for comment in comments:
+            if comment.author_id == 0:
+                comment.author_name = 'Anonymous'
+            else:
+                comment.author_name = User.query.filter_by(id=comment.author_id).first().username
     except AttributeError:
         return abort(404)
     
     if request.method == "POST":                                    ## ??????????                      
         if len(request.form['objavitiKomentar']) > 0:
-            comment = Comment(text=request.form['objavitiKomentar'], author=current_user.username, timestamp = datetime.now(), id_story=story_id)  
+            if current_user.is_authenticated:
+                author_id = current_user.id
+            else:
+                author_id = 0
+            comment = Comment(text=request.form['objavitiKomentar'], author_id=author_id, timestamp = datetime.now(), id_story=story_id)
             db.session.add(comment)
             db.session.commit()
-            return redirect(url_for('stories.display_story'))    ##   request.url umjesto stories.display_story ??
+            return redirect(url_for('story.display_story', story_id=story_id))    ##   request.url umjesto stories.display_story ??
                               
     story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
     print(story_elements)
