@@ -3,12 +3,16 @@
 
 {% block content %}
 
+<!--
+
 <script src="../static/js/cycler.js"></script>
 <script src="../static/js/main.js"></script>
 
 <span hidden id="elem-count">2</span>
-<span hidden class="img-cycle" id="elem-cycle-0">./static/img/pocetna.png</span>
-<span hidden class="vid-cycle" id="elem-cycle-1">./static/vid/video.mp4</span>
+<span hidden class="img-cycle" id="elem-cycle-0">../static/img/pocetna.png</span>
+<span hidden class="vid-cycle" id="elem-cycle-1">../static/vid/video.mp4</span>
+
+-->
 
 <div class="regErrMsg"></div>
 
@@ -44,9 +48,9 @@
                                     <br/>
                                     <span class="specSpan">Ostalo:</span><br/>
                             </div>
-                            <form id="addToCart" method="POST" class="cart-func">
+                            <form id="addToCart" method="POST" class="cart-func form-deselect">
                                 <div class="elem-chooser flex-element-tekst">
-                                    <label for="materijalChoose"><b class="tekstHeader">Odaberite materijal</b></label><br/>
+                                    <label class="label-ponistavanje" for="materijalChoose"><b class="tekstHeader">Odaberite materijal</b></label><br/>
                                     <select id="materijaliChoose" name="materijaliChoose" size="1" onchange="updatePrice()" required>
                                         <option disabled selected value>--odaberite--</option>
                                             {% for material in materials %}
