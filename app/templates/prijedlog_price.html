@@ -9,11 +9,13 @@
     <button class="btn-ctrl" name="addVideo" onclick="addTextField('video');">Dodaj video</button>
 </span>
 
+<div class="regErrMsg"></div>
+
 <div class="main-container">
     <div class="container">
-    <form method="post" enctype="multipart/form-data">
-        <label id="naslov-prijedlog">Naslov priče
-            <input type="text" name="story-title" required>
+    <form method="post" enctype="multipart/form-data" onsubmit="return checkData()">
+        <label class="label-ponistavanje" id="naslov-prijedlog">Naslov priče
+            <input id="prijedlogNaslovPrice" type="text" name="story-title" required>
         </label>
         <ol id="InputList"></ol>
         <div class="prijedlog-btn-holder">

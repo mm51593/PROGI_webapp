@@ -3,11 +3,13 @@
 
 {% block content %}
 
+<div class="regErrMsg"></div>
+
 <form onsubmit="return checkPswd()" method="post" action="">
 	{{ form.hidden_tag() }}
 	<div class="container sec-main-container">
 		{{ form.username.label() }}
-		{{ form.username(placeholder="Unesi korisničko ime") }}
+		{{ form.username(placeholder="Unesi korisničko ime", id="user") }}
 		{% if form.username.errors %}
 			<div>
 				{% for error in form.username.errors %}
@@ -17,7 +19,7 @@
 		{% endif %}
 
 		{{ form.email.label() }}
-		{{ form.email(placeholder="Unesi e-mail adresu") }}
+		{{ form.email(placeholder="Unesi e-mail adresu", id="mail") }}
 		{% if form.email.errors %}
 			<div>
 				{% for error in form.email.errors %}
@@ -27,7 +29,7 @@
 		{% endif %}
 
 		{{ form.password.label() }}
-		{{ form.password(placeholder="Unesi lozinku") }}
+		{{ form.password(placeholder="Unesi lozinku", id="regPswd") }}
 		{% if form.password.errors %}
 			<div>
 				{% for error in form.password.errors %}
@@ -37,7 +39,7 @@
 		{% endif %}
 
 		{{ form.confirm_password.label() }}
-		{{ form.confirm_password(placeholder="Ponovno unesi lozinku") }}
+		{{ form.confirm_password(placeholder="Ponovno unesi lozinku",  id="reRegPswd") }}
 		{% if form.confirm_password.errors %}
 		<div>
 			{% for error in form.confirm_password.errors %}

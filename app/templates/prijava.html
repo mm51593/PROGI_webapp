@@ -2,19 +2,21 @@
 {% set active_page = "prijava" %}
 
 {% block content %}
+
+<div class="regErrMsg"></div>
 	
-<form method="post">
+<form method="post" onsubmit="return checkLogin()">
 	{{ form.hidden_tag() }}
 
 	<div class="container sec-main-container">
 		{% if error %}
-		<div>
-			{{ error }}
-		</div>
+		<script>
+			appendError("{{error}}");
+		</script>
 
 		{% endif %}
 		{{ form.email.label }}
-		{{ form.email(placeholder="Unesi e-mail adresu") }}
+		{{ form.email(placeholder="Unesi e-mail adresu", id="loginMail") }}
 		{% if form.email.errors %}
 			<div>
 				{% for error in form.email.errors %}
@@ -24,7 +26,7 @@
 		{% endif %}
 
 		{{ form.password.label }}
-		{{ form.password(placeholder="Unesi lozinku") }}
+		{{ form.password(placeholder="Unesi lozinku", id="loginLoz") }}
 		{% if form.password.errors %}
 			<div>
 				{% for error in form.password.errors %}
