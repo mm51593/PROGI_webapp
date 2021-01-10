@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(60), nullable=False)
 
     def getNotifications(self):
-        return ModelNotification.query.filter_by(receiver_id=self.id).all()
+        return ModelNotification.query.filter_by(receiver_id=self.id, seen=False).all()
 
     def __repr__(self):     # output of print()
         return f"User('{self.id}', '{self.username}', '{self.email}', '{self.password}')"

@@ -104,7 +104,7 @@ def model_approval():
             for mat in application.config['MATERIALS']:
                 MP = ModelPrice(model_id=model_id, material=mat, price=request.form[mat])
                 db.session.add(MP)
-            notif = ModelNotification(model_id=model_id, receiver=model.creator_id)
+            notif = ModelNotification(model_id=model_id, receiver_id=model.creator_id)
             db.session.add(notif)
         try:
             db.session.commit()
@@ -113,3 +113,13 @@ def model_approval():
         return redirect(url_for('store.model_approval'))
     orders = Model.query.filter_by(approved=False)
     return render_template('prihvat_makete.html', orders=orders, materials=application.config['MATERIALS'])
+
+@store.route('/obavijesti')
+def my_notifications():
+    notifs = ModelNotification.query.filter_by(receiver_id=current_user.id).order_by(ModelNotification.time_create.desc()).all()
+    models = []
+    for notif in notifs:
+        models.append(Model.query.filter_by(id=notif.model_id).first())
+        notif.seen = True
+    db.session.commit()
+    return render_template('makete_prikaz.html', title='Obavijesti', models=models)
