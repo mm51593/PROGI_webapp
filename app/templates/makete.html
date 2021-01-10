@@ -43,9 +43,9 @@
                                     <br/>
                                     <span class="specSpan">Ostalo:</span><br/>
                             </div>
-                            <form id="addToCart" method="POST" class="cart-func">
+                            <form id="addToCart" method="POST" class="cart-func form-deselect">
                                 <div class="elem-chooser flex-element-tekst">
-                                    <label for="materijalChoose"><b class="tekstHeader">Odaberite materijal</b></label><br/>
+                                    <label class="label-ponistavanje" for="materijalChoose"><b class="tekstHeader">Odaberite materijal</b></label><br/>
                                     <select id="materijaliChoose" name="materijaliChoose" size="1" onchange="updatePrice()" required>
                                         <option disabled selected value>--odaberite--</option>
                                             {% for material in materials %}
