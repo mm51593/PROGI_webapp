@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, redirect, request, flash
+from sqlalchemy import exc
 from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice
 from app.store.forms import ModelForm, MaterialForm, ModelPriceForm
 from app import application
@@ -89,3 +90,24 @@ def model_Instance(model_id):
         else:
             return redirect(url_for("auth.login"))
     return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, materials=materials, dimensions=model_dimensions, colors=model_colors)
+
+@store.route('/prihvatimaketu', methods=['GET', 'POST'])
+def model_approval():
+    if request.method == 'POST':
+        print(request.form)
+        model_id = request.form['order_id']
+        model = Model.query.filter_by(id=model_id).first()
+        if request.form['response'] == 'Odbij':
+            db.session.delete(model)
+        else:
+            model.approved = True
+            for mat in application.config['MATERIALS']:
+                MP = ModelPrice(model_id=model_id, material=mat, price=request.form[mat])
+                db.session.add(MP)
+        try:
+            db.session.commit()
+        except exc.SQLAlchemyError:
+            pass
+        return redirect(url_for('store.model_approval'))
+    orders = Model.query.filter_by(approved=False)
+    return render_template('prihvat_makete.html', orders=orders, materials=application.config['MATERIALS'])

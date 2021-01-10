@@ -7,6 +7,7 @@ application.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dummy.db'
 application.config['SECRET_KEY'] = 'secret-key'
 application.config['STORY_LOCATION'] = 'static/story_files'
 application.config['MODEL_LOCATION'] = 'static/model_files'
+application.config['MATERIALS'] = ['Drvo', 'Aluminij', 'Željezo']
 login_manager = LoginManager(application)
 
 

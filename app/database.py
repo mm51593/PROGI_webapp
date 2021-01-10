@@ -63,7 +63,7 @@ class ModelPhoto(db.Model):
             return f"ModelPhoto('{self.image_name}', '{self.video_name}', '{self.model_id}')"
 
 class ModelPrice(db.Model): 
-    model_id = db.Column(db.Integer, db.ForeignKey('model.id'))
+    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), primary_key=True)
     material = db.Column(db.String(20), nullable=False, primary_key=True)    # composite key?, static type for material?
     price = db.Column(db.Integer, nullable=False)    # need to add restriction for price>0    
 
