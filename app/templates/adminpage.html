@@ -4,25 +4,20 @@
 {% block content %}
 
 <section id="main">
-    <div class="fourth-main-container center">
-      <div class="cont-style">
-          <a class="kor-pregled admin-link">
-              <div class="pre-elem"><a href="{{url_for('admin.admin_userlist')}}" id="userlistLink" title="Otvorite userlist">USERLIST</a></div>
-          </a>
-      </div>
+    <h1 class="admin-title">Admin - Kontrolna ploča</h1>
+    <div class="sec-main-container">
+        <div class="admin-link-hold">
+            <a href="{{url_for('admin.admin_userlist')}}" class="admin-link">
+                <div title="Otvorite userlist" id="userlistLink" class="admin-link">USERLIST</div>
+            </a>
+        </div>
 
-      <div class="cont-style">
-          <a class="kor-pregled admin-link">
-              <div class="pre-elem"><a href="{{url_for('story.display_story_list_validation')}}" id="prihvatpriceLink" title="Otvorite prihvat price">Prihvat price</a></div>
-          </a>
-      </div>
-
-      <div class="cont-style">
-          <a class="kor-pregled admin-link">
-              <div class="pre-elem">Poveznica 3</div>
-          </a>
-      </div>
+        <div class="admin-link-hold">
+            <a href="{{url_for('story.display_story_list_validation')}}" class="admin-link">
+                <div title="Otvorite userlist" id="userlistLink" class="admin-link">Prihvat price</div>
+            </a>
+        </div>
     </div>
-  </section>
+</section>
 
 {% endblock %}
