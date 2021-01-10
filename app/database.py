@@ -63,7 +63,7 @@ class ModelPhoto(db.Model):
             return f"ModelPhoto('{self.image_name}', '{self.video_name}', '{self.model_id}')"
 
 class ModelPrice(db.Model): 
-    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), primary_key=True)
+    model_id = db.Column(db.Integer, db.ForeignKey('model.id'))
     material = db.Column(db.String(20), nullable=False, primary_key=True)    # composite key?, static type for material?
     price = db.Column(db.Integer, nullable=False)    # need to add restriction for price>0    
 
@@ -76,7 +76,17 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):     # output of print()
-          return f"Order('{self.id}', '{self.time_created}', '{self.user_id}')" 
+          return f"Order('{self.id}', '{self.time_created}', '{self.user_id}')"
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.String(140))
+    author = db.Column(db.String(32))
+    timestamp = db.Column(db.DateTime, nullable=False)
+    id_story = db.Column(db.Integer, db.ForeignKey('story.id'), nullable=False)
+    
+    def __repr__(self):     # output of print()
+          return f"Comment('{self.id}', '{self.text}', '{self.author}', '{self.timestamp}', '{self.id_story}' )"
 
 #class OrderModel(db.Model):  #primary key nedostaje
 #    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
