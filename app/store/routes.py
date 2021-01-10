@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, redirect, request, flash
 from sqlalchemy import exc
-from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice
+from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice, ModelNotification
 from app.store.forms import ModelForm, MaterialForm, ModelPriceForm
 from app import application
 from flask_login import login_user, current_user, logout_user
@@ -104,6 +104,8 @@ def model_approval():
             for mat in application.config['MATERIALS']:
                 MP = ModelPrice(model_id=model_id, material=mat, price=request.form[mat])
                 db.session.add(MP)
+            notif = ModelNotification(model_id=model_id, receiver=model.creator_id)
+            db.session.add(notif)
         try:
             db.session.commit()
         except exc.SQLAlchemyError:

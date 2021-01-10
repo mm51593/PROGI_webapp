@@ -15,7 +15,9 @@
     {% endif %}
 	</head>
 
-
+	{% if current_user.is_authenticated %}
+		{% set notifications = current_user.getNotifications() %}
+	{% endif %}
 
 	<body>
 
@@ -40,7 +42,10 @@
 						</li>
 						<li {% if active_page == "makete" %} class="current" {% endif %}>
 							<div class="dropdown">
-								<button class="dropbtn"><a href="{{ url_for('store.makete_prikaz_Instance') }}">Makete</a></button>
+								<button class="dropbtn"><a href="{{ url_for('store.makete_prikaz_Instance') }}">Makete
+								{% if notifications %}
+									<img src="../static/img/exclamation-16.ico">
+								{% endif %}</a></button>
 								<div class="dropdown-content">
 									<a href="{{ url_for('store.new_model') }}">Naruči</a>
 									<a href="{{ url_for('store.model_approval') }}">Prihvati</a>

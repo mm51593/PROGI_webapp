@@ -18,6 +18,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
 
+    def getNotifications(self):
+        return ModelNotification.query.filter_by(receiver_id=self.id).all()
+
     def __repr__(self):     # output of print()
         return f"User('{self.id}', '{self.username}', '{self.email}', '{self.password}')"
 
@@ -93,6 +96,13 @@ class Comment(db.Model):
     
     def __repr__(self):     # output of print()
           return f"Comment('{self.id}', '{self.text}', '{self.author}', '{self.timestamp}', '{self.id_story}' )"
+
+class ModelNotification(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    receiver_id = db.Column(db.Integer, nullable=False)
+    model_id = db.Column(db.Integer, nullable=False)
+    time_create = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    seen = db.Column(db.Boolean, nullable=False, default=False)
 
 # class OrderModel(db.Model):  #primary key nedostaje
 #    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
