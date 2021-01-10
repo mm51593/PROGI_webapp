@@ -85,7 +85,7 @@ def validation(story_id):
     story_title = validationstory.title
     story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
     if request.method == 'POST':
-        if current_user.id == 1:
+        if current_user.id != 1:
             if request.form['prihvPonudaPric'] == 'Prihvati':
                 validationstory.validated = True
                 db.session.add(validationstory)
@@ -100,7 +100,7 @@ def validation(story_id):
 
 @stories.route('/stories')
 def display_story_list():
-    return render_template('price.html', stories=Story.query.filter_by(validated=True).all())
+    return render_template('price.html', stories=Story.query.filter_by(validated=False).all())
 
 @stories.route('/storiesforvalidation')
 def display_story_list_validation():
