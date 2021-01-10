@@ -722,6 +722,13 @@ button:hover {
 	padding: 0 16px;
 	box-sizing: border-box;
 }
+
+.col-33 {
+	-ms-flex: 5%;
+	flex: 5%;
+	padding: 0 16px;
+	box-sizing: border-box;
+}
   
 label {
 	margin-top: 10px;
@@ -734,6 +741,18 @@ label {
 	font-size: 24px;
 }
   
+.ddmain-button {
+	background-color: #FF5500;
+	color: white;
+	padding: 12px;
+	margin: 10px 0;
+	border: none;
+	width: 100%;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 17px;
+}
+
 .btn {
 	background-color: #FF5500;
 	color: white;
@@ -746,6 +765,15 @@ label {
 	font-size: 17px;
 }
   
+textarea {
+	width: 100%;   
+	margin: 8px 0;
+	padding: 12px 20px;   
+	display: inline-block;   
+	border: 2px solid #ff5500;
+	box-sizing: border-box;
+}
+
 .btn:hover {
 	background-color: #ff5e01;
 }
