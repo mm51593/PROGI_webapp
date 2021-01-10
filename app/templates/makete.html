@@ -9,6 +9,8 @@
 <span hidden class="img-cycle" id="elem-cycle-0">./static/img/pocetna.png</span>
 <span hidden class="vid-cycle" id="elem-cycle-1">./static/vid/video.mp4</span>
 
+<div class="regErrMsg"></div>
+
 <section id="main">
     <div class="container main-container">
         <article id="main-col">
@@ -37,10 +39,10 @@
                             </div>
                             <div class="cart-func">
                                 <div class="elem-chooser flex-element-tekst">
-                                    <label for="materijalChoose"><b class="tekstHeader">Odaberite
+                                    <label class="label-ponistavanje" for="materijalChoose"><b class="tekstHeader">Odaberite
                                             materijal</b></label><br />
                                     <select id="materijaliChoose" size="1" onchange="updatePrice()">
-                                        <option disabled selected value>--odaberite--</option>
+                                        <option disabled selected value="noneSelected">--odaberite--</option>
                                         <option value="1">Aluminij</option>
                                         <option value="2">Zeljezo</option>
                                         <option value="3">Drvo</option>
@@ -49,7 +51,7 @@
                                         <option id="data-3" hidden>200 BAM</option>
                                     </select>
                                 </div>
-                                <input type="button" class="main-button subBtn add-to-cart"
+                                <input onclick="return checkMaketa()" type="button" class="main-button subBtn add-to-cart"
                                     value="Dodaj u kosaricu"><br />
                             </div>
                         </div>

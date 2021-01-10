@@ -40,6 +40,11 @@ header li {
 	padding: 0 20px 0 20px;
 }
 
+header .pull-left {
+	float: right;
+	display: inline;
+}
+
 header #branding {
 	float: left;
 }
@@ -565,8 +570,19 @@ button:hover {
 }
 
 .regErrMsg {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
 	opacity: 0;
-	transition: ease-in 0.25s;
+	transition: ease-in 0.15s;
+	text-align: center;
+	border:rgb(146, 6, 6) 1px solid;
+	background-color: rgb(255, 103, 103);
+	width: 30vw;
+	margin: auto;
+	color: white;
+	font-weight: bold;
 }
 
 .kor-page-title {
@@ -579,6 +595,7 @@ button:hover {
 	border: 1px solid #cccccc;
 	background-color: #e6e6e6;
 	margin: 10px;
+	min-height: 65vh;
 	padding: 10px;
 }
 
@@ -674,3 +691,4 @@ button:hover {
 .mrg-top {
 	margin-top: 15px;
 }
+

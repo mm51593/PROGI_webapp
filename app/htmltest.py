@@ -66,4 +66,20 @@ def korracun_izmjena():
 def korracun_prikaz():
     return render_template("korracun_prikaz.html", main_title="Korisnicki racun - prikaz")
 
+@application.route("/cart.html")
+def cart():
+    return render_template("cart.html", main_title="Košarica")
+
+@application.route("/checkout.html")
+def checkout():
+    return render_template("checkout.html", main_title="Kupovina")
+
+@application.route("/prihvat_price_list.html")
+def prihvat_price_list():
+    return render_template("/prihvat_price_list.html", main_title="Lista predlozenih prica")
+
+@application.route("/transakcije.html")
+def trans():
+    return render_template("/transakcije.html", main_title="Lista predlozenih prica")
+
 application.run(debug=True)

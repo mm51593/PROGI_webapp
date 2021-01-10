@@ -5,43 +5,42 @@
 
 <script src="static/js/cycler.js"></script>
 
-	<span hidden id="elem-count">2</span>
-	<span hidden class="img-cycle" id="elem-cycle-0">./static/img/pocetna.png</span>
-	<span hidden class="vid-cycle" id="elem-cycle-1">./static/vid/video.mp4</span>
+<span hidden id="elem-count">4</span>
+<span hidden class="img-cycle" id="elem-cycle-0">./static/img/maketaimg.jpg</span>
+<span hidden class="text-cycle" id="elem-cycle-1">Et anim labore incididunt veniam fugiat proident id incididunt duis
+	cillum sint sint
+	eu quis. Culpa excepteur minim ex nulla dolore velit est. Sint nisi sit non cupidatat magna consequat
+	reprehenderit voluptate laboris. Ut aliqua dolore ea esse adipisicing minim in. Pariatur aliqua sunt id aliquip
+	velit ad labore. Nulla ea in nulla exercitation excepteur nisi tempor enim voluptate nisi. Mollit sit qui mollit
+	irure officia esse velit elit ad aliqua laboris aliqua eu excepteur.</span>
+<span hidden class="text-cycle" id="elem-cycle-2">Ipsum labore pariatur ullamco et anim voluptate amet consequat minim
+	aliquip
+	incididunt fugiat commodo. Quis esse voluptate voluptate pariatur. Exercitation cupidatat sunt cillum sit esse
+	occaecat aliqua et culpa sint nostrud. Aliqua nostrud dolor consequat quis ut ullamco aliquip ut. Lorem commodo
+	irure ea sit anim aute reprehenderit nisi ipsum. Esse nostrud labore enim esse qui esse fugiat consequat
+	occaecat Lorem veniam quis commodo. Officia esse irure enim non.</span>
+<span hidden class="vid-cycle" id="elem-cycle-3">./static/vid/video.mp4</span>
 
-	<section id="main">
-		<div class="container main-container">
-			<article id="main-col">
-				<ul id="services" class="mrg-top">
-					<li id="ponuda/cijena-1">
-						<div class="drzacPrijedloga">
-							<h3>Priča 1</h3>
-							<div class="grid-ponuda">
-								<div class="grid-ponuda-tekst">
-									Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
-									Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat. Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore commodo.
-									Aliostrud velit Lorem consequat exercitation nulla. Dolore ad cillum anim aute. Occaecat amet cupidatat commodo adipisicing tempor duis dolor ad pariatur nisi fugiat aliquip consectetur. Reprehenderit est aliquip sit excepteur consequat.
-								</div>
-								<div class="grid-ponuda-img flex-container-column flex-video-img">
-									<div class="flex-contain-story">
-										<div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
-										<div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
-											<div class="img-prop-holder" id="elem-holdncycle">
-											</div>
-										</div>
-										<div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
-									</div>
-									<!-- <img class="flex-element" id="maketaSlika"
-											src="./static/img/maketaimg.jpg"> -->
-								</div>
-								<div class="grid-btn grid-ponuda-prihvati" onclick="">Prihvati</div>
-								<div class="grid-btn grid-ponuda-odbij" onclick="return rejectOffer(1)">Odbij</div>
+<section id="main">
+	<div class="container main-container">
+		<article id="main-col">
+			<form class="cont-style" method="POST" target="./prihvat_price_list.html">
+					<p class="naslov-move" id="naslovPrice"> Naslov price </p>
+					<div class="flex-contain-story">
+						<div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
+						<div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
+							<div class="img-prop-holder" id="elem-holdncycle">
 							</div>
 						</div>
-					</li>
-				</ul>
-			</article>
-		</div>
-	</section>
+						<div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
+					</div>
+					<div class="flex-acc-rej">
+						<input type="submit" value="Prihvati" name="prihvPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return acceptOfferRed()" />
+						<input type="submit" value="Odbaci" name="odbPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return rejectOfferRed()" />
+					</div>
+			</form>
+		</article>
+	</div>
+</section>
 
 {% endblock %}
