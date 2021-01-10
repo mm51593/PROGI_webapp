@@ -62,15 +62,25 @@ def add_content():
     return render_template("prijedlog_price.html", title="Zahtjev priče", error=ret_error)
 
 
-@stories.route('/story/<story_id>')
+
+@stories.route('/story/<story_id>', methods=['GET', 'POST'])      ## ?????
 def display_story(story_id):
     try:
         story_title = Story.query.filter_by(id=story_id).first().title
+        comments = Comment.query.filter_by(id_story=story_id).order_by(Comment.timestamp.desc()).all()     #
     except AttributeError:
         return abort(404)
+    
+    if request.method == "POST":                                    ## ??????????                      
+        if len(request.form['objavitiKomentar']) > 0:
+            comment = Comment(text=request.form['objavitiKomentar'], author=current_user.username, timestamp = datetime.now(), id_story=story_id)  
+            db.session.add(comment)
+            db.session.commit()
+            return redirect(url_for('stories.display_story'))    ##   request.url umjesto stories.display_story ??
+                              
     story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
     print(story_elements)
-    return render_template("citavaPrica.html", title="Prica", story_title=story_title, story_elements=story_elements, elem_len=len(story_elements))
+    return render_template("citavaPrica.html", title="Prica", story_title=story_title, story_elements=story_elements, comments=comments, elem_len=len(story_elements)) ##my
 
 
 @stories.route('/story_element/<file>')
@@ -82,22 +92,13 @@ def pull_file(file):
 def validation(story_id):
     #TODO: osiguraj da samo admin moze na ovaj URL
     validationstory = Story.query.filter_by(id=story_id).first()
-    story_title = validationstory.title
-    story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
+
     if request.method == 'POST':
-        if request.form['prihvPonudaPric'] == 'Prihvati':
-            validationstory.validated = True
+        if request.form.get("Prihvati"):
+            validationstory.validated = "True"
             db.session.add(validationstory)
             db.session.commit()
-        elif request.form.get['odbPonudaPric'] == 'Odbaci':
+        elif request.form.get("Odbij"):
             db.session.delete(validationstory)
             db.session.commit()
-    return render_template("prihvat_price.html", title="Prihvat price", story_title=story_title, story_elements=story_elements, elem_len=len(story_elements))
-
-@stories.route('/stories')
-def display_story_list():
-    return render_template('price.html', stories=Story.query.filter_by(validated=True).all())
-
-@stories.route('/storiesforvalidation')
-def display_story_list_validation():
-    return render_template('prihvat_price_list.html', stories=Story.query.filter_by(validated=False).all())
+    return render_template("prihvat_price.html", title="Prihvat price")
