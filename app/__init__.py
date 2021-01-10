@@ -17,8 +17,10 @@ from app.authentication.routes import authentication
 from app.stories.routes import stories
 from app.index.routes import index
 from app.store.routes import store
+#from app.cart.routes import cart
 
 application.register_blueprint(authentication)
 application.register_blueprint(stories)
 application.register_blueprint(index)
 application.register_blueprint(store)
+#application.register_blueprint(cart)

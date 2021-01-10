@@ -60,12 +60,12 @@ class ModelPhoto(db.Model):
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
 
     def __repr__(self):     # output of print()
-            return f"ModelPhoto('{self.image_name}', '{self.video_name}', '{self.model_id}')"
+            return f"ModelPhoto('{self.image_name}', '{self.model_id}')"
 
 class ModelPrice(db.Model): 
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'))
-    material = db.Column(db.String(20), nullable=False, primary_key=True)    # composite key?, static type for material?
-    price = db.Column(db.Integer, nullable=False)    # need to add restriction for price>0    
+    material = db.Column(db.String(20), nullable=False, primary_key=True)
+    price = db.Column(db.Integer, nullable=False) 
 
     def __repr__(self):     # output of print()
           return f"ModelPrice('{self.model_id}', '{self.material}', '{self.price}')" 
@@ -96,3 +96,19 @@ class Comment(db.Model):
 #
 #    def __repr__(self):     # output of print()
 #        return f"OrderModel('{self.order_id}', '{self.model_id}', '{self.material}', '{self.price}')"
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):     # output of print()
+          return f"Order('{self.id}', '{self.buyer_id}')"
+
+class CartModel(db.Model):  #primary key nedostaje
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), primary_key=True, nullable=False)
+    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
+    material = db.Column(db.String(20), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):     # output of print()
+        return f"OrderModel('{self.cart_id}', '{self.model_id}', '{self.material}', '{self.price}')"
