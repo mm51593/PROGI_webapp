@@ -33,10 +33,9 @@
 						<li {% if active_page == "pocetna" %} class="current" {% endif %}><a href="{{ url_for('index.homepage')}}">Početna</a></li>
 						<li {% if active_page == "price" %} class="current" {% endif %}>
 							<div class="dropdown">
-								<button class="dropbtn"><a href="price.html">Priče</a></button>
+								<button class="dropbtn"><a href="{{ url_for('story.display_story_list') }}">Priče</a></button>
 								<div class="dropdown-content">
 									<a href="{{ url_for('story.add_content') }}">Predloži</a>
-									<a href="prihvat_price.html">Prihvati</a>
 								</div>
 							</div>
 						</li>
