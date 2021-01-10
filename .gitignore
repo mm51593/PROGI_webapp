@@ -4,6 +4,7 @@ app/stories/__pycache__/
 app/store/__pycache__/
 app/index/__pycache__/
 app/admin/__pycache__/
+app/profile/__pycache__/
 env
 .idea
 /dokumentacija/*.aux

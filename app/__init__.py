@@ -9,6 +9,8 @@ application.config['STORY_LOCATION'] = 'static/story_files'
 application.config['MODEL_LOCATION'] = 'static/model_files'
 application.config['MATERIALS'] = ['Drvo', 'Aluminij', 'Željezo']
 login_manager = LoginManager(application)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'
 
 
 from app import database
@@ -18,9 +20,11 @@ from app.stories.routes import stories
 from app.index.routes import index
 from app.store.routes import store
 from app.admin.routes import admin
+from app.profile.routes import profile
 
 application.register_blueprint(authentication)
 application.register_blueprint(stories)
 application.register_blueprint(index)
 application.register_blueprint(store)
 application.register_blueprint(admin)
+application.register_blueprint(profile)

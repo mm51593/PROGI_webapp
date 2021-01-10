@@ -3,6 +3,7 @@ from flask_bcrypt import Bcrypt
 from datetime import datetime
 from app import application, login_manager
 from flask_login import UserMixin
+import datetime
 db = SQLAlchemy(application)
 bcrypt = Bcrypt(application)
 
@@ -112,3 +113,18 @@ class ModelNotification(db.Model):
 #
 #    def __repr__(self):     # output of print()
 #        return f"OrderModel('{self.order_id}', '{self.model_id}', '{self.material}', '{self.price}')"
+
+class Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    Ime = db.Column(db.String(25), nullable = True)
+    Private_ime = db.Column(db.Boolean, default = False)
+    Prezime = db.Column(db.String, nullable = True)
+    Private_prezime = db.Column(db.Boolean, default = False)
+    Datum_rodenja = db.Column(db.DateTime, nullable = True, default = datetime.datetime.utcnow)
+    Private_Datum = db.Column(db.Boolean, default = False)
+    Zivotopis = db.Column(db.String(300), nullable = True)
+    Private_Zivotopis = db.Column(db.Boolean, default = False)
+
+    def __repr__(self):
+        return f"Profile('{self.Ime}', '{self.Prezime}', '{self.Datum_rodenja}', '{self.Zivotopis}')"
+

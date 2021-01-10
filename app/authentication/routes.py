@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, abort
 from app.authentication.forms import RegistrationForm, LoginForm
-from app.database import User, db, bcrypt, Banned
+from app.database import User, db, bcrypt, Profile, Banned
 from flask_login import login_user, current_user, logout_user
 
 authentication = Blueprint('auth', __name__)
@@ -12,6 +12,7 @@ def register():
         return redirect('/')
     reg_form = RegistrationForm()
     if reg_form.validate_on_submit():
+        print("success")
         hashed_pass = bcrypt.generate_password_hash(reg_form.password.data)
         user = User(username=reg_form.username.data, email=reg_form.email.data, password=hashed_pass)
         is_banned = Banned.query.filter_by(email=reg_form.email.data).first()
@@ -19,7 +20,12 @@ def register():
             return "YOU GOT BANNED"
         db.session.add(user)
         db.session.commit()
+        profile = Profile(id=user.id)
+        db.session.add(profile)
+        db.session.commit()
         return redirect(url_for('auth.login'))
+    else:
+        print(reg_form.errors)
     return render_template("registracija.html", title="Registriraj se", form=reg_form)
 
 
