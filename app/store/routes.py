@@ -76,6 +76,7 @@ def model_Instance(model_id):
     model_dimensions = model.dimension.split(',')
     model_colors = model.colors.split(',')
     materials = ModelPrice.query.filter_by(model_id=model.id).all()
+    model_creator = User.query.filter_by(id=model.creator_id).first()
     #ModelPrice(model_id=model.id, material=m_form.material.data, price=price)
     #model = Model(name=form.name.data, description=form.description.data, creator_id=current_user) #dodati image_name
     #db.session.add(model_price)
@@ -89,7 +90,7 @@ def model_Instance(model_id):
             print(model_id, request.form.get("materijaliChoose"))
         else:
             return redirect(url_for("auth.login"))
-    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, materials=materials, dimensions=model_dimensions, colors=model_colors)
+    return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, materials=materials, dimensions=model_dimensions, colors=model_colors, model_creator=model_creator)
 
 @store.route('/prihvatimaketu', methods=['GET', 'POST'])
 def model_approval():

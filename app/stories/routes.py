@@ -66,7 +66,8 @@ def add_content():
 @stories.route('/story/<story_id>', methods=['GET', 'POST'])      ## ?????
 def display_story(story_id):
     try:
-        story_title = Story.query.filter_by(id=story_id).first().title
+        story = Story.query.filter_by(id=story_id).first()
+        story_author = User.query.filter_by(id=story.author_id).first()
         comments = Comment.query.filter_by(id_story=story_id).order_by(Comment.timestamp.desc()).all()
         for comment in comments:
             if comment.author_id == 0:
@@ -89,7 +90,7 @@ def display_story(story_id):
                               
     story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
     print(story_elements)
-    return render_template("citavaPrica.html", title="Prica", story_title=story_title, story_elements=story_elements, comments=comments, elem_len=len(story_elements)) ##my
+    return render_template("citavaPrica.html", title="Prica", story=story, story_author=story_author, story_elements=story_elements, comments=comments, elem_len=len(story_elements)) ##my
 
 
 @stories.route('/story_element/<file>')

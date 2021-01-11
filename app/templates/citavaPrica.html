@@ -20,7 +20,9 @@
     <section id="main">
         <div class="sec-main-container full-story-cont">
             <h1 class="page-title"></h1>
-            <p class="naslov-move" id="naslovPrice">{{ story_title }}</p>
+            <p class="naslov-move" id="naslovPrice">{{ story.title }}</p>
+            <h2 class="naslov-move"><a href="{{ url_for('profile.User_Profil', id=story_author.id) }}">{{ story_author.username }}</a></h2>
+            <h3 class="naslov-move">{{ story.time_created.strftime('%d.%m.%Y %H:%M') }}</h3>
             <div class="flex-contain-story">
                 <div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
                 <div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
@@ -47,7 +49,15 @@
 
     {% for comment in comments %}
     <div class="objavljen-komentar">
-        <p class="komentar-userName"> {{ comment.author_name }} </p>
+        <p class="komentar-userName">
+            {% if comment.author_id != 0 %}
+                <a href="{{ url_for('profile.User_Profil', id=comment.author_id) }}">
+            {% endif %}
+            {{ comment.author_name }}
+            {% if comment.author_id != 0 %}
+            </a>
+            {% endif %}
+        </p>
         <p class="komentar-date"> {{ comment.timestamp.strftime('%d.%m.%Y %H:%M') }} </p>
         <p class="komentar-data"> {{ comment.text }} </p>
     </div>

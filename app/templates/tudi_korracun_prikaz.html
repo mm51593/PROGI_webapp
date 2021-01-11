@@ -22,7 +22,11 @@
                 {% if profile.Private_Datum %}
                     <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>privatno</div>
                 {% else %}
-                    <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>{{ profile.Datum_rodenja.strftime('%d.%m.%Y.') }}</div>
+                    <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>
+                        {% if profile.Datum_rodenja %}
+                            {{ profile.Datum_rodenja.strftime('%d.%m.%Y.') }}
+                        {% endif %}
+                    </div>
                 {% endif %}
                 <div class="flex-pre pre-elem">
                     <div class="kor-pre-desc">

@@ -115,13 +115,13 @@ class ModelNotification(db.Model):
 
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    Ime = db.Column(db.String(25), nullable = True)
+    Ime = db.Column(db.String(25), nullable = True, default="")
     Private_ime = db.Column(db.Boolean, default = False)
-    Prezime = db.Column(db.String, nullable = True)
+    Prezime = db.Column(db.String, nullable = True, default="")
     Private_prezime = db.Column(db.Boolean, default = False)
     Datum_rodenja = db.Column(db.DateTime, nullable = True)
     Private_Datum = db.Column(db.Boolean, default = False)
-    Zivotopis = db.Column(db.String(300), nullable = True)
+    Zivotopis = db.Column(db.String(300), nullable = True, default="")
     Private_Zivotopis = db.Column(db.Boolean, default = False)
 
     def __repr__(self):
