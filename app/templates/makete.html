@@ -33,6 +33,7 @@
                                 <b class="tekstHeader">Specifikacije</b><br/>
                                     <span class="specSpan">Cijena:  </span>
                                     <span id="prices">
+                                        <span class="emph" value="">Odaberite materijal</span>
                                     {% for material in materials %}
                                         <span value="{{ material.material }}" hidden>{{ material.price }}</span>
                                     {% endfor %}
@@ -49,7 +50,7 @@
                             </div>
                             <div class="flex-element flex-element-tekst flex-element-specifikacije">
                                 <b class="tekstHeader">Autor</b><br/>
-                                    <span class="specSpan"><a href="{{ url_for('profile.User_Profil', id=model_creator.id) }}">{{ model_creator.username }}</a></span>
+                                    <span class="specSpan"><a id="priceLink" href="{{ url_for('profile.User_Profil', id=model_creator.id) }}">{{ model_creator.username }}</a></span>
                             </div>
                             <form id="addToCart" method="POST" class="cart-func form-deselect">
                                 <div class="elem-chooser flex-element-tekst">
