@@ -6,10 +6,10 @@ admin = Blueprint('admin', __name__)
 
 @admin.route('/admin', methods=['GET', 'POST'])
 def admin_index():
-    if current_user.id == 1:
-        return render_template('adminpage.html')
-    else:
-        abort(404)
+    if current_user.is_authenticated:
+        if current_user.id == 1:
+            return render_template('adminpage.html')
+    abort(404)
 
 
 # @admin.route('/admin/transakcije')
