@@ -56,6 +56,14 @@
 						<li {% if active_page == "prijava" %} class="current" {% endif %}><a href="{{ url_for('auth.login') }}">Prijavi se</a><li>
 						<li {% if active_page == "registracija" %} class="current" {% endif %}><a href="{{ url_for('auth.register') }}">Registriraj se</a> </li>
 						{% else %}
+                        <li {% if active_page == "profile" %} class="current" {% endif %}>
+							<div class="dropdown">
+								<button class="dropbtn"><a href="{{ url_for('profile.User_Profil', id=current_user.id) }}">Moj profil</a></button>
+								<div class="dropdown-content">
+									<a id="decolour-nav" href="{{ url_for('profile.Change') }}">Uredi</a>
+								</div>
+							</div>
+						</li>
 						<li><a href="{{ url_for('auth.logout') }}">Odjavi se</a> </li>
 						{% endif %}
 					</ul>

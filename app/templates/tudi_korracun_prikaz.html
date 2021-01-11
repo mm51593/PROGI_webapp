@@ -1,26 +1,26 @@
 {% extends "layout.html" %}
-{% set active_page = "tudi_korracun_prikaz" %}
+{% set active_page = "profile" %}
 
 {% block content %}
 
 <section id="main">
     <div class="main-container container">
         <div class="cont-style" method="POST">
-            <h1 class="kor-page-title">Korisnicki racun</h1>
+            <h1 class="kor-page-title">{{ user.username }}</h1>
 
             <div class="kor-pregled">
-                {% if profile.PrivateIme %}
-                    <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>Private</div>
+                {% if profile.Private_ime %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>privatno</div>
                 {% else %}
                     <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>{{ profile.Ime }}</div>
                 {% endif %}
-                {% if profile.PrivatePrezime %}
-                    <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>Private</div>
+                {% if profile.Private_prezime %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>privatno</div>
                 {% else %}
                     <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>{{ profile.Prezime }}</div>
                 {% endif %}
-                {% if profile.PrivateDatum %}
-                    <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>Private</div>
+                {% if profile.Private_Datum %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>privatno</div>
                 {% else %}
                     <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>{{ profile.Datum_rodenja.strftime('%d.%m.%Y.') }}</div>
                 {% endif %}
@@ -28,13 +28,16 @@
                     <div class="kor-pre-desc">
                         Životopis:
                     </div>
-                    {% if profile.PrivateZivotopis %}
-                        <div class="kor-pre-info">Private</div>
+                    {% if profile.Private_Zivotopis %}
+                        <div class="kor-pre-info">privatno</div>
                     {% else %}
                         <div class="kor-pre-info">{{ profile.Zivotopis }}</div>
                     {% endif %}
                 </div>
             </div>
+            {% if user.id == current_user.id %}
+                <a class="ctrl-prijedlog mrg-left-42 btn-ctrl" href="{{ url_for('profile.Change') }}">Uredi profil</a>
+            {% endif %}
         </div>
     </div>
 </section>
