@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, redirect, request, flash
 from sqlalchemy import exc
-from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice, ModelNotification
+from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice, Cart, CartModel, Order, ModelNotification
 from app.store.forms import ModelForm, MaterialForm, ModelPriceForm
 from app import application
 from flask_login import login_user, current_user, logout_user
@@ -8,26 +8,6 @@ from uuid import uuid4
 from os import path, listdir
 
 store = Blueprint('store', __name__)
-
-#static model for testing
-
-#models = [{
-#        'name': 'Maketa 1',
-#        'description': 'blablabla bla',
-#        'creator_id': '1'
-#        'price': '100',
-#        'image_file': '',
-#        'material': ''
-#    },
-#    {
-#        'name': 'Maketa 2',
-#        'description': 'blablabla blagragra',
-#        'creator_id': '2'
-#        'price': '100',
-#        'image_file': '',
-#        'material': ''
-#    }
-#]
 
 @store.route('/admin_post_page', methods=['GET', 'POST']) #potrebno dodati stranicu za admina
 #@login_required
@@ -77,16 +57,28 @@ def model_Instance(model_id):
     model_colors = model.colors.split(',')
     materials = ModelPrice.query.filter_by(model_id=model.id).all()
     model_creator = User.query.filter_by(id=model.creator_id).first()
-    #ModelPrice(model_id=model.id, material=m_form.material.data, price=price)
-    #model = Model(name=form.name.data, description=form.description.data, creator_id=current_user) #dodati image_name
-    #db.session.add(model_price)
-    #db.session.commit()
-    #print(materials)
     if request.method == "POST":
         if current_user.is_authenticated:
-            if current_user.cart == None:
-                current_user.cart = []
-            #current_user.cart.append("")
+            cart_user = Cart.query.filter_by(buyer_id=current_user.id).first()
+            if cart_user == None:
+                cart_user = Cart(buyer_id=current_user.id)
+                db.session.add(cart_user)
+                try:
+                    db.session.commit()
+                except exc.SQLAlchemyError:
+                    pass
+            material_choice = request.form.get("materijaliChoose")
+            item_price = ModelPrice.query.filter_by(model_id=model.id, material=material_choice).first().price
+            if (request.form.get("materijaliChoose")) == None:
+                pass
+            else:
+                cart_m_user = CartModel(cart_id=cart_user.id, model_id=model.id, material=material_choice, price=item_price)
+                db.session.add(cart_m_user)
+                try:
+                    db.session.commit()
+                    #flash('Maketa dodana u košaricu!', 'succes')
+                except exc.SQLAlchemyError:
+                    pass    
             print(model_id, request.form.get("materijaliChoose"))
         else:
             return redirect(url_for("auth.login"))

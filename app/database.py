@@ -69,12 +69,13 @@ class ModelPhoto(db.Model):
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
 
     def __repr__(self):     # output of print()
-            return f"ModelPhoto('{self.image_name}', '{self.video_name}', '{self.model_id}')"
+            return f"ModelPhoto('{self.image_name}', '{self.model_id}')"
 
 class ModelPrice(db.Model): 
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'))
-    material = db.Column(db.String(20), nullable=False, primary_key=True)    # composite key?, static type for material?
-    price = db.Column(db.Integer, nullable=False)    # need to add restriction for price>0    
+    material = db.Column(db.String(20), nullable=False) #ne moze biti primary
+    price = db.Column(db.Integer, nullable=False) 
+    id = db.Column(db.Integer, primary_key=True)
 
     def __repr__(self):     # output of print()
           return f"ModelPrice('{self.model_id}', '{self.material}', '{self.price}')" 
@@ -127,3 +128,19 @@ class Profile(db.Model):
     def __repr__(self):
         return f"Profile('{self.Ime}', '{self.Prezime}', '{self.Datum_rodenja}', '{self.Zivotopis}')"
 
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):     # output of print()
+          return f"Cart('{self.id}', '{self.buyer_id}')"
+
+class CartModel(db.Model):
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), nullable=False)
+    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
+    material = db.Column(db.String(20), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+
+    def __repr__(self):     # output of print()
+        return f"CartModel('{self.cart_id}', '{self.model_id}', '{self.material}', '{self.price}')"

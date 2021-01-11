@@ -11,6 +11,7 @@ application.config['MATERIALS'] = ['Drvo', 'Aluminij', 'Željezo']
 login_manager = LoginManager(application)
 login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'
+application.jinja_env.filters['zip'] = zip
 
 
 from app import database
@@ -21,6 +22,7 @@ from app.index.routes import index
 from app.store.routes import store
 from app.admin.routes import admin
 from app.profile.routes import profile
+from app.cart.routes import cart
 
 application.register_blueprint(authentication)
 application.register_blueprint(stories)
@@ -28,3 +30,4 @@ application.register_blueprint(index)
 application.register_blueprint(store)
 application.register_blueprint(admin)
 application.register_blueprint(profile)
+application.register_blueprint(cart)

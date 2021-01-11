@@ -5,6 +5,7 @@ app/store/__pycache__/
 app/index/__pycache__/
 app/admin/__pycache__/
 app/profile/__pycache__/
+app/cart/__pycache__/
 env
 .idea
 /dokumentacija/*.aux

@@ -3,64 +3,25 @@
 
 {% block content %}
 
-<div class="main-row">
-  <div class="col-50">
-    <div class="container">
-      
-        <div class="row">
-          <div class="col-50">
-            <h3>Podaci za dostavu</h3>
-            <label for="fname"> Ime i prezime</label>
-              <input type="text" id="fname" name="firstname" placeholder="Pero Perić">
-            <label for="email"> Email</label>
-              <input type="text" id="email" name="email" placeholder="pero.peric@example.com">
-            <label for="adr"> Adresa</label>
-              <input type="text" id="adr" name="address" placeholder="Unska 3">
-            <label for="city"> Grad</label>
-              <input type="text" id="city" name="city" placeholder="Zagreb">
-
-            <div class="row">
-              <div class="col-50">
-                <label for="state"> Država</label>
-                  <input type="text" id="state" name="state" placeholder="Hrvatska">
-              </div>
-              <div class="col-50">
-                <label for="zip"> Poštanski broj</label>
-                  <input type="text" id="zip" name="zip" placeholder="10000">
-              </div>
-            </div>
-          </div>
-
-          <div class="col-50">
-            <h3>Podaci za plaćanje</h3>
-            <label for="fname"> Prihvatljive kartice</label>
-            <div class="icon-container">
-              <img src="../static/img/credit_cards.png" alt="Kartice" style="width:70%">
-            </div>
-            <label for="cname"> Ime na kartici</label>
-              <input type="text" id="cname" name="cardname" placeholder="Pero Perić">
-            <label for="ccnum"> Broj kartice</label>
-              <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-            <label for="expmonth"> Datum isteka</label>
-              <input type="text" id="expmonth" name="expmonth" placeholder="Studeni">
-            <div class="row">
-              <div class="col-50">
-                <label for="expyear"> Godina isteka</label>
-                <input type="text" id="expyear" name="expyear" placeholder="2022">
-              </div>
-              <div class="col-50">
-                <label for="cvv"> CVV</label>
-                  <input type="text" id="cvv" name="cvv" placeholder="352">
-              </div>
-            </div>
-          </div>
-          
-        </div>
-        <input type="submit" value="Završni s kupnjom" class="btn">
-      </form>
-    </div>
-  </div>
-  </div>
-</div>
+<section id="main">
+	<div class="container">
+    <article id="main-col">
+      <h1 class="page-title"></h1>
+      <ul id="services">
+        {% for content,model in contents|zip(models) %}
+            <a href="{{ url_for('store.model_Instance', model_id=content.model_id) }}" id="priceLink" title="Otvorite citavu pricu">
+                <li>
+                    <h3>{{ model.name }}</h3>
+                    <p>{{ model.description }}</p>
+                    <p>Materijal: {{ content.material }}</p>
+                    <h4>Cijena: {{ content.price }}</h4>
+                </li>
+            </a>
+        {% endfor %}    
+        <a href="checkout.html"><input type="submit" value="Kupi proizvode" class="btn"></a>
+      </ul>
+    </article>
+	</div>
+</section>
 
 {% endblock %}
