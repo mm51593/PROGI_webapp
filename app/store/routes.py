@@ -109,10 +109,13 @@ def model_approval():
 
 @store.route('/obavijesti')
 def my_notifications():
-    notifs = ModelNotification.query.filter_by(receiver_id=current_user.id).order_by(ModelNotification.time_create.desc()).all()
-    models = []
-    for notif in notifs:
-        models.append(Model.query.filter_by(id=notif.model_id).first())
-        notif.seen = True
-    db.session.commit()
+    if current_user.is_authenticated:
+        notifs = ModelNotification.query.filter_by(receiver_id=current_user.id).order_by(ModelNotification.time_create.desc()).all()
+        models = []
+        for notif in notifs:
+            models.append(Model.query.filter_by(id=notif.model_id).first())
+            notif.seen = True
+        db.session.commit()
+    else:
+        return redirect(url_for("auth.login"))
     return render_template('makete_prikaz.html', title='Obavijesti', models=models)
