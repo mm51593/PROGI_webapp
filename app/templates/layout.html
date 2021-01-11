@@ -66,6 +66,7 @@
 								</div>
 							</div>
 						</li>
+						<li {% if active_page == "cart" %} class="current" {% endif %}><a href="{{ url_for('cart.cart_Instance')}}"><img src="../static/img/shopping_cart.png" width="25px" height="25px"></a></li>
 						<li><a href="{{ url_for('auth.logout') }}">Odjavi se</a> </li>
 						{% endif %}
 					</ul>
