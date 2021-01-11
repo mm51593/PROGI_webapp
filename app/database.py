@@ -64,7 +64,7 @@ class ModelPhoto(db.Model):
 
 class ModelPrice(db.Model): 
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'))
-    material = db.Column(db.String(20), nullable=False, primary_key=True)
+    material = db.Column(db.String(20), nullable=False, primary_key=True) #ne moze biti primary
     price = db.Column(db.Integer, nullable=False) 
 
     def __repr__(self):     # output of print()
@@ -104,8 +104,8 @@ class Cart(db.Model):
     def __repr__(self):     # output of print()
           return f"Order('{self.id}', '{self.buyer_id}')"
 
-class CartModel(db.Model):  #primary key nedostaje
-    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), primary_key=True, nullable=False)
+class CartModel(db.Model):
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), primary_key=True, nullable=False)  #composite primary
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
     material = db.Column(db.String(20), nullable=False)
     price = db.Column(db.Integer, nullable=False)

@@ -9,6 +9,7 @@ application.config['STORY_LOCATION'] = 'static/story_files'
 application.config['MODEL_LOCATION'] = 'static/model_files'
 application.config['MATERIALS'] = ['Drvo', 'Aluminij', 'Željezo']
 login_manager = LoginManager(application)
+application.jinja_env.filters['zip'] = zip
 
 
 from app import database

@@ -8,11 +8,11 @@
     <article id="main-col">
       <h1 class="page-title"></h1>
       <ul id="services">
-        {% for content in contents %}
-            <a href="{{ url_for('store.model_Instance', model_id=contents.model_id) }}" id="priceLink" title="Otvorite citavu pricu">
+        {% for content,model in contents|zip(models) %}
+            <a href="{{ url_for('store.model_Instance', model_id=content.model_id) }}" id="priceLink" title="Otvorite citavu pricu">
                 <li>
-                    <h3>Standardna maketa 1</h3>
-                    <p>Laboris laboris irure sit aliquip eiusmod Lorem eiusmod aliquip cupidatat eiusmod ipsum sit cillum. Irure quis reprehenderit eu in consectetur mollit. Laborum dolor consectetur ea id ea eiusmod consectetur pariatur pariatur reprehenderit labore anim.</p>
+                    <h3> {{ model.name }}</h3>
+                    <p> {{ model.description }}</p>
                     <h4>Cijena: {{ content.price }}</h4>
                 </li>
             </a>

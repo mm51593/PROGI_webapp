@@ -11,8 +11,12 @@ cart = Blueprint('cart', __name__)
 @store.route('/cart', methods=['GET', 'POST'])
 #@login_required
 def cart_Instance():
-    
+    models = []
     cart_inst = Cart.query.filter_by(buyer_id=current_user.id).first().id
     contents = CartModel.query.filter_by(cart_id=cart_inst).all()
-    models = Model.query.filter_by(id=contents.model_id).all()
-    return render_template('cart.html', title='Košarica', contents=contents, models=models)
+    for content in contents:
+        model_elem = Model.query.filter_by(id=contents.model_id).first()
+        models.append(model_elem)
+    #model_elem = Model.query.filter_by(id=contents.model_id).all()
+    model_len = len(models)
+    return render_template('cart.html', title='Košarica', contents=contents, models=models, length=model_len)
