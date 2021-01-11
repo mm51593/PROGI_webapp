@@ -12,11 +12,18 @@ cart = Blueprint('cart', __name__)
 #@login_required
 def cart_Instance():
     models = []
-    cart_inst = Cart.query.filter_by(buyer_id=current_user.id).first().id
-    contents = CartModel.query.filter_by(cart_id=cart_inst).all()
+    cart_inst = Cart.query.filter_by(buyer_id=current_user.id).first()
+    if cart_inst == None:
+        cart_inst = Cart(buyer_id=current_user.id)
+        db.session.add(cart_inst)
+        try:
+            db.session.commit()
+        except exc.SQLAlchemyError:
+            pass   
+    contents = CartModel.query.filter_by(cart_id=cart_inst.id).all()
     for content in contents:
-        model_elem = Model.query.filter_by(id=contents.model_id).first()
+        model_elem = Model.query.filter_by(id=content.model_id).first()
         models.append(model_elem)
     #model_elem = Model.query.filter_by(id=contents.model_id).all()
-    model_len = len(models)
-    return render_template('cart.html', title='Košarica', contents=contents, models=models, length=model_len)
+    #model_len = len(models)
+    return render_template('cart.html', title='Košarica', contents=contents, models=models)

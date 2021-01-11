@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, redirect, request, flash
 from sqlalchemy import exc
-from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice
+from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice, Cart, CartModel, Order
 from app.store.forms import ModelForm, MaterialForm, ModelPriceForm
 from app import application
 from flask_login import login_user, current_user, logout_user
@@ -83,8 +83,28 @@ def model_Instance(model_id):
     #print(materials)
     if request.method == "POST":
         if current_user.is_authenticated:
-            if current_user.cart == None:
-                current_user.cart = []
+            cart_user = Cart.query.filter_by(buyer_id=current_user.id).first()
+            if cart_user == None:
+                cart_user = Cart(buyer_id=current_user.id)
+                db.session.add(cart_user)
+                try:
+                    db.session.commit()
+                except exc.SQLAlchemyError:
+                    pass
+            material_choice = request.form.get("materijaliChoose")
+            item_price = ModelPrice.query.filter_by(model_id=model.id, material=material_choice).first().price
+            if (request.form.get("materijaliChoose")) == None:
+                pass
+            else:
+                cart_m_user = CartModel(cart_id=cart_user.id, model_id=model.id, material=material_choice, price=item_price)
+                db.session.add(cart_m_user)
+                try:
+                    db.session.commit()
+                    #flash('Maketa dodana u košaricu!', 'succes')
+                except exc.SQLAlchemyError:
+                    pass    
+            #if current_user.cart == None:
+            #    current_user.cart = []
             #current_user.cart.append("")
             print(model_id, request.form.get("materijaliChoose"))
         else:
