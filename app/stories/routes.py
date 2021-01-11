@@ -99,13 +99,14 @@ def pull_file(file):
     return send_from_directory(route, file)
 
 
-@stories.route('/story/validation/<story_id>', methods=['GET', 'POST'])
+@stories.route('/storyvalidation/<story_id>', methods=['GET', 'POST'])
 def validation(story_id):
 
     validationstory = Story.query.filter_by(id=story_id).first()
     story_title = validationstory.title
     story_elements = sorted(StoryContent.query.filter_by(story_id=story_id), key=lambda x: x.ordinal_number)
     if request.method == 'POST':
+        print(request.form)
         if current_user.id == 1:
             if request.form.get('prihvPonudaPric', False) == 'Prihvati':
                 validationstory.validated = True

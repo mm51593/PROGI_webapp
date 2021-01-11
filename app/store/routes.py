@@ -65,7 +65,7 @@ def new_model():
 @store.route('/makete_prikaz', methods=['GET', 'POST'])
 #@login_required
 def makete_prikaz_Instance():
-    models = Model.query.all()
+    models = Model.query.filter_by(approved=True)
     return render_template('makete_prikaz.html', title='Makete', models=models)
 
 @store.route('/makete/<int:model_id>', methods=['GET', 'POST'])
