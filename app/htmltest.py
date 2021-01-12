@@ -78,4 +78,8 @@ def checkout():
 def prihvat_price_list():
     return render_template("/prihvat_price_list.html", main_title="Lista predlozenih prica")
 
+@application.route("/transakcije.html")
+def trans():
+    return render_template("/transakcije.html", main_title="Lista predlozenih prica")
+
 application.run(debug=True)

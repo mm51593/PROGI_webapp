@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, redirect, url_for, abort
+from flask import Blueprint, render_template, redirect, url_for, request
 from app.authentication.forms import RegistrationForm, LoginForm
-from app.database import User, db, bcrypt, Profile, Banned
+from app.database import User, db, bcrypt, Profile, PodaciPlacanje, Banned
 from flask_login import login_user, current_user, logout_user
 
 authentication = Blueprint('auth', __name__)
@@ -23,6 +23,9 @@ def register():
         profile = Profile(id=user.id)
         db.session.add(profile)
         db.session.commit()
+        Podaci = PodaciPlacanje(id = user.id)
+        db.session.add(Podaci)
+        db.session.commit()
         return redirect(url_for('auth.login'))
     else:
         print(reg_form.errors)
@@ -39,7 +42,7 @@ def login():
         user = User.query.filter_by(email=login_form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, login_form.password.data):
             login_user(user, remember=login_form.remember.data)
-            return redirect('/')
+            return redirect(request.referrer)
         else:
             login_error = "Neispravna E-mail adresa ili lozinka."
             print(login_error)

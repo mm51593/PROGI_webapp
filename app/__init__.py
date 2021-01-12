@@ -23,6 +23,7 @@ from app.store.routes import store
 from app.admin.routes import admin
 from app.profile.routes import profile
 from app.cart.routes import cart
+from app.checkout.routes import checkout
 
 application.register_blueprint(authentication)
 application.register_blueprint(stories)
@@ -31,3 +32,4 @@ application.register_blueprint(store)
 application.register_blueprint(admin)
 application.register_blueprint(profile)
 application.register_blueprint(cart)
+application.register_blueprint(checkout)

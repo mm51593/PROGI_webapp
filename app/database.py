@@ -144,3 +144,19 @@ class CartModel(db.Model):
 
     def __repr__(self):     # output of print()
         return f"CartModel('{self.cart_id}', '{self.model_id}', '{self.material}', '{self.price}')"
+
+class PodaciPlacanje(db.Model):
+    use_id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String(70), nullable = True)
+    email = db.Column(db.String(50), nullable=True)
+    address = db.Column(db.String(30), nullable=True)
+    country = db.Column(db.String(20), nullable = True)
+    city = db.Column(db.String(20), nullable=True)
+    zip_code = db.Column(db.String(8), nullable = True)
+    card_full_name = db.Column(db.String(40), nullable = True)
+    card_number = db.Column(db.String(20), nullable = True)
+    card_expiry = db.Column(db.String(7), nullable = True)
+    card_CVC = db.Column(db.String(3), nullable = True)
+
+    def __repr__(self):
+        return f"PodaciPlacanje('{self.Ime_Prezime}', '{self.email}', '{self.Ime_Kartica}', '{self.Broj_Kartica}')"
