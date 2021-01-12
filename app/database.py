@@ -146,7 +146,7 @@ class CartModel(db.Model):
         return f"CartModel('{self.cart_id}', '{self.model_id}', '{self.material}', '{self.price}')"
 
 class PodaciPlacanje(db.Model):
-    use_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(70), nullable = True)
     email = db.Column(db.String(50), nullable=True)
     address = db.Column(db.String(30), nullable=True)

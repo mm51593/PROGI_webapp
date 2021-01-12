@@ -6,9 +6,9 @@ from app.database import PodaciPlacanje, db
 checkout = Blueprint('checkout', __name__)
 
 @checkout.route('/checkout', methods=['GET','POST'])
-def Checkout():
+def checkout_page():
     form = CheckoutForm()
-    billing_info = PodaciPlacanje.query.filter_by(id=current_user.id).first()
+    billing_info = PodaciPlacanje.query.filter_by(user_id=current_user.id).first()
     if form.validate_on_submit():
         if current_user.is_authenticated:
             billing_info.full_name = form.fname.data
@@ -20,7 +20,7 @@ def Checkout():
             billing_info.card_expiry = form.expmonth.data
             billing_info.country = form.state.data
             billing_info.zip_code = form.zip.data
-            billing_info.CVC = form.cvv.data
+            billing_info.card_CVC = form.cvv.data
             db.session.commit()
         flash ('Uspješno obavljena kupnja', 'success')
         return redirect(url_for('/'))
@@ -35,7 +35,7 @@ def Checkout():
             form.expmonth.data = billing_info.card_expiry
             form.state.data = billing_info.country
             form.zip.data = billing_info.zip_code
-            form.cvv.data = billing_info.CVV
+            form.cvv.data = billing_info.card_CVC
     else:
         print(form.errors)
     return render_template('checkout.html',title = "Podaci za placanje", form = form)
