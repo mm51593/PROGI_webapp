@@ -252,7 +252,7 @@ button:hover {
 
 #komentarText {
 	resize: none;
-	width: 100%;
+	width: 99.9%;
 	height: 70px;
 	box-sizing: border-box;
 }
@@ -894,6 +894,40 @@ span.price {
 #decolour-nav:hover {
 	color: white;
 	font-weight: bold;
+}
+
+.kor-btn {
+	text-align: center;
+	padding-top: 1.6vh;
+	text-decoration: none;
+}
+
+.story-relative {
+	position: relative;
+}
+
+.story-user-details {
+	position: absolute;
+	background-color: #f0e8e8;
+	border: #cccccc solid 1px;
+	font-size: 0.8em;
+	padding: 5px;
+	left: 85%;
+	bottom: 70%;
+}
+
+.textarea-ponistavanje {
+	margin: 1px;
+	padding: unset;
+}
+
+.emph {
+	font-weight: bold;
+}
+
+.naslov-black {
+	text-align: center;
+	color: black;
 }
 
 .w3-table,.w3-table-all{border-collapse:collapse;border-spacing:0;width:100%;display:table}.w3-table-all{border:1px solid #ccc}

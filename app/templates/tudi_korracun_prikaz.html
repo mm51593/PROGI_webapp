@@ -40,7 +40,9 @@
                 </div>
             </div>
             {% if user.id == current_user.id %}
-                <a class="ctrl-prijedlog mrg-left-42 btn-ctrl" href="{{ url_for('profile.Change') }}">Uredi profil</a>
+                <div class="btnHolder">
+                    <a class="kor-btn ctrl-prijedlog" href="{{ url_for('profile.Change') }}">Uredi profil</a>
+                </div>
             {% endif %}
         </div>
     </div>
