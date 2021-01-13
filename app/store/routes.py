@@ -1,9 +1,9 @@
-from flask import Blueprint, render_template, redirect, url_for, redirect, request, flash
+from flask import Blueprint, render_template, url_for, redirect, request, session
 from sqlalchemy import exc
-from app.database import User, db, bcrypt, Model, ModelPhoto, ModelPrice, Cart, CartModel, Order, ModelNotification
-from app.store.forms import ModelForm, MaterialForm, ModelPriceForm
+from app.database import User, db, Model, ModelPhoto, ModelPrice, Cart, CartModel, ModelNotification
+from app.store.forms import ModelForm
 from app import application
-from flask_login import login_user, current_user, logout_user
+from flask_login import current_user
 from uuid import uuid4
 from os import path, listdir
 
@@ -81,7 +81,11 @@ def model_Instance(model_id):
                     pass    
             print(model_id, request.form.get("materijaliChoose"))
         else:
-            return redirect(url_for("auth.login"))
+            if not session.get('cart', None):
+                session['cart'] = []
+            material_choice = request.form.get("materijaliChoose")
+            item_price = ModelPrice.query.filter_by(model_id=model_id, material=material_choice).first().price
+            session['cart'].append(dict(model_id=model_id, material=material_choice, price=item_price))
     return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, materials=materials, dimensions=model_dimensions, colors=model_colors, model_creator=model_creator)
 
 @store.route('/prihvatimaketu', methods=['GET', 'POST'])
@@ -119,3 +123,4 @@ def my_notifications():
     else:
         return redirect(url_for("auth.login"))
     return render_template('makete_prikaz.html', title='Obavijesti', models=models)
+

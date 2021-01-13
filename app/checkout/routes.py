@@ -8,9 +8,9 @@ checkout = Blueprint('checkout', __name__)
 @checkout.route('/checkout', methods=['GET','POST'])
 def checkout_page():
     form = CheckoutForm()
-    billing_info = PodaciPlacanje.query.filter_by(user_id=current_user.id).first()
     if form.validate_on_submit():
         if current_user.is_authenticated:
+            billing_info = PodaciPlacanje.query.filter_by(user_id=current_user.id).first()
             billing_info.full_name = form.fname.data
             billing_info.email = form.email.data
             billing_info.address = form.adr.data
@@ -26,6 +26,7 @@ def checkout_page():
         return redirect(url_for('/'))
     elif request.method == 'GET':
         if current_user.is_authenticated:
+            billing_info = PodaciPlacanje.query.filter_by(user_id=current_user.id).first()
             form.fname.data = billing_info.full_name
             form.email.data = billing_info.email
             form.adr.data = billing_info.address
