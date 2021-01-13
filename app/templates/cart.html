@@ -11,10 +11,10 @@
         {% for content,model in contents|zip(models) %}
             <a href="{{ url_for('store.model_Instance', model_id=content.model_id) }}" id="priceLink" title="Otvorite citavu pricu">
                 <li>
-                    <h3>{{ model.name }}</h3>
+                    <h3>{{ model.name }} {% if content.quantity > 1 %} x{{ content.quantity }} {% endif %}</h3>
                     <p>{{ model.description }}</p>
                     <p>Materijal: {{ content.material }}</p>
-                    <h4>Cijena: {{ content.price }}</h4>
+                    <h4>Cijena: {{ content.price }} {% if content.quantity > 1 %} x{{ content.quantity }} {% endif %}</h4>
                 </li>
             </a>
         {% endfor %}    

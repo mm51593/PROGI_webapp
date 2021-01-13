@@ -79,14 +79,6 @@ class ModelPrice(db.Model):
 
     def __repr__(self):     # output of print()
           return f"ModelPrice('{self.model_id}', '{self.material}', '{self.price}')" 
-                             
-class Order(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    time_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __repr__(self):     # output of print()
-          return f"Order('{self.id}', '{self.time_created}', '{self.user_id}')"
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -105,15 +97,6 @@ class ModelNotification(db.Model):
     time_create = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     seen = db.Column(db.Boolean, nullable=False, default=False)
 
-# class OrderModel(db.Model):  #primary key nedostaje
-#    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
-#    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
-#    material = db.Column(db.String(20), nullable=False)
-#    price = db.Column(db.Integer, nullable=False)
-#
-#    def __repr__(self):     # output of print()
-#        return f"OrderModel('{self.order_id}', '{self.model_id}', '{self.material}', '{self.price}')"
-
 class Profile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     Ime = db.Column(db.String(25), nullable = True, default="")
@@ -128,6 +111,24 @@ class Profile(db.Model):
     def __repr__(self):
         return f"Profile('{self.Ime}', '{self.Prezime}', '{self.Datum_rodenja}', '{self.Zivotopis}')"
 
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    time_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):     # output of print()
+        return f"Order('{self.id}', '{self.time_created}', '{self.user_id}')"
+
+class OrderModel(db.Model):  #primary key nedostaje
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False, primary_key=True)
+    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False, primary_key=True)
+    material = db.Column(db.String(20), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):     # output of print()
+        return f"OrderModel('{self.order_id}', '{self.model_id}', '{self.material}', '{self.price}')"
+
 class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -136,11 +137,11 @@ class Cart(db.Model):
           return f"Cart('{self.id}', '{self.buyer_id}')"
 
 class CartModel(db.Model):
-    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), nullable=False)
-    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False)
-    material = db.Column(db.String(20), nullable=False)
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), nullable=False, primary_key=True)
+    model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False, primary_key=True)
+    material = db.Column(db.String(20), nullable=False, primary_key=True)
     price = db.Column(db.Integer, nullable=False)
-    id = db.Column(db.Integer, primary_key=True)
+    quantity = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):     # output of print()
         return f"CartModel('{self.cart_id}', '{self.model_id}', '{self.material}', '{self.price}')"

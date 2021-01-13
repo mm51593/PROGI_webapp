@@ -51,7 +51,6 @@ def makete_prikaz_Instance():
 @store.route('/makete/<int:model_id>', methods=['GET', 'POST'])
 def model_Instance(model_id):
     model = Model.query.get_or_404(model_id)
-    print(model_id)
     model_photo = ModelPhoto.query.filter_by(model_id=model.id).first().image_name
     model_dimensions = model.dimension.split(',')
     model_colors = model.colors.split(',')
@@ -60,7 +59,7 @@ def model_Instance(model_id):
     if request.method == "POST":
         if current_user.is_authenticated:
             cart_user = Cart.query.filter_by(buyer_id=current_user.id).first()
-            if cart_user == None:
+            if cart_user is None:
                 cart_user = Cart(buyer_id=current_user.id)
                 db.session.add(cart_user)
                 try:
@@ -68,24 +67,31 @@ def model_Instance(model_id):
                 except exc.SQLAlchemyError:
                     pass
             material_choice = request.form.get("materijaliChoose")
-            item_price = ModelPrice.query.filter_by(model_id=model.id, material=material_choice).first().price
-            if (request.form.get("materijaliChoose")) == None:
-                pass
-            else:
-                cart_m_user = CartModel(cart_id=cart_user.id, model_id=model.id, material=material_choice, price=item_price)
+            item_in_cart = CartModel.query.filter_by(cart_id=cart_user.id, model_id=model.id, material=material_choice).first()
+            if item_in_cart is None:
+                item_price = ModelPrice.query.filter_by(model_id=model.id, material=material_choice).first().price
+                cart_m_user = CartModel(cart_id=cart_user.id, model_id=model.id, material=material_choice, price=item_price, quantity=1)
                 db.session.add(cart_m_user)
-                try:
-                    db.session.commit()
-                    #flash('Maketa dodana u košaricu!', 'succes')
-                except exc.SQLAlchemyError:
-                    pass    
-            print(model_id, request.form.get("materijaliChoose"))
+            else:
+                item_in_cart.quantity += 1
+            try:
+                db.session.commit()
+                #flash('Maketa dodana u košaricu!', 'succes')
+            except exc.SQLAlchemyError:
+                pass
         else:
             if not session.get('cart', None):
                 session['cart'] = []
             material_choice = request.form.get("materijaliChoose")
-            item_price = ModelPrice.query.filter_by(model_id=model_id, material=material_choice).first().price
-            session['cart'].append(dict(model_id=model_id, material=material_choice, price=item_price))
+            inCart = False
+            for elem in session['cart']:
+                if elem['model_id'] == model_id and elem['material'] == material_choice:
+                    elem['quantity'] += 1
+                    inCart = True
+                    break
+            if not inCart:
+                item_price = ModelPrice.query.filter_by(model_id=model_id, material=material_choice).first().price
+                session['cart'].append(dict(model_id=model_id, material=material_choice, price=item_price, quantity=1))
     return render_template('makete.html', title=model.name, model=model, model_photo=model_photo, materials=materials, dimensions=model_dimensions, colors=model_colors, model_creator=model_creator)
 
 @store.route('/prihvatimaketu', methods=['GET', 'POST'])
