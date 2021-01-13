@@ -67,10 +67,10 @@ def model_Instance(model_id):
                 except exc.SQLAlchemyError:
                     pass
             material_choice = request.form.get("materijaliChoose")
-            item_in_cart = CartModel.query.filter_by(cart_id=cart_user.id, model_id=model.id, material=material_choice).first()
+            item_in_cart = CartModel.query.filter_by(cart_id=cart_user.buyer_id, model_id=model.id, material=material_choice).first()
             if item_in_cart is None:
                 item_price = ModelPrice.query.filter_by(model_id=model.id, material=material_choice).first().price
-                cart_m_user = CartModel(cart_id=cart_user.id, model_id=model.id, material=material_choice, price=item_price, quantity=1)
+                cart_m_user = CartModel(cart_id=cart_user.buyer_id, model_id=model.id, material=material_choice, price=item_price, quantity=1)
                 db.session.add(cart_m_user)
             else:
                 item_in_cart.quantity += 1

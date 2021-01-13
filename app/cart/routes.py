@@ -11,19 +11,19 @@ def cart_Instance():
     models = []
     if current_user.is_authenticated:
         cart_inst = Cart.query.filter_by(buyer_id=current_user.id).first()
-        if cart_inst == None:
+        if cart_inst is None:
             cart_inst = Cart(buyer_id=current_user.id)
             db.session.add(cart_inst)
             try:
                 db.session.commit()
             except exc.SQLAlchemyError:
                 pass
-        contents = CartModel.query.filter_by(cart_id=cart_inst.id).all()
+        contents = CartModel.query.filter_by(cart_id=cart_inst.buyer_id).all()
         for content in contents:
             model_elem = Model.query.filter_by(id=content.model_id).first()
             models.append(model_elem)
     else:
-        if not session['cart']:
+        if session.get('cart', None) is None:
             session['cart'] = []
         contents = session['cart']
         for elem in contents:

@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import current_user, login_required
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask_login import current_user
 from app.checkout.forms import CheckoutForm
-from app.database import PodaciPlacanje, db
+from app.database import PodaciPlacanje, db, Cart, CartModel, Order, OrderModel
 
 checkout = Blueprint('checkout', __name__)
 
@@ -22,6 +22,7 @@ def checkout_page():
             billing_info.zip_code = form.zip.data
             billing_info.card_CVC = form.cvv.data
             db.session.commit()
+        flush_cart()
         flash ('Uspješno obavljena kupnja', 'success')
         return redirect(url_for('index.homepage'))
     elif request.method == 'GET':
@@ -40,3 +41,26 @@ def checkout_page():
     else:
         print(form.errors)
     return render_template('checkout.html',title = "Podaci za placanje", form = form)
+
+def flush_cart():
+    if current_user.is_authenticated:
+        cart = Cart.query.filter_by(buyer_id=current_user.id).first()
+        order = Order(user_id=current_user.id)
+        cart_contents = CartModel.query.filter_by(cart_id=cart.buyer_id).all()
+        print(cart)
+        db.session.delete(cart)
+    else:
+        cart_contents = list(session['cart'])
+        order = Order(user_id=0)
+        del session['cart']
+    db.session.add(order)
+    db.session.commit()
+
+    for elem in cart_contents:
+        order_elem = OrderModel(order_id=order.id, model_id=elem.get('model_id'), material=elem.get('material'), price=elem.get('price'), quantity=elem.get('quantity'))
+        db.session.add(order_elem)
+        if current_user.is_authenticated:
+            db.session.delete(elem)
+
+    db.session.commit()
+    return

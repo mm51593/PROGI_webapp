@@ -130,14 +130,13 @@ class OrderModel(db.Model):  #primary key nedostaje
         return f"OrderModel('{self.order_id}', '{self.model_id}', '{self.material}', '{self.price}')"
 
 class Cart(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    buyer_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, primary_key=True)
 
     def __repr__(self):     # output of print()
-          return f"Cart('{self.id}', '{self.buyer_id}')"
+          return f"Cart('{self.buyer_id}')"
 
 class CartModel(db.Model):
-    cart_id = db.Column(db.Integer, db.ForeignKey('cart.id'), nullable=False, primary_key=True)
+    cart_id = db.Column(db.Integer, db.ForeignKey('cart.buyer_id'), nullable=False, primary_key=True)
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False, primary_key=True)
     material = db.Column(db.String(20), nullable=False, primary_key=True)
     price = db.Column(db.Integer, nullable=False)
