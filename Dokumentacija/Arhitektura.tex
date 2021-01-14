@@ -90,9 +90,13 @@
 					
 					\cellcolor{LightGreen} user\_id& INT	&  identifikacijski broj korisnika kojemu profil pripada \\ \hline
 					first\_name & VARCHAR &  korisnikovo ime; opcionalno	\\ \hline 
+					private\_name & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					last\_name & VARCHAR & korisnikovo prezime; opcionalno  \\ \hline 
+					private\_lname & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					DOB & DATETIME & korisnikov datum rođenja; opcionalno \\ \hline
+					private\_DOB & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					bio & TEXT	& kratak životopis; opcionalno\\ \hline 
+					private\_bio & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 				
 				\end{longtabu}
 			
@@ -353,7 +357,7 @@
 			
 			\subsection{Dijagram baze podataka}
 				\begin{figure}[H]
-					\includegraphics[width=.9\linewidth]{dijagrami/ER_baza.png}
+					\includegraphics[width=1\linewidth]{dijagrami/ER_baza_podataka.PNG}
 					\caption{E-R dijagram baze podataka}
 					\label{fig:erdija}
 				\end{figure}
