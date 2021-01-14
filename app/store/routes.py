@@ -9,9 +9,11 @@ from os import path, listdir
 
 store = Blueprint('store', __name__)
 
-@store.route('/admin_post_page', methods=['GET', 'POST']) #potrebno dodati stranicu za admina
+@store.route('/order_custom', methods=['GET', 'POST']) #potrebno dodati stranicu za admina
 #@login_required
 def new_model():
+    if not current_user.is_authenticated:
+        return redirect(url_for('auth.login'))
     form = ModelForm()
     if form.validate_on_submit():
         print("success")
