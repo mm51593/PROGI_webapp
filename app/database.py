@@ -6,6 +6,7 @@ from flask_login import UserMixin
 db = SQLAlchemy(application)
 bcrypt = Bcrypt(application)
 
+db.create_all()
 
 @login_manager.user_loader
 def load_user(user_userID):
