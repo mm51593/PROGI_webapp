@@ -60,13 +60,81 @@
 			\eject 
 		
 		\section{Upute za puštanje u pogon}
-		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{U ovom poglavlju potrebno je dati upute za puštanje u pogon (engl. deployment) ostvarene aplikacije. Na primjer, za web aplikacije, opisati postupak kojim se od izvornog kôda dolazi do potpuno postavljene baze podataka i poslužitelja koji odgovara na upite korisnika. Za mobilnu aplikaciju, postupak kojim se aplikacija izgradi, te postavi na neku od trgovina. Za stolnu (engl. desktop) aplikaciju, postupak kojim se aplikacija instalira na računalo. Ukoliko mobilne i stolne aplikacije komuniciraju s poslužiteljem i/ili bazom podataka, opisati i postupak njihovog postavljanja. Pri izradi uputa preporučuje se \textbf{naglasiti korake instalacije uporabom natuknica} te koristiti što je više moguće \textbf{slike ekrana} (engl. screenshots) kako bi upute bile jasne i jednostavne za slijediti.}
-			
-			
-			 \textit{Dovršenu aplikaciju potrebno je pokrenuti na javno dostupnom poslužitelju. Studentima se preporuča korištenje neke od sljedećih besplatnih usluga: \href{https://aws.amazon.com/}{Amazon AWS}, \href{https://azure.microsoft.com/en-us/}{Microsoft Azure} ili \href{https://www.heroku.com/}{Heroku}. Mobilne aplikacije trebaju biti objavljene na F-Droid, Google Play ili Amazon App trgovini.}
-			
-			
+			\noindent\textbf{Heroku}\\
+			Aplikacija je namjenjena puštanju u pogon preko platforme Heroku. Heroku je servis koji nudi usluge posluživanja aplikacija u više programskih jezika, među kojima su Ruby, Java, Node.js, Scala, Clojure, Python, PHP i Go, te usluge posluživanja baza podataka. Heroku je izabran za ovaj projekt zbog niske cijene (besplatan za stranicu ovog opsega) i jednostavnosti korištenja. Pretpostavit ćemo da korisnik na računalu ima instaliran Git te da je aplikacija preuzeta na računalo.
+			\\\\
+			\noindent\textbf{Stvaranje projekta}\\
+			Potrebno je stvoriti račun na  \href{www.heroku.hr}{www.heroku.hr} te se prijaviti. Stranica će nas preusmjeriti na \textit{dashboard}, odakle stvaramo novi projekt klikom na gumb "New" - "Create new app" u gornjem desnom kutu grafičkog sučelja (Slika \ref{fig:newapp}). Pokazat će nam se forma za unos imena aplikacije i regije na kojoj će biti puštena u pogon (Slika \ref{fig:nameapp}). Nakon toga smo preusmjereni na stranicu novokreiranog projekta.
+			\textbf{Napomena:} Ime aplikacije mora biti jedinstveno na razini čitave platforme. 
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_203519.png}
+				\centering
+				\caption{Nova aplikacija}
+				\label{fig:newapp}
+			\end{figure}
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_203555.png}
+				\centering
+				\caption{Ime aplikacije}
+				\label{fig:nameapp}
+			\end{figure}
+			\noindent\textbf{Stvaranje baze podataka}\\
+			Heroku pruža uslugu posluživanje PostgreSQL baze podataka. Kako bismo ju omogućili, na stranici projekta kliknemo na "Resources" karticu (Slika \ref{fig:resourcestab}). U traci za pretraživanje poglavlja "Add-ons" upišemo pojam "Heroku Postgres" i odaberemo prvi rezultat (Slika \ref{fig:herokupostgres}). Odaberemo plan pri vrhu sučelja, te kliknemo "Submit Order Form" (Slika \ref{fig:orderform}).\\
+			Sada navigiramo na "Settings"  karticu (Slika \ref{fig:settingstab}) i nađemo poglavlje "Config Vars". Kliknemo gumb "Reveal Config Vars" za prikaz varijabli okruženja te radimo dvije stvari. Prvo se uvjerimo da postoji varijabla "DATABASE\_URL" koja je nastala kada smo stvorili PostgreSQL bazu. Nakon toga u polje "KEY" upisujemo pojam "SECRET" \textit{(bez navodnika)} i u polje "VALUE" upisujemo bilo kakav niz znakova. On će služiti za enkripciju poruka koje aplikacija razmjenjuje. Unos potvrdimo klikom na gumb "Add". Sučelje bi trebalo izgledati slično slici \ref{fig:configvars)}.
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_214638.png}
+				\centering
+				\caption{Kartica "Resources"}
+				\label{fig:resourcestab}
+			\end{figure}
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_215207.png}
+				\centering
+				\caption{Pretraživanje "Heroku Postgres"}
+				\label{fig:herokupostgres}
+			\end{figure}
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_214812.png}
+				\centering
+				\caption{"Submit Order Form"}
+				\label{fig:orderform}
+			\end{figure}
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_215739.png}
+				\centering
+				\caption{"Settings" kartica}
+				\label{fig:settingstab}
+			\end{figure}
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_220108.png}
+				\centering
+				\caption{Config Vars}
+				\label{fig:configvars}
+			\end{figure}
+			\noindent\textbf{Heroku CLI}\\
+			Heroku CLI \textit{(Command Line Interface)} nam omogućuje pristup platformi Heroku iz komandne linije. 
+			Navigiramo nazad na karticu "Deploy". Kliknemo na poveznicu "Deployment method" - "Heroku Git" (Slika \ref{fig:herokucli)}) te pratimo uputstva za instalaciju ovisno o operacijskom sustavu koji koristimo.\\
+			Po završetku instalacije otvorimo komandnu liniju \textit{cmd, terminal} i unesemo naredbu \code{heroku login}, nakon čega pratimo uputstva za prijavu.
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_205522.png}
+				\centering
+				\caption{Heroku CLI}
+				\label{fig:herokucli}
+			\end{figure}
+			\noindent\textbf{Spajanje Git repozitorija i Heroku}\\
+			U komandnoj liniji se pozicioniramo na direktorij aplikacije \textit{(naredba cd)}. Za idući korak je bitno da imamo inicijaliziran Git repozitoriji u direktoriju. To možemo provjeriti naredbom \code{git status}. Ukoliko je ispis \code{fatal: not a git repository...}, inicijaliziramo ga naredbom \code{git init}. Nakon toga dodajemo Heroku udaljeni repozitoriji pomoću \code{heroku git:remote -a <ime-aplikacije>}, gdje \textit{ime-aplikacije} zamijenimo imenom koji smo odabrali pri kreaciji projekta.\\
+			Sada \textit{pushamo} projekt na Heroku udaljeni repozitorij slijedećim nizom naredbi:\\
+			\code{git add .}\\
+			\code{git commit -am "Commit"}\\
+			\code{git push heroku master}\\
+			Ovo može potrajati oko 1 minute. Nakon toga Heroku preuzima stvar i puštanje u pogon se automatizira.
+			\\\\
+			\noindent\textbf{Pristup stranici}\\
+			Vraćamo se na Heroku web-stranicu. Jedino što preostaje je u gornjem desnom kutu \textit{dashboarda} kliknuti na "Open App" što će nas preusmjeriti na aplikaciju (Slika \ref{fig:openapp}).
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/20210114_222433.png}
+				\centering
+				\caption{Otvori aplikaciju}
+				\label{fig:openapp}
+			\end{figure}
 			\eject 

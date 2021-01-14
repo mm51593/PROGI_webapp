@@ -15,6 +15,7 @@
 \usepackage{etoolbox}
 \usepackage{longtable, tabu}
 \usepackage{color, colortbl}
+\usepackage{xcolor}
 \usepackage{adjustbox}
 \usepackage{geometry}
 \usepackage[classicReIm]{kpfonts}
@@ -26,6 +27,9 @@
 \usepackage{float}
 \usepackage{setspace}
 \restylefloat{table}
+
+\definecolor{light-gray}{gray}{0.95}
+\newcommand{\code}[1]{\colorbox{light-gray}{\texttt{#1}}}
 
 
 \patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} %redefiniranje stila stranice u paketu fancyhdr
