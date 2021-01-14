@@ -1,0 +1,87 @@
+                                       OPIS  BAZE PODATAKA  -  PROJEKT  „ Maketa Shop “
+
+          Tablice:
+
+          1.	 User (Korisnik)
+
+-	sadrži informacije i autentifikacijske podatke o korisnicima koji kupuju proizvode, registracijske podatke aplikacije te kontakt za potvrdu registracije i promotivne ponude
+
+ATRIBUTI:
+
+          id  = identifikator korisnika, primarni ključ, cijeli broj
+
+     username = korisničko ime, jedinstveno za nekog korisnika, mora 
+                biti definirano, ne smije biti dulje od 20 znakova 
+
+        email = adresa korisnikove elektroničke pošte, također
+                jedinstvena, mora biti definirana, ne smije biti dulja od 
+                50 znakova
+
+     password = korisnička lozinka, mora biti definirana, ne smije biti
+                dulja od 60 znakova, kriptirana je algoritmom bcrypt  
+                na 60 bajtova
+
+
+
+
+         2. 	Product (Proizvod)
+
+-	sadrži ključne informacije i priče o maketama koje objavljuje administrator uz tehničke specifikacije proizvedenih maketa   
+    (dimenzije, boje, korišteni materijali)
+-	format priče može varirati od slike, videa, teksta ili kombinacije navedenog 
+
+
+ATRIBUTI:
+
+           id_p = identifikator proizvoda, primarni ključ, cijeli broj
+           name = ime proizvoda, jedinstveno za svaki proizvod, mora 
+                  biti definirano, ne smije biti dulje od 60 znakova
+    description = opis proizvoda, može sadržavati dimenziju makete,
+                  njezinu boju i sl. , ne smije sadržavati više od 500 
+                  znakova, ne mora nužno biti definiran
+          price = cijena proizvoda, cijeli broj veći od 0, mora  
+                  biti definirana za svaki proizvod
+     image_file = ime datoteke slike proizvoda, ovaj atribut ima 
+                  pretpostavljenu (defaultnu) vrijednost, mora biti              
+                  definiran, ne smije sadržavati više od 20 znakova
+
+       material = naziv materijala koji je korišten za izradu, ne smije 
+                  sadržavati više od 20 znakova
+
+
+
+          3.	 Story (Priča)
+
+-	Mogu ih predlagati registrirani korisnici, ali ih može objavljivati samo administrator
+-	Na svaku priču dozvoljeni su komentari. Komentirati mogu registrirani i neregistrirani korisnici. 
+
+ATRIBUTI:
+
+             id = identifikator priče, cijeli broj veći od nule, primarni ključ
+          title = naslov priče, ne smije biti dulji od 70 znakova, mora biti      
+                  definiran
+      author_id = identifikator autora priče, referenca na User (id), cijeli
+                  broj veći od nule, mora biti definiran
+   time_created = vremenska oznaka stvaranja priče, mora biti definirana
+
+
+
+              4.	Story content (Sadržaj)
+
+-	Može se pojaviti u obliku slike, teksta ili videa 
+
+ATRIBUTI :
+
+       story_id = identifikator priče, referenca na Story (id), cijeli broj
+                  veći od nule, dio primarnog ključa 
+ ordinal_number = redni broj priče, cijeli broj veći od nule, drugi dio    
+                  primarnog ključa
+     story_text = tekst priče, ne smije biti dulji od 280 znakova
+     image_name = ime slike uz pripadajuću priču, ne smije biti dulje od  
+                  50 znakova
+     video_name = ime videozapisa uz pripadajuću priču, ne smije biti     
+                  dulje od 50 znakova
+
+
+          
+
