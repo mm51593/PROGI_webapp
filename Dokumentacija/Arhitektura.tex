@@ -90,9 +90,13 @@
 					
 					\cellcolor{LightGreen} user\_id& INT	&  identifikacijski broj korisnika kojemu profil pripada \\ \hline
 					first\_name & VARCHAR &  korisnikovo ime; opcionalno	\\ \hline 
+					private\_name & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					last\_name & VARCHAR & korisnikovo prezime; opcionalno  \\ \hline 
+					private\_lname & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					DOB & DATETIME & korisnikov datum rođenja; opcionalno \\ \hline
+					private\_DOB & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					bio & TEXT	& kratak životopis; opcionalno\\ \hline 
+					private\_bio & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 				
 				\end{longtabu}
 			
@@ -353,7 +357,7 @@
 			
 			\subsection{Dijagram baze podataka}
 				\begin{figure}[H]
-					\includegraphics[width=.9\linewidth]{dijagrami/ER_baza.png}
+					\includegraphics[width=1\linewidth]{dijagrami/ER_baza_podataka.PNG}
 					\caption{E-R dijagram baze podataka}
 					\label{fig:erdija}
 				\end{figure}
@@ -406,7 +410,15 @@
 			
 			\eject
 		\section{Dijagram komponenti}
-		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			
+			Dijagram komponenti služi za prikaz organizacije i interakcije između komponenata implementacije te odnos programske potpore prema okolini. Oblikovanje sustava mora biti dovršeno prije nego se počnu modelirati komponente. Autentifikacija korisnika podrazumijeva mogućnost prijave i registracije novog korisnika. Korisnik
+može pregledavati ponuđene makete i nakon toga ih dodavati po potrebi u košaricu. Također postoji mogućnost narudžbe makete prema korisnikovim preferencijama i vlastitim skicama vezano uz veličinu, boju, materijal izrade itd. Opcija naručivanja maketa predviđena je samo za registrirane korisnike.
+			
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/dijagram_komponenti.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram komponenti}
+				\label{fig:dijkomp} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+			
+			
+			\eject
