@@ -5,7 +5,8 @@
 		
 			\textbf{\textit{dio 2. revizije}}
 			
-			 \textit{Detaljno navesti sve tehnologije i alate koji su primijenjeni pri izradi dokumentacije i aplikacije. Ukratko ih opisati, te navesti njihovo značenje i mjesto primjene. Za svaki navedeni alat i tehnologiju je potrebno \textbf{navesti internet poveznicu} gdje se mogu preuzeti ili više saznati o njima}.
+			 \noindent Za komunikaciju među članovima tima korišten je Whatsapp (https://www.whatsapp.com/), za raspodijelu zadataka među članovima tima korišten je Miro (https://miro.com/). Kao sustav za upravljanje izvornim kodom korišten je Git (https://git-scm.com/), a za udaljeni repozitorij projekta korišten je GitLab ( https://gitlab.com/). Za izradu UML dijagrama u dokumentaciji korišten je Astah UML (https://astah.net/).Za izradu backend dijela aplikacije korišten je programski jezik python (https://www.python.org/) verzija 3.8, te alat Flask (https://flask.palletsprojects.com/en/1.1.x/). Kao aplikacijski server korišten je heroku (https://heroku.com/).Korištena je baza podataka MySQL (https://www.mysql.com/).
+
 			
 			
 			\eject 
@@ -35,15 +36,131 @@
 			
 			\subsection{Ispitivanje sustava}
 			
-			 \textit{Potrebno je provesti i opisati ispitivanje sustava koristeći radni okvir Selenium\footnote{\url{https://www.seleniumhq.org/}}. Razraditi \textbf{minimalno 4 ispitna slučaja} u kojima će se ispitati redovni slučajevi, rubni uvjeti te poziv funkcionalnosti koja nije implementirana/izaziva pogrešku kako bi se vidjelo na koji način sustav reagira kada nešto nije u potpunosti ostvareno. Ispitni slučaj se treba sastojati od ulaza (npr. korisničko ime i lozinka), očekivanog izlaza ili rezultata, koraka ispitivanja i dobivenog izlaza ili rezultata.\\ }
-			 
-			 \textit{Izradu ispitnih slučajeva pomoću radnog okvira Selenium moguće je provesti pomoću jednog od sljedeća dva alata:}
-			 \begin{itemize}
-			 	\item \textit{dodatak za preglednik \textbf{Selenium IDE} - snimanje korisnikovih akcija radi automatskog ponavljanja ispita	}
-			 	\item \textit{\textbf{Selenium WebDriver} - podrška za pisanje ispita u jezicima Java, C\#, PHP koristeći posebno programsko sučelje.}
-			 \end{itemize}
-		 	\textit{Detalji o korištenju alata Selenium bit će prikazani na posebnom predavanju tijekom semestra.}
+			 \noindent Provedeno je testiranje rada sustava pomoću Selenium testova(Selenium IDE)
+			 . Testirane su neke od osnovnih funkcionalnosti sustava. Svi testovi izvrseni su ručno. U dokumentaciji su prikazani slučajevi UC1, UC9, UC10, UC11, UC23.
+
+			\noindent Ispitni slučaj 1 : Registracija
+
+			\noindent Ulaz : 
+	
+			\begin{itemize}
+				\item : 1. Otvaranje pocetne stranice u web pregledniku.
+				\item   2. Odabir na gumb registracije
+				\item   3. Unos potrebnih podataka
+			\end{itemize}
+
+			\noindent Ocekivani rezultat : 
+
+			\begin{itemize}
+				\item : 1.a Prikazao se ekran za unos podataka
+				\item   1.b Ako su uneseni valjani podaci korisnik ce biti preusmjeren na login screen
+			\end{itemize}
+	
+			\noindent Rezultati : Očekivani rezultat 1.b je zadovoljen. Aplikacija je prošla test. 
+
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/ispitnit_test_1.PNG} %veličina u odnosu na širinu linije
+				\caption{Ispitni test 1}
+				\label{fig:Test1} %label mora biti drugaciji za svaku sliku
+			\end{figure}
 			
+			\noindent Ispitni slučaj 2 : Prijava
+
+			\noindent Ulaz : 
+	
+			\begin{itemize}
+				\item : 1. Otvaranje pocetne stranice u web pregledniku.
+				\item   2. Odabir na gumb prijava
+				\item   3. Unos potrebnih podataka
+			\end{itemize}
+
+			\noindent Ocekivani rezultat : 
+
+			\begin{itemize}
+				\item : 1.a Prikazao se ekran za unos podataka
+				\item   1.b Ako su uneseni valjani podaci korisnik ce biti preusmjeren na pocetnu stranicu
+			\end{itemize}
+	
+			\noindent Rezultati : Očekivani rezultat 1.b je zadovoljen. Aplikacija je prošla test. 
+
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/ispitnit_test_2.PNG} %veličina u odnosu na širinu linije
+				\caption{Ispitni test 2}
+				\label{fig:Test2} %label mora biti drugaciji za svaku sliku
+			\end{figure}			
+
+			\noindent Ispitni slučaj 3 : Odjava
+
+			\noindent Ulaz : 
+	
+			\begin{itemize}
+				\item : 1. Korisnik treba biti prijavljen
+				\item   2. Odabir na gumb odjavi se
+			\end{itemize}
+
+			\noindent Ocekivani rezultat : 
+
+			\begin{itemize}
+				\item : 1. Korisnik će biti odjavljen i preusmjeren na pocetnu stranicu
+			\end{itemize}
+	
+			\noindent Rezultati : Očekivani rezultat 1. je zadovoljen. Aplikacija je prošla test. 
+
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/ispitnit_test_3.PNG} %veličina u odnosu na širinu linije
+				\caption{Ispitni test 3}
+				\label{fig:Test3} %label mora biti drugaciji za svaku sliku
+			\end{figure}	
+
+			\noindent Ispitni slučaj 4 : Odjava
+
+			\noindent Ulaz : 
+	
+			\begin{itemize}
+				\item : 1. Korisnik treba biti prijavljen
+				\item   2. Odabir na gumb moj profil
+			\end{itemize}
+
+			\noindent Ocekivani rezultat : 
+
+			\begin{itemize}
+				\item : 1. Korisnik će biti preusmjeren na stranicu sa svojim podacima
+			\end{itemize}
+	
+			\noindent Rezultati : Očekivani rezultat 1. je zadovoljen. Aplikacija je prošla test. 
+
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/ispitnit_test_4.PNG} %veličina u odnosu na širinu linije
+				\caption{Ispitni test 4}
+				\label{fig:Test4} %label mora biti drugaciji za svaku sliku
+			\end{figure}				
+
+			\noindent Ispitni slučaj 5 : Postavljanje postavki vidljivosti korisničkog računa
+
+			\noindent Ulaz : 
+	
+			\begin{itemize}
+				\item : 1. Korisnik treba biti prijavljen
+				\item   2. Odabir na gumb uredi
+				\item   3. Odabir postavki vidljivosti
+				\item   4. Pritisak na gumb spremi promjene
+			\end{itemize}
+
+			\noindent Ocekivani rezultat : 
+
+			\begin{itemize}
+				\item : 1.a Korisnik će biti preusmjeren na stranicu postavka profila
+				\item   1.b Nakon odabira postavka privatnosti i pristika na gumb korisnik će biti preusmjeren na stranicu sa svojim podacima.
+			\end{itemize}
+	
+			\noindent Rezultati : Očekivani rezultat 1.b je zadovoljen. Aplikacija je prošla test. 
+
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/ispitnit_test_5.PNG} %veličina u odnosu na širinu linije
+				\caption{Ispitni test 5}
+				\label{fig:Test5} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+
 			\eject 
 		
 		
