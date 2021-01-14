@@ -7,14 +7,17 @@
 		<meta name="viewport" content="width=device-width">
 		<!-- Dodati glavni naslov svakoj stranici -->
 		<link rel="stylesheet" href="../static/styles/style.css">
-		{% if title %}
+		<script src="../static/js/main.js"></script>
+    {% if title %}
         <title>MaketaShop-{{ title }}</title>
     {% else %}
         <title>MaketaShop</title>
     {% endif %}
 	</head>
-	
-	
+
+	{% if current_user.is_authenticated %}
+		{% set notifications = current_user.getNotifications() %}
+	{% endif %}
 
 	<body>
 
@@ -23,33 +26,47 @@
 				<div id="branding">
 					<h1><span class="highlight">Maketa</span> Shop</h1>
 				</div>
-				
+
 				<nav>
 					<ul>
 						<!-- Svaka stranica postavlja varijablue active_page koja označava trenutni izbornik -->
-						<li {% if active_page == "pocetna" %} class="current" {% endif %}><a href="{{ url_for('index')}}">Početna</a></li>
+						<li {% if active_page == "pocetna" %} class="current" {% endif %}><a href="{{ url_for('index.homepage')}}">Početna</a></li>
 						<li {% if active_page == "price" %} class="current" {% endif %}>
 							<div class="dropdown">
-								<button class="dropbtn"><a href="price.html">Priče</a></button>
+								<button class="dropbtn"><a href="{{ url_for('story.display_story_list') }}">Priče</a></button>
 								<div class="dropdown-content">
-									<a href="{{ url_for('story.add_content') }}">Predloži</a>
-									<a href="prihvat_price.html">Prihvati</a>
+									<a id="decolour-nav" href="{{ url_for('story.add_content') }}">Predloži</a>
 								</div>
 							</div>
 						</li>
 						<li {% if active_page == "makete" %} class="current" {% endif %}>
 							<div class="dropdown">
-								<button class="dropbtn"><a href="makete.html">Makete</a></button>
+								<button class="dropbtn"><a href="{{ url_for('store.makete_prikaz_Instance') }}">Makete
+								{% if notifications %}
+									<img src="../static/img/exclamation-16.ico">
+								{% endif %}</a></button>
 								<div class="dropdown-content">
-									<a href="narudzba.html">Naruči</a>
-									<a href="prihvat_makete.html">Prihvati</a>
+									<a id="decolour-nav" href="{{ url_for('store.new_model') }}">Naruči</a>
+                                    <a id="decolour-nav" href="{{ url_for('store.my_notifications') }}">Obavijesti</a>
 								</div>
 							</div>
 						</li>
+						<li {% if active_page == "cart" %} class="current" {% endif %}><a href="{{ url_for('cart.cart_Instance')}}"><img src="../static/img/shopping_cart.png" width="25px" height="25px"></a></li>
 						{% if not current_user.is_authenticated %}
 						<li {% if active_page == "prijava" %} class="current" {% endif %}><a href="{{ url_for('auth.login') }}">Prijavi se</a><li>
 						<li {% if active_page == "registracija" %} class="current" {% endif %}><a href="{{ url_for('auth.register') }}">Registriraj se</a> </li>
 						{% else %}
+                        <li {% if active_page == "profile" %} class="current" {% endif %}>
+							<div class="dropdown">
+								<button class="dropbtn"><a href="{{ url_for('profile.User_Profil', id=current_user.id) }}">Moj profil</a></button>
+								<div class="dropdown-content">
+									<a id="decolour-nav" href="{{ url_for('profile.Change') }}">Uredi</a>
+									{% if current_user.id == 1 %}
+									<a id="decolour-nav" href="{{ url_for('admin.admin_index') }}">Admin</a>
+									{% endif %}
+								</div>
+							</div>
+						</li>
 						<li><a href="{{ url_for('auth.logout') }}">Odjavi se</a> </li>
 						{% endif %}
 					</ul>

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+{% set active_page = "profile" %}
+
+{% block content %}
+
+<section id="main">
+    <div class="main-container container">
+        <div class="cont-style" method="POST">
+            <h1 class="kor-page-title">{{ user.username }}</h1>
+
+            <div class="kor-pregled">
+                {% if profile.Private_ime %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>privatno</div>
+                {% else %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>{{ profile.Ime }}</div>
+                {% endif %}
+                {% if profile.Private_prezime %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>privatno</div>
+                {% else %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>{{ profile.Prezime }}</div>
+                {% endif %}
+                {% if profile.Private_Datum %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>privatno</div>
+                {% else %}
+                    <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>
+                        {% if profile.Datum_rodenja %}
+                            {{ profile.Datum_rodenja.strftime('%d.%m.%Y.') }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+                <div class="flex-pre pre-elem">
+                    <div class="kor-pre-desc">
+                        Životopis:
+                    </div>
+                    {% if profile.Private_Zivotopis %}
+                        <div class="kor-pre-info">privatno</div>
+                    {% else %}
+                        <div class="kor-pre-info">{{ profile.Zivotopis }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if user.id == current_user.id %}
+                <div class="btnHolder">
+                    <a class="kor-btn ctrl-prijedlog" href="{{ url_for('profile.Change') }}">Uredi profil</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

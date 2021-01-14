@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% set active_page = "korracun_prikaz" %}
+
+{% block content %}
+
+<section id="main">
+    <div class="main-container container">
+        <div class="cont-style" method="POST">
+            <h1 class="kor-page-title">Korisnicki racun</h1>
+
+            <div class="kor-pregled">
+                <div class="pre-elem"><span class="kor-pre-desc">Ime: </span>{{ profile.Ime }}</div>
+                <div class="pre-elem"><span class="kor-pre-desc">Prezime: </span>{{ profile.Prezime }}</div>
+                <div class="pre-elem"><span class="kor-pre-desc">Datum rođenja: </span>{{ profile.Datum_rodenja.strftime('%d.%m.%Y.') }}</div>
+                <div class="flex-pre pre-elem">
+                    <div class="kor-pre-desc">
+                        Životopis:
+                    </div>
+                    <div class="kor-pre-info">{{ profile.Zivotopis }}</div>
+                </div>
+                <div class="btnHolder">
+                    <a class="kor-btn ctrl-prijedlog" href="{{ url_for('profile.Change') }}">Uredi profil</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

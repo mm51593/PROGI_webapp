@@ -3,6 +3,11 @@ function removeElement(self)
     self.parentElement.parentElement.remove()
     document.getElementById("input-number").value--;
 }
+
+function resetCounter()
+{
+    document.getElementById("input-number").value = 0;
+}
  
 function reevaluateNames()
 {
@@ -43,6 +48,7 @@ function addTextField(type)
         newlistitem.inputtype = "image";
         field.type = "file";
         field.accept = "image/*";
+        field.className = "elem-check-selected";
     }
     else
     {
@@ -50,7 +56,9 @@ function addTextField(type)
         newlistitem.inputtype = "video";
         field.type = "file";
         field.accept = "video/*";
+        field.className = "elem-check-selected";
     }
+
 
     var listDiv = document.createElement("div");
     listDiv.className = "listDiv";
@@ -59,7 +67,14 @@ function addTextField(type)
     contentDiv.className = "div-content";
 
     var newlabel = document.createElement("label");
-    newlabel.textContent = "Add " + type;
+    switch(type) {
+        case "image" : newlabel.textContent = "Dodaj sliku";
+                       break;
+        case "video" : newlabel.textContent = "Dodaj video";
+                       break;
+        case "text" : newlabel.textContent = "Dodaj tekst";
+                       break;
+    }
     newlabel.className = "elem-submit-" + type;
 
     var removebutton = document.createElement("button");
@@ -84,3 +99,6 @@ function addTextField(type)
 
     reevaluateNames();
 }
+
+resetCounter();
+

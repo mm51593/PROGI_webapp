@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% set active_page = "profile" %}
+
+{% block content %}
+
+<div class="main-container">
+    <div class="table-holder table-spacer">
+        <table class="w3-table-all w3-centered">
+            <thead>
+                <tr class="w3-orange">
+                    <th>ID transakcije</th>
+                    <th>Korisničko ime</th>
+                    <th>Adresa</th>
+                    <th>Detalji</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for elem in transakcije %}
+                <tr>
+                    <td>{{ elem.id }}</td>
+                    <td>{{ elem.username }}</td>
+                    <td>{{ elem.buyer_address }}</td>
+                    <td><a href="{{ url_for('admin.transakcije_pojedinacno', transaction_id=elem.id) }}">Detalji</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

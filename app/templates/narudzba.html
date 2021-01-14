@@ -3,12 +3,42 @@
 
 {% block content %}
 
-<form>
-	<div class="container">
+<div class="regErrMsg"></div>
+
+<form onsubmit="return checkNarudzba()" method="POST" enctype="multipart/form-data">
+	{{ form.hidden_tag() }}
+	<div class="container sec-main-container">
 		<h1>Naruči maketu</h1>
-		<label>Opis : </label>   
-			<input type="text" placeholder="Opiši maketu" name="text" required>  
-		<button class="main-button" type="submit">Naruči</button>
+		<div class="row">
+			<div class="col-50">
+        		{{ form.name.label }}
+					{{ form.name(id="imeMaketa", placeholder="Unesi ime") }}
+				{{ form.description.label }}
+					{{ form.description(id="opisMaketa", placeholder="Opiši maketu") }}
+			</div>
+			<div class="col-50">
+				<label>Dimenzije</label>
+				<div class="row">
+				
+				<div class="col-33">
+				{{ form.dimension_1(id="dimenzijeMaketa", placeholder="Unesi duljinu") }}
+				</div>
+				<div class="col-33">
+				{{ form.dimension_2(id="dimenzijeMaketa", placeholder="Unesi visinu") }}
+				</div>
+				<div class="col-33">
+				{{ form.dimension_3(id="dimenzijeMaketa", placeholder="Unesi širinu") }}
+				</div>
+				</div>
+				{{ form.colors.label }}
+					{{ form.colors(id="bojeMaketa", placeholder="Unesi boje") }}
+				<!--<label for="slika">Slika ili nacrt</label>
+				<input type="file" id="slika" accept="image/*" name="slika" required>-->
+				{{ form.image.label }}
+				{{ form.image() }}
+			</div>
+		</div>
+		{{ form.submit(class="btn") }}
 	</div>
 </form>
 

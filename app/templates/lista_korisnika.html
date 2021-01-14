@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% set active_page = "makete" %}
+
+{% block content %}
+
+<div class="main-container">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <div class="table-holder table-spacer">
+        <table class="w3-table-all w3-centered">
+            <thead>
+                <tr class="w3-orange">
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>LINK</th>
+                    <th>BAN</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td><a href="{{url_for('profile.User_Profil', id=user.id)}}" id="userLink" title="Otvorite stranicu usera">User page</a></td>
+                    <td><a href="{{url_for('admin.admin_ban', user_id=user.id)}}" id="userBan" title="User ban">BAN user</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,6 +1,13 @@
+__pycache__/
 app/__pycache__/
 app/authentication/__pycache__/
 app/stories/__pycache__/
+app/store/__pycache__/
+app/index/__pycache__/
+app/admin/__pycache__/
+app/profile/__pycache__/
+app/cart/__pycache__/
+app/checkout/__pycache__/
 env
 .idea
 /dokumentacija/*.aux
@@ -17,3 +24,4 @@ env
 /Dokumentacija/*.out
 /Dokumentacija/*.synctex.gz
 /Dokumentacija/*.toc
+/venv/

@@ -2,52 +2,67 @@
 {% set active_page = "price" %}
 
 {% block content %}
+
+<script src="../static/js/cycler.js"></script>
         
-<div class="main-container">
-	<p id="naslovPrice"> {{ story_title}} </p>
-	<div class="flex-container">
-		{% for element in story_elements %}
-			{% if element.story_text %}
-				<div class="flex-element flex-element-tekst">
-					{{ element.story_text }}
-				</div>
-			{% elif element.image_name %}
-				<div class="flex-container-column flex-video-img">
-					<img class="flex-element" id="element.image_name" src="{{ url_for('story.pull_file', file=element.image_name) }}">
-				</div>
-			{% elif element.video_name %}
-				<div class="flex-container-column flex-video-img">
-					<video class="flex-element" controls>
-						<source src="{{ url_for('story.pull_file', file=element.video_name) }}"  type="video/mp4">
-					</video>
-				</div>
-			{% endif %}
-		{% endfor %}
-	</div>
-</div>
+<span hidden id="elem-count">{{ elem_len }}</span>
 
-<div id="divider"></div>
+    {% for elem in story_elements %}
+        {% if elem.story_text %}
+            <span hidden class="text-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ elem.story_text }}</span>
+        {% elif elem.image_name %}
+            <span hidden class="img-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ url_for('story.pull_file', file=elem.image_name) }}</span>
+        {% elif elem.video_name %}
+            <span hidden class="vid-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ url_for('story.pull_file', file=elem.video_name) }}</span>
+        {% endif %}
+    {% endfor %}
 
-<div class="flex-container-column">
-	<form class="ostaviKomentar" id="idKomentar" target="_self">
-		<fieldset class="ostaviKomentar ostaviKomentar-fieldset">
-			<textarea form="idKomentar" name="objavitiKomentar" placeholder="Upisite komentar" id="komentarText"></textarea>
-			<input type="submit" id="submitKom" value="Objavi komentar">
-			<input type="reset" id="resetKom" value="Odustani">
-		</fieldset>
-	</form>
-	<div class="comment">
-		<p>Ime korisnika</p>
-		<p>Njegov komentar....</p>
-	</div>
-	<div class="comment">
-		<p>Ime korisnika</p>
-		<p>Njegov komentar....</p>
-	</div>
-	<div class="comment">
-		<p>Ime korisnika</p>
-		<p>Njegov komentar....</p>
-	</div>
-</div>
+    <section id="main">
+        <div class="sec-main-container full-story-cont story-relative">
+            <h1 class="page-title"></h1>
+            <p class="naslov-move" id="naslovPrice">{{ story.title }}</p>
+            <div class="story-user-details">
+                <h2 class="naslov-black"><a id="priceLink" href="{{ url_for('profile.User_Profil', id=story_author.id) }}">{{ story_author.username }}</a></h2>
+                <h3 class="naslov-black">{{ story.time_created.strftime('%d.%m.%Y %H:%M') }}</h3>
+            </div>
+            <div class="flex-contain-story">
+                <div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
+                <div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
+                    <div class="img-prop-holder" id="elem-holdncycle">
+                    </div>
+                </div>
+                <div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="divider"></div>
+
+    <div class="flex-container-column">
+        <form method="POST" class="ostaviKomentar" id="idKomentar" target="_self">
+            <fieldset class="ostaviKomentar ostaviKomentar-fieldset">
+                <textarea class="textarea-ponistavanje" form="idKomentar" name="objavitiKomentar" placeholder="Upisite komentar"
+                    id="komentarText"></textarea>
+                <input class="grid-btn grid-ponuda-sing komentar-btn-padding" type="submit" id="submitKom" value="Objavi komentar">
+                <input class="grid-btn grid-ponuda-sing komentar-btn-padding" type="reset" id="resetKom" value="Odustani">
+            </fieldset>
+        </form>
+    </div>
+
+    {% for comment in comments %}
+    <div class="objavljen-komentar">
+        <p class="komentar-userName">
+            {% if comment.author_id != 0 %}
+                <a href="{{ url_for('profile.User_Profil', id=comment.author_id) }}">
+            {% endif %}
+            {{ comment.author_name }}
+            {% if comment.author_id != 0 %}
+            </a>
+            {% endif %}
+        </p>
+        <p class="komentar-date"> {{ comment.timestamp.strftime('%d.%m.%Y %H:%M') }} </p>
+        <p class="komentar-data"> {{ comment.text }} </p>
+    </div>
+    {% endfor %}
 
 {% endblock %}

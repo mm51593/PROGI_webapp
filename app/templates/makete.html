@@ -3,34 +3,83 @@
 
 {% block content %}
 
+<!--
+
+<script src="../static/js/cycler.js"></script>
+<script src="../static/js/main.js"></script>
+
+<span hidden id="elem-count">2</span>
+<span hidden class="img-cycle" id="elem-cycle-0">../static/img/pocetna.png</span>
+<span hidden class="vid-cycle" id="elem-cycle-1">../static/vid/video.mp4</span>
+
+-->
+
+<div class="regErrMsg"></div>
+
 <section id="main">
-	<div class="container">
-		<article id="main-col">
-			<h1 class="page-title"></h1>
-			<ul id="services">
-				<li>
-					<h3>Maketa 1</h3>
-					<p>bla bla bla</p>
-				</li>
-				<li>
-					<h3>Maketa 2</h3>
-					<p>bla bla bla</p>
-				</li>
-				<li>
-					<h3>Maketa 3</h3>
-					<p>bla bla bla</p>
-				</li>
-				<li>
-					<h3>Maketa 4</h3>
-					<p>bla bla bla</p>
-				</li>
-				<li>
-					<h3>Maketa 5</h3>
-					<p>bla bla bla</p>
-				</li>
-			</ul>
-		</article>
-	</div>
+    <div class="container main-container">
+        <article id="main-col">
+            <h1 class="page-title"></h1>
+            <ul id="services">
+                <li>
+                    <p id="naslovPrice"> {{ model.name }} </p>
+                    <div class="flex-container">
+                        <div class="flex-container-column">
+                            <div class="flex-element flex-element-tekst">
+                                <b class="tekstHeader">Opis makete</b><br/>
+                                {{ model.description }}
+                            </div>
+                            <div class="flex-element flex-element-tekst flex-element-specifikacije">
+                                <b class="tekstHeader">Specifikacije</b><br/>
+                                    <span class="specSpan">Cijena:  </span>
+                                    <span id="prices">
+                                        <span class="emph" value="">Odaberite materijal</span>
+                                    {% for material in materials %}
+                                        <span value="{{ material.material }}" hidden>{{ material.price }}</span>
+                                    {% endfor %}
+                                    </span>
+                                    <br/>
+                                    <span class="specSpan">Boje: {% for color in colors %}
+                                    {{ color }} 
+                                    {% endfor %}</span>
+                                    <br/>
+                                    <span class="specSpan">Dimenzije: {% for dimension in dimensions %} 
+                                    {{ dimension }}cm 
+                                    {% endfor %}</span>
+                                    <br/>
+                            </div>
+                            <div class="flex-element flex-element-tekst flex-element-specifikacije">
+                                <b class="tekstHeader">Autor</b><br/>
+                                    <span class="specSpan"><a id="priceLink" href="{{ url_for('profile.User_Profil', id=model_creator.id) }}">{{ model_creator.username }}</a></span>
+                            </div>
+                            <form id="addToCart" method="POST" class="cart-func form-deselect">
+                                <div class="elem-chooser flex-element-tekst">
+                                    <label class="label-ponistavanje" for="materijalChoose"><b class="tekstHeader">Odaberite materijal</b></label><br/>
+                                    <select id="materijaliChoose" name="materijaliChoose" size="1" onchange="updatePrice()" required>
+                                        <option disabled selected value>--odaberite--</option>
+                                            {% for material in materials %}
+                                                <option value="{{ material.material }}">{{ material.material }}</option>
+                                            {% endfor %}
+                                    </select>
+                                </div>
+                                <input type="submit" class="main-button subBtn add-to-cart" value="Dodaj u kosaricu"><br/>
+                            </form>
+                        </div>
+                        <div class="flex-container-column flex-video-img">
+                            <!--<video class="flex-element" controls>
+                                <source src="{ url_for('static', filename='vid/' + model_video) }" type="video/mp4">
+                            </video>-->
+                            <img class="flex-element" id="maketaSlika"
+                                src="{{ url_for('static', filename='img/' + model_photo) }}">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </article>
+    </div>
 </section>
+<script>
+    updatePrice()
+</script>
 
 {% endblock %}

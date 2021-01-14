@@ -3,8 +3,39 @@
 
 {% block content %}
 
+<div class="regErrMsg"></div>
+
 <section id="main">
-	<div class="container">
+	<div class="container main-container">
+		<article id="main-col">
+			<h1 class="page-title"></h1>
+			<ul id="services">
+				{% for order in orders %}
+				<li>
+					<div class="drzacPrijedloga">
+						<h3>{{ order.name }}</h3>
+							<h4>Opis:</h4>
+								<div class="grid-ponuda-tekst">{{ order.description }}</div>
+							<h4>Dimenzije (cm):</h4>
+								<div class="grid-ponuda-tekst">{{ ' x '.join(order.dimension.split(',')) }}</div>
+							<h4>Materijal:</h4>
+							<form method="POST">
+								{% for mat in materials %}
+								<li>
+									<label>{{ mat }}</label>
+									<input id="{{ mat }}" type="text" placeholder="Cijena izrade" name="{{ mat }}" pattern="^\d*(\.\d{0,2})?$" required>
+									kn
+								</li>
+								{% endfor %}
+								<input type="hidden" name="order_id" value="{{ order.id }}">
+								<input id="approve" type="submit" name="response" value="Prihvati">
+								<input id="reject" type="submit" name="response" value="Odbij" formnovalidate>
+							</form>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+		</article>
 	</div>
 </section>
 

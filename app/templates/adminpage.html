@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% set active_page = "makete" %}
+
+{% block content %}
+
+<section id="main">
+    <h1 class="admin-title">Admin - Kontrolna ploča</h1>
+    <div class="sec-main-container">
+        <div class="admin-link-hold">
+            <a href="{{url_for('admin.admin_userlist')}}" class="admin-link">
+                <div title="Otvorite userlist" id="userlistLink" class="admin-link">USERLIST</div>
+            </a>
+        </div>
+
+        <div class="admin-link-hold">
+            <a href="{{url_for('story.display_story_list_validation')}}" class="admin-link">
+                <div title="Otvorite userlist" id="userlistLink" class="admin-link">Prihvat priča</div>
+            </a>
+        </div>
+
+        <div class="admin-link-hold">
+            <a href="{{url_for('store.model_approval')}}" class="admin-link">
+                <div title="Otvorite userlist" id="userlistLink" class="admin-link">Prihvat maketa</div>
+            </a>
+        </div>
+
+        <div class="admin-link-hold">
+            <a href="{{url_for('admin.admin_transakcije')}}" class="admin-link">
+                <div title="Povijest transakcija" id="userlistLink" class="admin-link">Povijest transkacija</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

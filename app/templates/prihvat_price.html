@@ -3,50 +3,41 @@
 
 {% block content %}
 
-<section id="main">
-	<div class="container main-container">
-		<article id="main-col">
-			<h1 class="page-title"></h1>
-			<ul id="services">
-				<li>
-					<div class="drzacPrijedloga">
-						<h3>Priča 1</h3>
-						<div class="grid-ponuda">
-							<div class="grid-ponuda-tekst">
-								Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
-								Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat. Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore commodo.
-								Aliostrud velit Lorem consequat exercitation nulla. Dolore ad cillum anim aute. Occaecat amet cupidatat commodo adipisicing tempor duis dolor ad pariatur nisi fugiat aliquip consectetur. Reprehenderit est aliquip sit excepteur consequat.
+<script src="../../static/js/cycler.js"></script>
+
+<span hidden id="elem-count">{{ elem_len }}</span>
+
+    {% for elem in story_elements %}
+        {% if elem.story_text %}
+            <span hidden class="text-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ elem.story_text }}</span>
+        {% elif elem.image_name %}
+            <span hidden class="img-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ url_for('story.pull_file', file=elem.image_name) }}</span>
+        {% elif elem.video_name %}
+            <span hidden class="vid-cycle" id="elem-cycle-{{ loop.index - 1 }}">{{ url_for('story.pull_file', file=elem.video_name) }}</span>
+        {% endif %}
+    {% endfor %}
+
+
+	<section id="main">
+		<div class="container main-container">
+			<article id="main-col">
+				<form class="cont-style" method="POST">
+						<p class="naslov-move" id="naslovPrice"> Naslov price </p>
+						<div class="flex-contain-story">
+							<div class="left-arrow" id="elem-arrow-l" onclick="return cycleCaller(0)"></div>
+							<div class="flex-element flex-element-tekst js-selector-elem" id="story-control-tekst">
+								<div class="img-prop-holder" id="elem-holdncycle">
+								</div>
 							</div>
-							<video class="grid-ponuda-vid" controls>
-								<source src="../static/vid/video.mp4" type="video/mp4">
-							</video>
-							<img class="grid-ponuda-img" src="https://www.njuskalo.hr/image-w920x690/makete/maketa-kuce-hrasta-slika-2664453.jpg">
-							<div class="grid-btn grid-ponuda-prihvati" onclick="">Prihvati</div>
-							<div class="grid-btn grid-ponuda-odbij" onclick="">Odbij</div>
+							<div class="right-arrow" id="elem-arrow-r" onclick="return cycleCaller(1)"></div>
 						</div>
-					</div>
-				</li>
-				<li>
-					<div class="drzacPrijedloga">
-						<h3>Priča 1</h3>
-						<div class="grid-ponuda">
-							<div class="grid-ponuda-tekst">
-								Nulla nostrud ullamco officia consectetur et. Ex fugiat cillum minim enim nisi ad aute commodo nostrud. Ad anim voluptate reprehenderit labore. Duis tempor deserunt non irure dolore aliqua do qui commodo. Cupidatat excepteur aliquip consequat aliquip Lorem.
-								Ullamco minim mollit est occaecat. Consequat deserunt minim ipsum officia elit. Anim tempor officia culpa eiusmod laboris excepteur ipsum eiusmod aute occaecat consequat. Qui nisi ut labore dolore duis quis nisi. Aliqua ad voluptate sint amet irure labore commodo.
-								Aliostrud velit Lorem consequat exercitation nulla. Dolore ad cillum anim aute. Occaecat amet cupidatat commodo adipisicing tempor duis dolor ad pariatur nisi fugiat aliquip consectetur. Reprehenderit est aliquip sit excepteur consequat.
-							</div>
-							<video class="grid-ponuda-vid" controls>
-								<source src="../static/vid/video.mp4" type="video/mp4">
-							</video>
-							<img class="grid-ponuda-img" src="https://www.njuskalo.hr/image-w920x690/makete/maketa-kuce-hrasta-slika-2664453.jpg">
-							<div class="grid-btn grid-ponuda-prihvati" onclick="">Prihvati</div>
-							<div class="grid-btn grid-ponuda-odbij" onclick="">Odbij</div>
+						<div class="flex-acc-rej">
+							<input type="submit" value="Prihvati" name="prihvPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return acceptOfferRed()" />
+							<input type="submit" value="Odbaci" name="odbPonudaPric" class="grid-btn grid-ponuda-sing" onclick="return rejectOfferRed()" />
 						</div>
-					</div>
-				</li>
-			</ul>
-		</article>
-	</div>
-</section>
+				</form>
+			</article>
+		</div>
+	</section>
 
 {% endblock %}

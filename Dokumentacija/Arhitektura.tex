@@ -1,7 +1,4 @@
 \chapter{Arhitektura i dizajn sustava}
-		
-		\textbf{\textit{dio 1. revizije}}\\
-
 		\noindent Arhitektura se moze podijeliti na tri podsustava: 
 		\begin{itemize}
 			\item Web poslužitelj
@@ -31,11 +28,10 @@
 				
 		\section{Baza podataka}
 			
-			\textbf{\textit{dio 1. revizije}}\\
-			
 			\noindent Sutav koristi relacijsku bazu podataka. Baza se sastoji od relacija, tablica koje svojim atributima modeliraju pojave iz stvarnog svijeta. Uloga baze je strukurirana pohrana  podataka radi njihova lakšeg dohvaćanja i izmjenjivanja. Baza ovog sustava se sadrži od sljedećih entiteta:
 			\begin{itemize}
 				\item User (korisnik)
+				\item Banned (blokirani korisnici)
 				\item Profile (osobni podaci korisnika)
 				\item BillingInfo (podaci o plaćanju)
 				\item Story (priča)
@@ -43,15 +39,19 @@
 				\item Model (maketa)
 				\item ModelPhoto (fotografija koja se prilaže maketi)
 				\item ModelPrice (cijena modela ovisno o materijalu)
+				\item ModelNotification (obavijest)
+				\item Comment (komentar)
 				\item Order (narudžba)
-				\item Order-Model (makete po narudžbi)
+				\item OrderModel (makete po narudžbi)
+				\item Cart (košarica)
+				\item CartModel (model u košarici)
 			\end{itemize}
 		
 			\subsection{Opis tablica}
 			
 
-				\noindent\textbf{User}  Podaci potrebni za prijavu u sustav. Sadrži atribute: identifikacijski broj, korisničko ime, e-mail adresu, lozinku i vrijeme nastanka računa. U vezi je \textit{One-to-One} s entitetom BillingInfo preko atributa id, u vezi \textit{One-to-One} s entitetom Profile preko atributa id, u vezi \textit{One-to-Many} s entitetom Story preko atributa id, u vezi \textit{One-to-Many} s entitetom Order preko atributa id te u vezi \textit{One-to-Many} s entitetom Model preko atributa it.
-				
+				\noindent\textbf{User}  Podaci potrebni za prijavu u sustav. Sadrži atribute: identifikacijski broj, korisničko ime, e-mail adresu i lozinku. U vezi je \textit{One-to-One} s entitetom BillingInfo preko atributa id, u vezi \textit{One-to-One} s entitetom Profile preko atributa id, u vezi \textit{One-to-Many} s entitetom Story preko atributa id, u vezi \textit{One-to-Many} s entitetom Order preko atributa id, u vezi \textit{One-to-Many} s entitetom Model preko atributa id, u vezi \textit{One-to-Many} s entitetom Cart preko atributa id, u vezi \textit{One-to-Many} s entitetom Model preko atributa id, u vezi \textit{One-to-Many} s entitetom Comment preko atributa id, u vezi \textit{One-to-Many} s entitetom ModelNotification preko atributa id.
+
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
 					\hline \multicolumn{3}{|c|}{\textbf{User}}	 \\[3pt] \hline
@@ -67,11 +67,10 @@
 					username& VARCHAR &  ime koje se prikazuje drugim korisnicima; jedinstveno 	\\ \hline 
 					email & VARCHAR & E-mail adresa kojom se prijavljuje u sustav; jedinstvena  \\ \hline 
 					password & CHAR & lozinka kojem se prijavljuje u sustav, kriptirana algoritmom Bcrypt na 60 bajtova \\ \hline
-					time\_created & DATETIME	& vrijeme nastanka računa \\ \hline 
 
 				\end{longtabu}
 			
-				\noindent\textbf{Profile} Podaci koje korisnik može prikazati na svom profilu. Sadrži atribute: ime, prezime, datum rođenja i kratak životopis. U vezi \textit{One-to-One} s entitetom User.
+				\noindent\textbf{Profile} Podaci koje korisnik može prikazati na svom profilu. Sadrži atribute: ime, prezime, datum rođenja, kratak životopis, te postavke privatnosti za svaku od stavki. U vezi \textit{One-to-One} s entitetom User.
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 				
@@ -86,13 +85,17 @@
 					
 					\cellcolor{LightGreen} user\_id& INT	&  identifikacijski broj korisnika kojemu profil pripada \\ \hline
 					first\_name & VARCHAR &  korisnikovo ime; opcionalno	\\ \hline 
+					private\_name & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					last\_name & VARCHAR & korisnikovo prezime; opcionalno  \\ \hline 
+					private\_lname & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					DOB & DATETIME & korisnikov datum rođenja; opcionalno \\ \hline
+					private\_DOB & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 					bio & TEXT	& kratak životopis; opcionalno\\ \hline 
+					private\_bio & BOOLEAN & TRUE ako je javno, FALSE ako nije \\ \hline
 				
 				\end{longtabu}
 			
-				\noindent\textbf{BillingInfo} Sadrži korisnikove podatke o plaćanju. Sadrži atribute: ime, prezime, adresa za naplatu, broj kreditne kartice, datum isteka kartice, CVC kartice. U vezi \textit{One-to-One} s entitetom User.
+				\noindent\textbf{BillingInfo} Sadrži korisnikove podatke o plaćanju. Sadrži atribute: puno ime, adresa za naplatu, broj kreditne kartice, datum isteka kartice, CVC kartice, državu, puno ime kartice, zip kod i email adresu. U vezi \textit{One-to-One} s entitetom User.
 			
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 	
@@ -106,9 +109,13 @@
 					\endlastfoot
 					
 					\cellcolor{LightGreen} user\_id& INT	&  identifikacijski broj korisnika kojemu podaci pripadaju \\ \hline
-					first\_name & VARCHAR &  korisnikovo ime	\\ \hline 
-					last\_name & VARCHAR & korisnikovo prezime  \\ \hline 
-					billing\_address & DATETIME & adresa za naplatu \\ \hline
+					full\_name & VARCHAR &  korisnikovo ime i prezime	\\ \hline 
+					email & VARCHAR & email adresa korisnika  \\ \hline 
+					address & VARCHAR & adresa\\ \hline
+					country & VARCHAR & država\\ \hline
+					city & VARCHAR & grad\\ \hline
+					zip\_code & VARCHAR & poštanski broj\\ \hline
+					card\_full\_name & VARCHAR & puno ime kreditne kartice \\ \hline
 					card\_number & VARCHAR & broj kreditne kartice \\ \hline
 					card\_expiry & DATETIME & datum isteka kartice \\ \hline
 					card\_CVC & INT & CVC kartice \\ \hline
@@ -131,7 +138,7 @@
 					\cellcolor{LightGreen} id& INT	&  identifikacijski broj priče; samoinkrementirajući broj jedinstven za svaku priču	\\ \hline
 					title& TEXT &  naslov priče \\ \hline 
 					time\_created & DATETIME & vrijeme nastanka priče \\ \hline 
-					is\_approved & BOOLEAN & TRUE ako je priča prhvaćena, FALSE ako nije \\ \hline
+					validated & BOOLEAN & TRUE ako je priča prhvaćena, FALSE ako nije \\ \hline
 					\cellcolor{LightBlue}author\_id & INT & identifikacijski broj autora \\ \hline 
 				
 				\end{longtabu}
@@ -158,7 +165,7 @@
 					
 				\end{longtabu}
 			
-				\noindent\textbf{Model} Podaci o maketi koju predlaže korisnik. Sadrži atribute: identifikacijski broj, ime, opis, identifikacijski broj korisnika koji ju predlaže. U vezi je \textit{Many-to-One} s entitetom User, u vezi \textit{One-to-Many} s entitetom ModelPrice, u vezi \textit{One-to-Many} s entitetom ModelPhoto te u vezi \textit{Many-to-Many} s entitetom Order-Model.
+				\noindent\textbf{Model} Podaci o maketi koju predlaže korisnik. Sadrži atribute: identifikacijski broj, ime, opis, identifikacijski broj korisnika koji ju predlaže, dimenzije, boje i odobrenost. U vezi je \textit{Many-to-One} s entitetom User, u vezi \textit{One-to-Many} s entitetom ModelPrice, u vezi \textit{One-to-Many} s entitetom ModelPhoto, u vezi \textit{Many-to-Many} s entitetom Order-Model te u vezi \textit{One-to-Many} s entitetom CartModel.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -174,6 +181,9 @@
 					\cellcolor{LightGreen} id & INT &  identifikacijski broj makete; samoinkrementirajući broj jedinstven za svaku maketu \\ \hline
 					name & VARCHAR &  ime makete; jedinstveno	\\ \hline 
 					description & TEXT & opis makete \\ \hline 
+					dimension & VARCHAR &  dimenzije; odvojene znakom ","	\\ \hline 
+					colors & VARCHAR &  dostupne boje; odvojene znakom ","	\\ \hline 
+					approved & BOOLEAN & TRUE ako je model prhvaćen, FALSE ako nije \\ \hline
 					\cellcolor{LightBlue} creator\_id & INT & identifikacijski broj korisnika koji predlaže maketu \\ \hline
 					
 				\end{longtabu}
@@ -196,7 +206,7 @@
 					
 				\end{longtabu}
 			
-				\noindent\textbf{ModelPrice} Cijena makete ovisno o materijalu od kojeg je izrađena. Sadrži atribute: identifijacijski broj modela, materijal od kojeg je izrađena i cijenu makete.
+				\noindent\textbf{ModelPrice} Cijena makete ovisno o materijalu od kojeg je izrađena. Sadrži atribute: identifijacijski broj modela, materijal od kojeg je izrađena, cijenu makete te samoinkrementirajući id makete.
 				U vezi \textit{Many-to-One} s entitetom Model.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
@@ -213,10 +223,11 @@
 					\cellcolor{LightGreen} model\_id & INT & identifikacijski broj makete \\ \hline
 					\cellcolor{LightGreen} material & VARCHAR & ime materijala \\ \hline
 					price & NUMERIC & cijena makete za zadani materijal \\ \hline
+					id & INT &  identifikacijski broj; samoinkrementirajući broj jedinstven za svaku instancu ModelPrice \\ \hline
 					
 				\end{longtabu}
 			
-				\noindent\textbf{Order} Podaci o narudžbi koju korisnik šalje trgovini. Sadrži atribute: identifikacijski broj narudžbe, vrijeme nastanka, identifikacijski broj korisnika koji šalje narudžbu. U vezi je \textit{Many-to-One} s entitetom User i u vezi \textit{One-to-Many} s entitetom Order-Model.
+				\noindent\textbf{Order} Podaci o narudžbi koju korisnik šalje trgovini. Sadrži atribute: identifikacijski broj narudžbe, vrijeme nastanka, identifikacijski broj korisnika koji šalje narudžbu te ime, adresu i email kupca. U vezi je \textit{Many-to-One} s entitetom User i u vezi \textit{One-to-Many} s entitetom OrderModel.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
@@ -231,18 +242,21 @@
 					
 					\cellcolor{LightGreen} id & INT &  identifikacijski broj narudžbe; samoinkrementirajući broj jedinstven za svaku narudžbu \\ \hline
 					time\_created & DATETIME &  vrijeme nastanka	\\ \hline 
+					buyer\_name & VARCHAR & ime kupca \\ \hline
+					buyer\_email & VARCHAR & email adresa kupca \\ \hline
+					buyer\_address & VARCHAR & adresa kupca \\ \hline
 					\cellcolor{LightBlue} user\_id & INT & identifikacijski broj korisnika koji šalje narudžbu \\ \hline
 					
 				\end{longtabu}
 			
-				\noindent\textbf{Order-Model} Lista maketa u narudžbi. Sadrži atribute: identifikacijski broj narudžbe, identifikacijski broj makete, materijal od kojeg je maketa izrađena i cijena makete u trenutku narudžbe.
+				\noindent\textbf{OrderModel} Lista maketa u narudžbi. Sadrži atribute: identifikacijski broj narudžbe, identifikacijski broj makete, materijal od kojeg je maketa izrađena količinu i cijena makete u trenutku narudžbe.
 				
 				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Order-Model}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{OrderModel}}	 \\[3pt] \hline
 					\endfirsthead
 					
-					\hline \multicolumn{3}{|c|}{\textbf{Order-Model}}	 \\[3pt] \hline
+					\hline \multicolumn{3}{|c|}{\textbf{OrderModel}}	 \\[3pt] \hline
 					\endhead
 					
 					\hline 
@@ -252,12 +266,93 @@
 					\cellcolor{LightBlue} model\_id & INT & identifikacijski broj makete \\ \hline
 					material & VARCHAR & ime materijala od kojeg je maketa izrađena \\ \hline
 					price & NUMERIC & cijena makete za zadani materijal u trenutku narudžbe \\ \hline
+					quantity & INT & količina makete \\ \hline
+					
+				\end{longtabu}
+
+				\noindent\textbf{Comment} Komentari ispod pojedine priče, u vezi \textit{Many-to-One} s entitetom User te u vezi \textit{Many-to-One} s entitetom Story.
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Comment}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Comment}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue} id & INT &  identifikacijski broj komentara \\ \hline
+					\cellcolor{LightBlue} id & INT &  identifikacijski broj priče \\ \hline
+					\cellcolor{LightBlue} author\_id & INT & identifikacijski broj autora komentara \\ \hline
+					text & TEXT & tekst komentara \\ \hline
+					timestamp & DATETIME & vrijeme nastanka komentara \\ \hline 
+					
+				\end{longtabu}
+
+				\noindent\textbf{ModelNotification} Obavijest o prihvaćanju naručene makete, u vezi \textit{Many-to-One} s entitetom Model te u vezi \textit{Many-to-One} s entitetom User.
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{ModelNotification}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{ModelNotification}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue} id & INT &  identifikacijski broj obavijesti \\ \hline
+					\cellcolor{LightBlue} receiver\_id & INT &  identifikacijski broj primatelja obavijesti \\ \hline
+					\cellcolor{LightBlue} model\_id & INT & identifikacijski broj naručenog modela \\ \hline
+					seen & BOOLEAN & pregledanost obavijesti \\ \hline
+					time\_create & DATETIME & vrijeme nastanka obavijesti \\ \hline 
+					
+				\end{longtabu}
+
+				\noindent\textbf{Cart} Entitet košarice pridružen entitetu User vezom \textit{One-to-One}.
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Cart}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{Cart}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue} buyer\_id & INT &  identifikacijski broj kupca \\ \hline
+					
+				\end{longtabu}
+
+				\noindent\textbf{CartModel} Lista maketa u košarici. Sadrži atribute: identifikacijski broj košarice, identifikacijski broj makete, materijal od kojeg je maketa izrađena te količinu i cijenu makete u košarici, u vezi \textit{Many-to-One} s entitetom Cart.
+				
+				\begin{longtabu} to \textwidth {|X[6, l]|X[6, l]|X[20, l]|}
+					
+					\hline \multicolumn{3}{|c|}{\textbf{CartModel}}	 \\[3pt] \hline
+					\endfirsthead
+					
+					\hline \multicolumn{3}{|c|}{\textbf{CartModel}}	 \\[3pt] \hline
+					\endhead
+					
+					\hline 
+					\endlastfoot
+					
+					\cellcolor{LightBlue} cart\_id & INT &  identifikacijski broj košarice \\ \hline
+					\cellcolor{LightBlue} model\_id & INT & identifikacijski broj makete \\ \hline
+					material & VARCHAR & ime materijala od kojeg je maketa izrađena \\ \hline
+					price & NUMERIC & cijena makete za zadani materijal u košarici \\ \hline
+					quantity & INT & količina maketa \\ \hline
 					
 				\end{longtabu}
 			
 			\subsection{Dijagram baze podataka}
 				\begin{figure}[H]
-					\includegraphics[width=.9\linewidth]{dijagrami/ER_baza.png}
+					\includegraphics[width=1\linewidth]{dijagrami/ER_baza_podataka.PNG}
 					\caption{E-R dijagram baze podataka}
 					\label{fig:erdija}
 				\end{figure}
@@ -265,32 +360,60 @@
 			
 			
 		\section{Dijagram razreda}
+				
+			\begin{figure}[H]
+				\includegraphics[width=.9\linewidth]{slike/Dijagram_razreda.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram razreda}
+				\label{fig:diraz1} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+		
+			Razredi vezani uz bazu podataka su smješteni na zasebnoj slici zbog lakše preglednosti.
 		
 			\begin{figure}[H]
-						\includegraphics[width=.9\linewidth]{dijagrami/UML_class.PNG} %veličina u odnosu na širinu linije
-						\caption{Dijagram razreda generičke funkcionalnosti}
-						\label{fig:diraz1} %label mora biti drugaciji za svaku sliku
-					\end{figure}
+				\includegraphics[width=.9\linewidth]{slike/Dijagram_razreda_baza.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram razreda - Baza podataka}
+				\label{fig:diraz2} %label mora biti drugaciji za svaku sliku
+			\end{figure}
 		
 		\section{Dijagram stanja}
 			
 			
-			\textbf{\textit{dio 2. revizije}}\\
+			Dijagram stanja opisuje dinamičko ponašanje dijela sustava u vremenu. Njim se prikazuj stanje objekta te prijelazi iz jednog stanja u drugo temeljeni na događajima. Na slici ispod prikazan je dijagram stanja za prijavljenog korisnika u sustav. Korisniku se pri otvaranju stranice prikazuje početna stranica te dalje pomoću izbornika u zaglavlju pristupa funkcijama koje mu se nude. Prijavljeni korisnik može pregledavati, komentirati i predlagati priče. Također, može pregledavati standardne makete u sustavu i kupovati ih ili naručiti maketu po svojim zahtjevima. Klikom na "Korisnički račun" u izborniku korisniku se daje pregled njegovog računa sa mogučnošću izmjene podataka i vidljivosti svakog podatka. Na kraju, korisnik također može pristupiti svojoj košarici i preko nje dovršiti kupnju.
 			
-			\textit{Potrebno je priložiti dijagram stanja i opisati ga. Dovoljan je jedan dijagram stanja koji prikazuje \textbf{značajan dio funkcionalnosti} sustava. Na primjer, stanja korisničkog sučelja i tijek korištenja neke ključne funkcionalnosti jesu značajan dio sustava, a registracija i prijava nisu. }
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/Dijagram_stanja.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram stanja}
+				\label{fig:dijstan} %label mora biti drugaciji za svaku sliku
+			\end{figure}
 			
 			
 			\eject 
 		
 		\section{Dijagram aktivnosti}
 			
-			\textbf{\textit{dio 2. revizije}}\\
-			
-			 \textit{Potrebno je priložiti dijagram aktivnosti s pripadajućim opisom. Dijagram aktivnosti treba prikazivati značajan dio sustava.}
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/Dijagram_aktivnosti_1.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram aktivnosti za predlaganje, pregled i komentiranje priča}
+				\label{fig:diakt1} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/Dijagram_aktivnosti_2.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram aktivnosti za kupovinu i narudžbu maketa}
+				\label{fig:diakt2} %label mora biti drugaciji za svaku sliku
+			\end{figure}
 			
 			\eject
 		\section{Dijagram komponenti}
-		
-			\textbf{\textit{dio 2. revizije}}\\
-		
-			 \textit{Potrebno je priložiti dijagram komponenti s pripadajućim opisom. Dijagram komponenti treba prikazivati strukturu cijele aplikacije.}
+			
+			Dijagram komponenti služi za prikaz organizacije i interakcije između komponenata implementacije te odnos programske potpore prema okolini. Oblikovanje sustava mora biti dovršeno prije nego se počnu modelirati komponente. Autentifikacija korisnika podrazumijeva mogućnost prijave i registracije novog korisnika. Korisnik
+može pregledavati ponuđene makete i nakon toga ih dodavati po potrebi u košaricu. Također postoji mogućnost narudžbe makete prema korisnikovim preferencijama i vlastitim skicama vezano uz veličinu, boju, materijal izrade itd. Opcija naručivanja maketa predviđena je samo za registrirane korisnike.
+			
+			\begin{figure}[H]
+				\includegraphics[width=1\linewidth]{slike/dijagram_komponenti.PNG} %veličina u odnosu na širinu linije
+				\caption{Dijagram komponenti}
+				\label{fig:dijkomp} %label mora biti drugaciji za svaku sliku
+			\end{figure}
+			
+			
+			\eject
