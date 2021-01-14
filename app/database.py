@@ -6,7 +6,6 @@ from flask_login import UserMixin
 db = SQLAlchemy(application)
 bcrypt = Bcrypt(application)
 
-db.create_all()
 
 @login_manager.user_loader
 def load_user(user_userID):
@@ -164,3 +163,6 @@ class PodaciPlacanje(db.Model):
 
     def __repr__(self):
         return f"PodaciPlacanje('{self.Ime_Prezime}', '{self.email}', '{self.Ime_Kartica}', '{self.Broj_Kartica}')"
+
+#ova linija mora biti na dnu datoteke
+db.create_all()
