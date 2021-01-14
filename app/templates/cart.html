@@ -18,7 +18,7 @@
                 </li>
             </a>
         {% endfor %}    
-        <a href="{{ url_for('checkout.checkout_page') }}"><input type="submit" value="Kupi proizvode" class="btn"></a>
+        <a href="{{ url_for('checkout.checkout_page') }}"><input type="submit" value="Kupi proizvode" class="btn" {% if number == 0 %} disabled {% endif %}></a>
       </ul>
     </article>
 	</div>

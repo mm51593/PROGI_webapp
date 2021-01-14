@@ -29,4 +29,4 @@ def cart_Instance():
         for elem in contents:
             model_elem = Model.query.filter_by(id=elem['model_id']).first()
             models.append(model_elem)
-    return render_template('cart.html', title='Košarica', contents=contents, models=models)
+    return render_template('cart.html', title='Košarica', contents=contents, models=models, number=len(contents))
