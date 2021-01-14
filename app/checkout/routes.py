@@ -22,7 +22,7 @@ def checkout_page():
             billing_info.zip_code = form.zip.data
             billing_info.card_CVC = form.cvv.data
             db.session.commit()
-        flush_cart()
+        flush_cart(form)
         flash ('Uspješno obavljena kupnja', 'success')
         return redirect(url_for('index.homepage'))
     elif request.method == 'GET':
@@ -42,25 +42,34 @@ def checkout_page():
         print(form.errors)
     return render_template('checkout.html',title = "Podaci za placanje", form = form)
 
-def flush_cart():
+def flush_cart(form):
+    buyer_name = form.fname.data
+    buyer_email = form.email.data
+    buyer_address = form.adr.data + ', ' + form.zip.data + ' ' + form.city.data + ', ' + form.state.data
     if current_user.is_authenticated:
         cart = Cart.query.filter_by(buyer_id=current_user.id).first()
-        order = Order(user_id=current_user.id)
+        order = Order(user_id=current_user.id, buyer_name=buyer_name, buyer_email=buyer_email, buyer_address=buyer_address)
         cart_contents = CartModel.query.filter_by(cart_id=cart.buyer_id).all()
         print(cart)
         db.session.delete(cart)
     else:
         cart_contents = list(session['cart'])
-        order = Order(user_id=0)
+        order = Order(user_id=0, buyer_name=buyer_name, buyer_email=buyer_email, buyer_address=buyer_address)
         del session['cart']
+
     db.session.add(order)
     db.session.commit()
 
-    for elem in cart_contents:
-        order_elem = OrderModel(order_id=order.id, model_id=elem.get('model_id'), material=elem.get('material'), price=elem.get('price'), quantity=elem.get('quantity'))
-        db.session.add(order_elem)
-        if current_user.is_authenticated:
+    if current_user.is_authenticated:
+        for elem in cart_contents:
+            order_elem = OrderModel(order_id=order.id, model_id=elem.model_id, material=elem.material, price=elem.price, quantity=elem.quantity)
+            db.session.add(order_elem)
             db.session.delete(elem)
-
+    else:
+        for elem in cart_contents:
+            order_elem = OrderModel(order_id=order.id, model_id=elem.get('model_id'), material=elem.get('material'),
+                            price=elem.get('price'), quantity=elem.get('quantity'))
+            db.session.add(order_elem)
+            db.session.delete(elem)
     db.session.commit()
     return

@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-{% set active_page = "makete" %}
+{% set active_page = "profile" %}
 
 {% block content %}
 
@@ -8,31 +8,21 @@
         <table class="w3-table-all w3-centered">
             <thead>
                 <tr class="w3-orange">
-                    <th>Naziv 1</th>
-                    <th>Naziv 2</th>
-                    <th>Naziv 3</th>
-                    <th>Naziv 4</th>
+                    <th>ID transakcije</th>
+                    <th>Korisničko ime</th>
+                    <th>Adresa</th>
+                    <th>Detalji</th>
                 </tr>
             </thead>
             <tbody>
+            {% for elem in transakcije %}
                 <tr>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
+                    <td>{{ elem.id }}</td>
+                    <td>{{ elem.username }}</td>
+                    <td>{{ elem.buyer_address }}</td>
+                    <td><a href="{{ url_for('admin.transakcije_pojedinacno', transaction_id=elem.id) }}">Detalji</a></td>
                 </tr>
-                <tr>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                </tr>
-                <tr>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

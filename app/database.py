@@ -115,6 +115,9 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     time_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    buyer_name = db.Column(db.String(40), nullable=False)
+    buyer_email = db.Column(db.String(59), nullable=False)
+    buyer_address = db.Column(db.String(100), nullable=False)
 
     def __repr__(self):     # output of print()
         return f"Order('{self.id}', '{self.time_created}', '{self.user_id}')"
@@ -122,7 +125,7 @@ class Order(db.Model):
 class OrderModel(db.Model):  #primary key nedostaje
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False, primary_key=True)
     model_id = db.Column(db.Integer, db.ForeignKey('model.id'), nullable=False, primary_key=True)
-    material = db.Column(db.String(20), nullable=False)
+    material = db.Column(db.String(20), nullable=False, primary_key=True)
     price = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 

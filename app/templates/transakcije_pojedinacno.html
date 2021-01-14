@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% set active_page = "profile" %}
+
+{% block content %}
+
+<div class="main-container">
+    <div class="table-holder table-spacer">
+        <div class="container">
+            <article>
+                <h1 class="page-title"></h1>
+                <ul id="services">
+                    <li>
+                        <h3>ID: {{ order.id }}</h3>
+                        <p>Vrijeme: {{ order.time_created }}</p>
+                        <p>Ime kupca: {{ order.buyer_name }}</p>
+                        <p>Email kupca: {{ order.buyer_email }}</p>
+                        <p>Adresa: {{ order.buyer_email }}</p>
+                        <p>Ukupna cijena: {{ price }}kn</p>
+                    </li>
+                </ul>
+            </article>
+        </div>
+        <table class="w3-table-all w3-centered">
+            <thead>
+                <tr class="w3-orange">
+                    <th>Maketa</th>
+                    <th>Materijal</th>
+                    <th>Količina</th>
+                    <th>Cijena</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for elem in models %}
+                <tr>
+                    <td><a href="{{ url_for('store.model_Instance', model_id=elem.model_id) }}"> {{ elem.model_name }} </a></td>
+                    <td>{{ elem.material }}</td>
+                    <td>{{ elem.quantity }}</td>
+                    <td>{{ elem.quantity * elem.price }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
