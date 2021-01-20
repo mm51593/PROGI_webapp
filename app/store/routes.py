@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, request, session
+from flask import Blueprint, render_template, url_for, redirect, request, session, send_from_directory
 from sqlalchemy import exc
 from app.database import User, db, Model, ModelPhoto, ModelPrice, Cart, CartModel, ModelNotification
 from app.store.forms import ModelForm
@@ -131,4 +131,10 @@ def my_notifications():
     else:
         return redirect(url_for("auth.login"))
     return render_template('makete_prikaz.html', title='Obavijesti', models=models)
+
+@store.route('/model_photo/<file>')
+def pull_file(file):
+    route = path.join(application.root_path, application.config['MODEL_LOCATION'])
+    print(route)
+    return send_from_directory(route, file)
 

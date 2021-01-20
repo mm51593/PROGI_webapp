@@ -38,8 +38,6 @@ def checkout_page():
             form.state.data = billing_info.country
             form.zip.data = billing_info.zip_code
             form.cvv.data = billing_info.card_CVC
-    else:
-        print(form.errors)
     return render_template('checkout.html',title = "Podaci za placanje", form = form)
 
 def flush_cart(form):
