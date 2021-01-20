@@ -124,8 +124,14 @@ def validation(story_id):
 
 @stories.route('/stories')
 def display_story_list():
-    return render_template('price.html', stories=Story.query.filter_by(validated=True).all())
+    stories = Story.query.filter_by(validated=True).all()
+    for elem in stories:
+        elem.author_name = User.query.filter_by(id=elem.author_id).first().username
+    return render_template('price.html', stories=stories)
 
 @stories.route('/storiesforvalidation')
 def display_story_list_validation():
-    return render_template('prihvat_price_list.html', stories=Story.query.filter_by(validated=False).all())
+    stories = Story.query.filter_by(validated=False).all()
+    for elem in stories:
+        elem.author_name = User.query.filter_by(id=elem.author_id).first().username
+    return render_template('prihvat_price_list.html', stories=stories)

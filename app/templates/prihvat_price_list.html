@@ -12,7 +12,7 @@
 				<a href="{{url_for('story.validation', story_id=story.id)}}" id="priceLink" title="Otvorite citavu pricu">
 					<li>
 						<h3>{{ story.title }}</h3>
-						<p>bla bla bla</p>
+						<p>{{ story.author_name }}</p>
 					</li>
 				</a>
 				{% endfor %}
