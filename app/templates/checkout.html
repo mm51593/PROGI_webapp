@@ -6,27 +6,85 @@
 <div class="main-row">
   <div class="col-50">
     <div class="container">
-      
+      <form method="POST">
+        {{ form.hidden_tag() }}
         <div class="row">
           <div class="col-50">
             <h3>Podaci za dostavu</h3>
-            <label for="fname"> Ime i prezime</label>
+            {{ form.fname.label }}
+            {% if form.fname.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.fname.errors %}
+                    <span>{{ error }}</span>
+                      {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.fname(placeholder="Pero Perić") }}
+
+            {{ form.email.label }}
+            {% if form.email.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                      {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.email(placeholder="pero.peric@example.com") }}
+
+            {{ form.adr.label }}
+            {% if form.adr.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.adr.errors %}
+                    <span>{{ error }}</span>
+                      {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.adr(placeholder="Unska 3") }}
+
+            {{ form.city.label }}
+            {% if form.city.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.city.errors %}
+                    <span>{{ error }}</span>
+                      {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.city(placeholder="Zagreb") }}
+            <!--<label for="fname"> Ime i prezime</label>
               <input type="text" id="fname" name="firstname" placeholder="Pero Perić">
             <label for="email"> Email</label>
               <input type="text" id="email" name="email" placeholder="pero.peric@example.com">
             <label for="adr"> Adresa</label>
               <input type="text" id="adr" name="address" placeholder="Unska 3">
             <label for="city"> Grad</label>
-              <input type="text" id="city" name="city" placeholder="Zagreb">
+              <input type="text" id="city" name="city" placeholder="Zagreb">-->
 
             <div class="row">
               <div class="col-50">
-                <label for="state"> Država</label>
-                  <input type="text" id="state" name="state" placeholder="Hrvatska">
+                {{ form.state.label }}
+                {% if form.state.errors %}
+                  <div class="invalid-feedback">
+                    {% for error in form.state.errors %}
+                      <span>{{ error }}</span>
+                        {% endfor %}
+                  </div>
+                {% endif %}
+                {{ form.state(placeholder="Hrvatska") }}
+                <!--<label for="state"> Država</label>
+                  <input type="text" id="state" name="state" placeholder="Hrvatska">-->
               </div>
               <div class="col-50">
-                <label for="zip"> Poštanski broj</label>
-                  <input type="text" id="zip" name="zip" placeholder="10000">
+                {{ form.zip.label }}
+                {% if form.zip.errors %}
+                  <div class="invalid-feedback">
+                    {% for error in form.zip.errors %}
+                      <span>{{ error }}</span>
+                        {% endfor %}
+                  </div>
+                {% endif %}
+                {{ form.zip(placeholder="10000") }}
+                <!--<label for="zip"> Poštanski broj</label>
+                  <input type="text" id="zip" name="zip" placeholder="10000">-->
               </div>
             </div>
           </div>
@@ -37,26 +95,69 @@
             <div class="icon-container">
               <img src="../static/img/credit_cards.png" alt="Kartice" style="width:70%">
             </div>
-            <label for="cname"> Ime na kartici</label>
+            {{ form.cname.label }}
+            {% if form.cname.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.cname.errors %}
+                    <span>{{ error }}</span>
+                      {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.cname(placeholder="Pero Perić") }}
+
+            {{ form.ccnum.label }}
+            {% if form.ccnum.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.ccnum.errors %}
+                    <span>{{ error }}</span>
+                      {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.ccnum(placeholder="1111-2222-3333-4444") }}
+
+            {{ form.expdate.label }}
+            {% if form.expdate.errors %}
+                <div class="invalid-feedback">
+                  {% for error in form.expdate.errors %}
+                    <span>{{ error }}</span>
+                      {% endfor %}
+                </div>
+            {% endif %}
+            {{ form.expdate(placeholder="01/22") }}
+            <!--<label for="cname"> Ime na kartici</label>
               <input type="text" id="cname" name="cardname" placeholder="Pero Perić">
             <label for="ccnum"> Broj kartice</label>
               <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
             <label for="expmonth"> Datum isteka</label>
-              <input type="text" id="expmonth" name="expmonth" placeholder="Studeni">
+              <input type="text" id="expmonth" name="expmonth" placeholder="Studeni">-->
             <div class="row">
               <div class="col-50">
-                <label for="expyear"> Godina isteka</label>
-                <input type="text" id="expyear" name="expyear" placeholder="2022">
+                {{ form.cvv.label }}
+                {% if form.cvv.errors %}
+                  <div class="invalid-feedback">
+                    {% for error in form.cvv.errors %}
+                      <span>{{ error }}</span>
+                        {% endfor %}
+                  </div>
+                {% endif %}
+                {{ form.cvv(placeholder="111") }}
+                <!--<label for="expyear"> Godina isteka</label>
+                <input type="text" id="expyear" name="expyear" placeholder="2022">-->
               </div>
               <div class="col-50">
-                <label for="cvv"> CVV</label>
-                  <input type="text" id="cvv" name="cvv" placeholder="352">
+                {% if current_user.is_authenticated %}
+                  {{ form.remember.label }}
+                  {{ form.remember() }}
+                {% endif %}
+                <!--<label for="cvv"> CVV</label>
+                  <input type="text" id="cvv" name="cvv" placeholder="352">-->
               </div>
             </div>
           </div>
           
         </div>
-        <input type="submit" value="Završni s kupnjom" class="btn">
+        {{ form.submit(class="btn") }}
+        <!--<input type="submit" value="Završni s kupnjom" class="btn">-->
       </form>
     </div>
   </div>
