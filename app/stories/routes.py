@@ -76,6 +76,9 @@ def display_story(story_id):
                 comment.author_name = User.query.filter_by(id=comment.author_id).first().username
     except AttributeError:
         return abort(404)
+
+    if not story.validated and (not current_user.is_authenticated or current_user.is_authenticated and not (current_user.id == 1 or current_user.id == story.author_id)):
+        abort(403)
     
     if request.method == "POST":                                    ## ??????????                      
         if len(request.form['objavitiKomentar']) > 0:
